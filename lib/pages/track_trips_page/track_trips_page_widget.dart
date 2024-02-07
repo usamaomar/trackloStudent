@@ -378,11 +378,8 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                           24.0,
                                                                     ),
                                                                     Text(
-                                                                      FFLocalizations.of(
-                                                                              context)
-                                                                          .getText(
-                                                                        '13udq9ls' /* نقطة */,
-                                                                      ),
+                                                                      locationPointsItem
+                                                                          .label,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium,
