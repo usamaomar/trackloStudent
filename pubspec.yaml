@@ -27,7 +27,7 @@ dependencies:
     sdk: flutter
   auto_size_text: 3.0.0
   cached_network_image: 3.2.1
-  collection: 1.17.2
+  collection: ^1.18.0
   equatable: 2.0.5
   firebase_core: 2.24.2
   firebase_core_platform_interface: 5.0.0
@@ -77,8 +77,8 @@ dev_dependencies:
   image: 4.0.17
   lints: 3.0.0
 
-  flutter_test:
-    sdk: flutter
+#  flutter_test:
+#    sdk: flutter
 
 
 flutter_launcher_icons:
