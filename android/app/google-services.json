@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "148177471752",
+    "project_id": "trackllostudent",
+    "storage_bucket": "trackllostudent.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148177471752:android:deafa60dcafeb7ac6cc4bd",
+        "android_client_info": {
+          "package_name": "com.tracllo.student"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaXQ0jctcZtMAPFiqznZM8RzHPa4kzvao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
