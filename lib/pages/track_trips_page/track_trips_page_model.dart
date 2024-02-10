@@ -21,6 +21,8 @@ class TrackTripsPageModel extends FlutterFlowModel<TrackTripsPageWidget> {
           int index, Function(TravelModelStruct) updateFn) =>
       localTravelsList[index] = updateFn(localTravelsList[index]);
 
+  bool? isLoading;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -38,6 +40,7 @@ class TrackTripsPageModel extends FlutterFlowModel<TrackTripsPageWidget> {
   @override
   void initState(BuildContext context) {
     appBarModel = createModel(context, () => AppBarModel());
+    isLoading = false;
   }
 
   @override
