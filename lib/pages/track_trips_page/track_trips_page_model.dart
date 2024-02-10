@@ -21,6 +21,22 @@ class TrackTripsPageModel extends FlutterFlowModel<TrackTripsPageWidget> {
           int index, Function(TravelModelStruct) updateFn) =>
       localTravelsList[index] = updateFn(localTravelsList[index]);
 
+
+
+  List<TravelModelStruct> localTravelsLastTravelList = [];
+  void addToLocalTravelsLastTravelList(TravelModelStruct item) =>
+      localTravelsLastTravelList.add(item);
+  void removeFromLocalTravelsLastTravelList(TravelModelStruct item) =>
+      localTravelsLastTravelList.remove(item);
+  void removeAtIndexFromLocalTravelsLastTravelList(int index) =>
+      localTravelsLastTravelList.removeAt(index);
+  void insertAtIndexInLocalTravelsLastTravelList(int index, TravelModelStruct item) =>
+      localTravelsLastTravelList.insert(index, item);
+  void updateLocalTravelsLastTravelListAtIndex(
+      int index, Function(TravelModelStruct) updateFn) =>
+      localTravelsLastTravelList[index] = updateFn(localTravelsLastTravelList[index]);
+
+
   bool? isLoading;
 
   ///  State fields for stateful widgets in this page.
@@ -28,6 +44,7 @@ class TrackTripsPageModel extends FlutterFlowModel<TrackTripsPageWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (GetAllTravileApi)] action in TrackTripsPage widget.
   ApiCallResponse? apiResult51f;
+  ApiCallResponse? apiResultLastTrips;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;

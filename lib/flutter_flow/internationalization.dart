@@ -295,6 +295,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '022/25',
       'ar': '',
     },
+    'seld': {
+      'en': 'Selected Lines By',
+      'ar': 'الخطوط المختارة من قبل',
+    },
+    'nereYou': {
+      'en': 'Line Closed to you',
+      'ar': 'الخطوط القريبة منك',
+    },
     'aqchkde4': {
       'en': 'More',
       'ar': 'أكثر',
@@ -302,6 +310,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '4eklp4ju': {
       'en': 'Select Line',
       'ar': 'اختر الخط',
+    },
+    'flow': {
+      'en': 'Follow Line',
+      'ar': 'تتبع الخط',
     },
     '2fw53lnx': {
       'en': 'Home',

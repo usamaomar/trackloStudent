@@ -100,7 +100,7 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
             ],
           ),
           ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(0.0),
             child: Image.asset(
               'assets/images/XF.png',
               width: double.infinity,
