@@ -190,152 +190,130 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                             itemCount: list2.length,
                             itemBuilder: (context, listIndex) {
                               final listItem2 = list2[listIndex];
-                              return Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(0.0, 10.0, 0.0, 0.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          15.0, 0.0, 15.0, 0.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          Icon(
-                                                            Icons.home_filled,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            size: 24.0,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    5.0,
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0),
-                                                            child: Text(
-                                                              listItem2
-                                                                  .travelStartName,
+                              return Visibility(
+                                visible:_model.textController.text.isNotEmpty ?  listItem2.travelStartName.contains(_model.textController.text) : true,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 10.0, 0.0, 0.0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            15.0, 0.0, 15.0, 0.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Icon(
+                                                              Icons.home_filled,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                              size: 24.0,
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      5.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                              child: Text(
+                                                                listItem2
+                                                                    .travelStartName,
+                                                                style: FlutterFlowTheme
+                                                                        .of(context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Cairo',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              listItem2.wayPoints
+                                                                  .first.time,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Cairo',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
+                                                                        'Readex Pro',
+                                                                    color: const Color(
+                                                                        0xFF48CD48),
+                                                                    fontSize:
+                                                                        10.0,
                                                                   ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            listItem2.wayPoints
-                                                                .first.time,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  color: const Color(
-                                                                      0xFF48CD48),
-                                                                  fontSize:
-                                                                      10.0,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Expanded(
-                                                        child: Center(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    5.0,
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0),
-                                                            child: Text(
-                                                              listItem2.way,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Cairo',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                  ),
+                                                          ],
+                                                        ),
+                                                        Expanded(
+                                                          child: Center(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      5.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                              child: Text(
+                                                                listItem2.way,
+                                                                style: FlutterFlowTheme
+                                                                        .of(context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Cairo',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                    ),
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          Text(
-                                                            listItem2.wayPoints
-                                                                .last.time,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Cairo',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .error,
-                                                                  fontSize:
-                                                                      10.0,
-                                                                ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    5.0,
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0),
-                                                            child: Text(
-                                                              listItem2
-                                                                  .travelEndName,
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Text(
+                                                              listItem2.wayPoints
+                                                                  .last.time,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -344,144 +322,169 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                         'Cairo',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .primary,
+                                                                        .error,
+                                                                    fontSize:
+                                                                        10.0,
                                                                   ),
                                                             ),
-                                                          ),
-                                                          Icon(
-                                                            Icons
-                                                                .location_on_outlined,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
-                                                            size: 20.0,
-                                                          ),
-                                                        ],
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      5.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                              child: Text(
+                                                                listItem2
+                                                                    .travelEndName,
+                                                                style: FlutterFlowTheme
+                                                                        .of(context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Cairo',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                            Icon(
+                                                              Icons
+                                                                  .location_on_outlined,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 20.0,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      Expanded(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      15.0,
+                                                                      10.0,
+                                                                      15.0,
+                                                                      0.0),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Builder(
+                                                                    builder:
+                                                                        (context) {
+                                                                      final locationPoints =
+                                                                          listItem2
+                                                                              .wayPoints
+                                                                              .toList();
+                                                                      return Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize
+                                                                                .max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment
+                                                                                .spaceEvenly,
+                                                                        children: List.generate(
+                                                                            locationPoints
+                                                                                .length,
+                                                                            (locationPointsIndex) {
+                                                                          final locationPointsItem =
+                                                                              locationPoints[locationPointsIndex];
+                                                                          return Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Icon(
+                                                                                Icons.location_on_outlined,
+                                                                                color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                size: 18.0,
+                                                                              ),
+                                                                              Text(
+                                                                                locationPointsItem.label,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Cairo',
+                                                                                      color: FlutterFlowTheme.of(context).black,
+                                                                                      fontSize: 10.0,
+                                                                                    ),
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        }),
+                                                                      );
+                                                                    },
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            const StyledDivider(
+                                                              height: 0.0,
+                                                              thickness: 1.0,
+                                                              indent: 20.0,
+                                                              color: Color(
+                                                                  0xFFA8A8A8),
+                                                              lineStyle:
+                                                                  DividerLineStyle
+                                                                      .dashed,
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
-                                                ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    15.0,
-                                                                    10.0,
-                                                                    15.0,
-                                                                    0.0),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Builder(
-                                                                  builder:
-                                                                      (context) {
-                                                                    final locationPoints =
-                                                                        listItem2
-                                                                            .wayPoints
-                                                                            .toList();
-                                                                    return Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceEvenly,
-                                                                      children: List.generate(
-                                                                          locationPoints
-                                                                              .length,
-                                                                          (locationPointsIndex) {
-                                                                        final locationPointsItem =
-                                                                            locationPoints[locationPointsIndex];
-                                                                        return Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          children: [
-                                                                            Icon(
-                                                                              Icons.location_on_outlined,
-                                                                              color: FlutterFlowTheme.of(context).secondaryText,
-                                                                              size: 18.0,
-                                                                            ),
-                                                                            Text(
-                                                                              locationPointsItem.label,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Cairo',
-                                                                                    color: FlutterFlowTheme.of(context).black,
-                                                                                    fontSize: 10.0,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      }),
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          const StyledDivider(
-                                                            height: 0.0,
-                                                            thickness: 1.0,
-                                                            indent: 20.0,
-                                                            color: Color(
-                                                                0xFFA8A8A8),
-                                                            lineStyle:
-                                                                DividerLineStyle
-                                                                    .dashed,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(15.0, 20.0,
-                                                          15.0, 0.0),
-                                                ),
-                                              ],
+                                                  const Padding(
+                                                    padding: EdgeInsetsDirectional
+                                                        .fromSTEB(15.0, 20.0,
+                                                            15.0, 0.0),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(5.0, 0.0, 5.0, 0.0),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            'flow' /* flow Line */,
+                                        Padding(
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                          child: Text(
+                                            FFLocalizations.of(context).getText(
+                                              'flow' /* flow Line */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Cairo',
+                                                  color:
+                                                      FlutterFlowTheme.of(context)
+                                                          .primary,
+                                                  fontSize: 10.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                fontSize: 10.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Divider(
-                                    endIndent: 18,
-                                    indent: 18,
-                                    thickness: 1.0,
-                                    color: Color(0xFFA8A8A8),
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                    const Divider(
+                                      endIndent: 18,
+                                      indent: 18,
+                                      thickness: 1.0,
+                                      color: Color(0xFFA8A8A8),
+                                    ),
+                                  ],
+                                ),
                               );
                             },
                           );
@@ -525,152 +528,130 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                             itemCount: list.length,
                             itemBuilder: (context, listIndex) {
                               final listItem = list[listIndex];
-                              return Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsetsDirectional
-                                                .fromSTEB(0.0, 10.0, 0.0, 0.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          15.0, 0.0, 15.0, 0.0),
-                                                  child: Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          Icon(
-                                                            Icons.home_filled,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            size: 24.0,
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    5.0,
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0),
-                                                            child: Text(
-                                                              listItem
-                                                                  .travelStartName,
+                              return Visibility(
+                                visible:_model.textController.text.isNotEmpty ?  listItem.travelStartName.contains(_model.textController.text) : true,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 10.0, 0.0, 0.0),
+                                              child: Column(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                            15.0, 0.0, 15.0, 0.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Icon(
+                                                              Icons.home_filled,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primary,
+                                                              size: 24.0,
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      5.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                              child: Text(
+                                                                listItem
+                                                                    .travelStartName,
+                                                                style: FlutterFlowTheme
+                                                                        .of(context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Cairo',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              listItem.wayPoints
+                                                                  .first.time,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
                                                                   .override(
                                                                     fontFamily:
-                                                                        'Cairo',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
+                                                                        'Readex Pro',
+                                                                    color: const Color(
+                                                                        0xFF48CD48),
+                                                                    fontSize:
+                                                                        10.0,
                                                                   ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            listItem.wayPoints
-                                                                .first.time,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  color: const Color(
-                                                                      0xFF48CD48),
-                                                                  fontSize:
-                                                                      10.0,
-                                                                ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Expanded(
-                                                        child: Center(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    5.0,
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0),
-                                                            child: Text(
-                                                              listItem.way,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Cairo',
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primary,
-                                                                  ),
+                                                          ],
+                                                        ),
+                                                        Expanded(
+                                                          child: Center(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      5.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                              child: Text(
+                                                                listItem.way,
+                                                                style: FlutterFlowTheme
+                                                                        .of(context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Cairo',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                    ),
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                      Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          Text(
-                                                            listItem.wayPoints
-                                                                .last.time,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Cairo',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .error,
-                                                                  fontSize:
-                                                                      10.0,
-                                                                ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    5.0,
-                                                                    0.0,
-                                                                    5.0,
-                                                                    0.0),
-                                                            child: Text(
-                                                              listItem
-                                                                  .travelEndName,
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            Text(
+                                                              listItem.wayPoints
+                                                                  .last.time,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium
@@ -679,236 +660,171 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                         'Cairo',
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .primary,
+                                                                        .error,
+                                                                    fontSize:
+                                                                        10.0,
                                                                   ),
                                                             ),
-                                                          ),
-                                                          Icon(
-                                                            Icons
-                                                                .location_on_outlined,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryText,
-                                                            size: 20.0,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Expanded(
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                    15.0,
-                                                                    10.0,
-                                                                    15.0,
-                                                                    0.0),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Builder(
-                                                                  builder:
-                                                                      (context) {
-                                                                    final locationPoints =
-                                                                        listItem
-                                                                            .wayPoints
-                                                                            .toList();
-                                                                    return Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceEvenly,
-                                                                      children: List.generate(
-                                                                          locationPoints
-                                                                              .length,
-                                                                          (locationPointsIndex) {
-                                                                        final locationPointsItem =
-                                                                            locationPoints[locationPointsIndex];
-                                                                        return Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          children: [
-                                                                            Icon(
-                                                                              Icons.location_on_outlined,
-                                                                              color: FlutterFlowTheme.of(context).secondaryText,
-                                                                              size: 18.0,
-                                                                            ),
-                                                                            Text(
-                                                                              locationPointsItem.label,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Cairo',
-                                                                                    color: FlutterFlowTheme.of(context).black,
-                                                                                    fontSize: 10.0,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        );
-                                                                      }),
-                                                                    );
-                                                                  },
-                                                                ),
-                                                              ],
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      5.0,
+                                                                      0.0,
+                                                                      5.0,
+                                                                      0.0),
+                                                              child: Text(
+                                                                listItem
+                                                                    .travelEndName,
+                                                                style: FlutterFlowTheme
+                                                                        .of(context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Cairo',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                    ),
+                                                              ),
                                                             ),
-                                                          ),
-                                                          const StyledDivider(
-                                                            height: 0.0,
-                                                            thickness: 1.0,
-                                                            indent: 20.0,
-                                                            color: Color(
-                                                                0xFFA8A8A8),
-                                                            lineStyle:
-                                                                DividerLineStyle
-                                                                    .dashed,
-                                                          ),
-                                                        ],
-                                                      ),
+                                                            Icon(
+                                                              Icons
+                                                                  .location_on_outlined,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .secondaryText,
+                                                              size: 20.0,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(15.0, 15.0,
-                                                          15.0, 0.0),
-                                                  child: Row(
+                                                  ),
+                                                  Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
                                                     children: [
-                                                      ClipRRect(
-                                                        child: SvgPicture.asset(
-                                                          'assets/images/Group_26.svg',
-                                                          width: 30.0,
-                                                          height: 20.0,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                      Stack(
-                                                        children: [
-                                                          Builder(
-                                                            builder: (context) {
-                                                              final listOf =
-                                                                  listItem
-                                                                      .wayPoints
-                                                                      .toList();
-                                                              return Row(
+                                                      Expanded(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                      15.0,
+                                                                      10.0,
+                                                                      15.0,
+                                                                      0.0),
+                                                              child: Column(
                                                                 mainAxisSize:
                                                                     MainAxisSize
                                                                         .max,
-                                                                children: List.generate(
-                                                                    listOf.length >
-                                                                            3
-                                                                        ? 3
-                                                                        : listOf
-                                                                            .length,
-                                                                    (listOfIndex) {
-                                                                  final listOfItem =
-                                                                      listOf[
-                                                                          listOfIndex];
-                                                                  return Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                        3.0,
-                                                                        0.0,
-                                                                        3.0,
-                                                                        0.0),
-                                                                    child:
-                                                                        Container(
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .alternate,
-                                                                        borderRadius:
-                                                                            const BorderRadius.only(
-                                                                          bottomLeft:
-                                                                              Radius.circular(2.0),
-                                                                          bottomRight:
-                                                                              Radius.circular(2.0),
-                                                                          topLeft:
-                                                                              Radius.circular(2.0),
-                                                                          topRight:
-                                                                              Radius.circular(2.0),
-                                                                        ),
-                                                                      ),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: const EdgeInsetsDirectional
-                                                                            .fromSTEB(
-                                                                            3.0,
-                                                                            3.0,
-                                                                            3.0,
-                                                                            3.0),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          children: [
-                                                                            Text(
-                                                                              FFLocalizations.of(context).getText(
-                                                                                'p0zzvg9x' /* 022/25 */,
+                                                                children: [
+                                                                  Builder(
+                                                                    builder:
+                                                                        (context) {
+                                                                      final locationPoints =
+                                                                          listItem
+                                                                              .wayPoints
+                                                                              .toList();
+                                                                      return Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize
+                                                                                .max,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment
+                                                                                .spaceEvenly,
+                                                                        children: List.generate(
+                                                                            locationPoints
+                                                                                .length,
+                                                                            (locationPointsIndex) {
+                                                                          final locationPointsItem =
+                                                                              locationPoints[locationPointsIndex];
+                                                                          return Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Icon(
+                                                                                Icons.location_on_outlined,
+                                                                                color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                size: 18.0,
                                                                               ),
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Readex Pro',
-                                                                                    color: FlutterFlowTheme.of(context).primary,
-                                                                                  ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                }),
-                                                              );
-                                                            },
-                                                          ),
-                                                          Visibility(
-                                                              visible: listItem
-                                                                  .isMoreClicked,
-                                                              child: Container(
-                                                                color: Colors
-                                                                    .white,
-                                                                width: 190,
-                                                                child: GridView
-                                                                    .builder(
-                                                                  physics:
-                                                                      const NeverScrollableScrollPhysics(),
-                                                                  gridDelegate:
-                                                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                                                    crossAxisCount:
-                                                                        3,
-                                                                    mainAxisSpacing:
-                                                                        1,
-                                                                    crossAxisSpacing:
-                                                                        0.1,
-                                                                    childAspectRatio:
-                                                                        2.7, // Aspect ratio of each item
+                                                                              Text(
+                                                                                locationPointsItem.label,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Cairo',
+                                                                                      color: FlutterFlowTheme.of(context).black,
+                                                                                      fontSize: 10.0,
+                                                                                    ),
+                                                                              ),
+                                                                            ],
+                                                                          );
+                                                                        }),
+                                                                      );
+                                                                    },
                                                                   ),
-                                                                  shrinkWrap: true,
-                                                                  itemCount: listItem
-                                                                      .wayPoints
-                                                                      .length,
-                                                                  itemBuilder:
-                                                                      (BuildContext
-                                                                              context,
-                                                                          int index) {
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            const StyledDivider(
+                                                              height: 0.0,
+                                                              thickness: 1.0,
+                                                              indent: 20.0,
+                                                              color: Color(
+                                                                  0xFFA8A8A8),
+                                                              lineStyle:
+                                                                  DividerLineStyle
+                                                                      .dashed,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(15.0, 15.0,
+                                                            15.0, 0.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.start,
+                                                      children: [
+                                                        ClipRRect(
+                                                          child: SvgPicture.asset(
+                                                            'assets/images/Group_26.svg',
+                                                            width: 30.0,
+                                                            height: 20.0,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                        ),
+                                                        Stack(
+                                                          children: [
+                                                            Builder(
+                                                              builder: (context) {
+                                                                final listOf =
+                                                                    listItem
+                                                                        .wayPoints
+                                                                        .toList();
+                                                                return Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: List.generate(
+                                                                      listOf.length >
+                                                                              3
+                                                                          ? 3
+                                                                          : listOf
+                                                                              .length,
+                                                                      (listOfIndex) {
                                                                     final listOfItem =
-                                                                        listItem
-                                                                            .wayPoints[index];
+                                                                        listOf[
+                                                                            listOfIndex];
                                                                     return Padding(
                                                                       padding: const EdgeInsetsDirectional
                                                                           .fromSTEB(
@@ -920,16 +836,27 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                           Container(
                                                                         decoration:
                                                                             BoxDecoration(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).alternate,
-                                                                          borderRadius: const BorderRadius
-                                                                              .all(
-                                                                              Radius.circular(2.0)),
+                                                                          color: FlutterFlowTheme.of(context)
+                                                                              .alternate,
+                                                                          borderRadius:
+                                                                              const BorderRadius.only(
+                                                                            bottomLeft:
+                                                                                Radius.circular(2.0),
+                                                                            bottomRight:
+                                                                                Radius.circular(2.0),
+                                                                            topLeft:
+                                                                                Radius.circular(2.0),
+                                                                            topRight:
+                                                                                Radius.circular(2.0),
+                                                                          ),
                                                                         ),
                                                                         child:
                                                                             Padding(
-                                                                          padding: const EdgeInsets
-                                                                              .all(
+                                                                          padding: const EdgeInsetsDirectional
+                                                                              .fromSTEB(
+                                                                              3.0,
+                                                                              3.0,
+                                                                              3.0,
                                                                               3.0),
                                                                           child:
                                                                               Row(
@@ -937,7 +864,9 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                                 MainAxisSize.max,
                                                                             children: [
                                                                               Text(
-                                                                                FFLocalizations.of(context).getText('p0zzvg9x' /* 022/25 */),
+                                                                                FFLocalizations.of(context).getText(
+                                                                                  'p0zzvg9x' /* 022/25 */,
+                                                                                ),
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                       fontFamily: 'Readex Pro',
                                                                                       color: FlutterFlowTheme.of(context).primary,
@@ -948,155 +877,232 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                         ),
                                                                       ),
                                                                     );
-                                                                  },
-                                                                ),
-                                                              )),
-                                                        ],
-                                                      ),
-                                                      Visibility(
-                                                        visible: listItem
-                                                                .wayPoints
-                                                                .toList()
-                                                                .length >
-                                                            3,
-                                                        child: InkWell(
-                                                          onTap: () {
-                                                            if (listItem
-                                                                .isMoreClicked) {
-                                                              setState(() {
-                                                                list
-                                                                    .map((e) =>
-                                                                        e.isMoreClicked =
-                                                                            false)
-                                                                    .toList();
-
-                                                                list
-                                                                    .map((e) => e.id ==
-                                                                            listItem
-                                                                                .id
-                                                                        ? e.isMoreClicked =
-                                                                            false
-                                                                        : e.isMoreClicked =
-                                                                            true)
-                                                                    .toList();
-                                                              });
-                                                            } else {
-                                                              setState(() {
-                                                                list
-                                                                    .map((e) =>
-                                                                        e.isMoreClicked =
-                                                                            false)
-                                                                    .toList();
-
-                                                                list
-                                                                    .map((e) => e.id ==
-                                                                            listItem
-                                                                                .id
-                                                                        ? e.isMoreClicked =
-                                                                            true
-                                                                        : e.isMoreClicked =
-                                                                            false)
-                                                                    .toList();
-                                                              });
-                                                            }
-                                                          },
-                                                          child: Container(
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primary,
-                                                              borderRadius:
-                                                                  const BorderRadius
-                                                                      .only(
-                                                                bottomLeft: Radius
-                                                                    .circular(
-                                                                        2.0),
-                                                                bottomRight: Radius
-                                                                    .circular(
-                                                                        2.0),
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        2.0),
-                                                                topRight: Radius
-                                                                    .circular(
-                                                                        2.0),
-                                                              ),
+                                                                  }),
+                                                                );
+                                                              },
                                                             ),
-                                                            child: Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                      3.0,
-                                                                      3.0,
-                                                                      3.0,
-                                                                      3.0),
-                                                              child: Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Text(
-                                                                    listItem
-                                                                            .isMoreClicked
-                                                                        ? FFLocalizations.of(context)
-                                                                            .getText(
-                                                                            'less' /* More */,
-                                                                          )
-                                                                        : FFLocalizations.of(context)
-                                                                            .getText(
-                                                                            'aqchkde4' /* More */,
+                                                            Visibility(
+                                                                visible: listItem
+                                                                    .isMoreClicked,
+                                                                child: Container(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  width: 190,
+                                                                  child: GridView
+                                                                      .builder(
+                                                                    physics:
+                                                                        const NeverScrollableScrollPhysics(),
+                                                                    gridDelegate:
+                                                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                                                      crossAxisCount:
+                                                                          3,
+                                                                      mainAxisSpacing:
+                                                                          1,
+                                                                      crossAxisSpacing:
+                                                                          0.1,
+                                                                      childAspectRatio:
+                                                                          2.7, // Aspect ratio of each item
+                                                                    ),
+                                                                    shrinkWrap: true,
+                                                                    itemCount: listItem
+                                                                        .wayPoints
+                                                                        .length,
+                                                                    itemBuilder:
+                                                                        (BuildContext
+                                                                                context,
+                                                                            int index) {
+                                                                      final listOfItem =
+                                                                          listItem
+                                                                              .wayPoints[index];
+                                                                      return Padding(
+                                                                        padding: const EdgeInsetsDirectional
+                                                                            .fromSTEB(
+                                                                            3.0,
+                                                                            0.0,
+                                                                            3.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Container(
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).alternate,
+                                                                            borderRadius: const BorderRadius
+                                                                                .all(
+                                                                                Radius.circular(2.0)),
                                                                           ),
-                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                        fontFamily:
-                                                                            'Readex Pro',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
-                                                                        fontSize:
-                                                                            10),
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: const EdgeInsets
+                                                                                .all(
+                                                                                3.0),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize:
+                                                                                  MainAxisSize.max,
+                                                                              children: [
+                                                                                Text(
+                                                                                  FFLocalizations.of(context).getText('p0zzvg9x' /* 022/25 */),
+                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                        fontFamily: 'Readex Pro',
+                                                                                        color: FlutterFlowTheme.of(context).primary,
+                                                                                      ),
+                                                                                ),
+                                                                              ],
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    },
                                                                   ),
-                                                                ],
+                                                                )),
+                                                          ],
+                                                        ),
+                                                        Visibility(
+                                                          visible: listItem
+                                                                  .wayPoints
+                                                                  .toList()
+                                                                  .length >
+                                                              3,
+                                                          child: InkWell(
+                                                            onTap: () {
+                                                              if (listItem
+                                                                  .isMoreClicked) {
+                                                                setState(() {
+                                                                  list
+                                                                      .map((e) =>
+                                                                          e.isMoreClicked =
+                                                                              false)
+                                                                      .toList();
+
+                                                                  list
+                                                                      .map((e) => e.id ==
+                                                                              listItem
+                                                                                  .id
+                                                                          ? e.isMoreClicked =
+                                                                              false
+                                                                          : e.isMoreClicked =
+                                                                              true)
+                                                                      .toList();
+                                                                });
+                                                              } else {
+                                                                setState(() {
+                                                                  list
+                                                                      .map((e) =>
+                                                                          e.isMoreClicked =
+                                                                              false)
+                                                                      .toList();
+
+                                                                  list
+                                                                      .map((e) => e.id ==
+                                                                              listItem
+                                                                                  .id
+                                                                          ? e.isMoreClicked =
+                                                                              true
+                                                                          : e.isMoreClicked =
+                                                                              false)
+                                                                      .toList();
+                                                                });
+                                                              }
+                                                            },
+                                                            child: Container(
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme
+                                                                        .of(context)
+                                                                    .primary,
+                                                                borderRadius:
+                                                                    const BorderRadius
+                                                                        .only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          2.0),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          2.0),
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          2.0),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          2.0),
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                        3.0,
+                                                                        3.0,
+                                                                        3.0,
+                                                                        3.0),
+                                                                child: Row(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  children: [
+                                                                    Text(
+                                                                      listItem
+                                                                              .isMoreClicked
+                                                                          ? FFLocalizations.of(context)
+                                                                              .getText(
+                                                                              'less' /* More */,
+                                                                            )
+                                                                          : FFLocalizations.of(context)
+                                                                              .getText(
+                                                                              'aqchkde4' /* More */,
+                                                                            ),
+                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          color: FlutterFlowTheme.of(context)
+                                                                              .secondaryBackground,
+                                                                          fontSize:
+                                                                              10),
+                                                                    ),
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ],
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional
-                                            .fromSTEB(5.0, 0.0, 5.0, 0.0),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            '4eklp4ju' /* Select Line */,
+                                        Padding(
+                                          padding: const EdgeInsetsDirectional
+                                              .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                          child: Text(
+                                            FFLocalizations.of(context).getText(
+                                              '4eklp4ju' /* Select Line */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Cairo',
+                                                  color:
+                                                      FlutterFlowTheme.of(context)
+                                                          .primary,
+                                                  fontSize: 10.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Cairo',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                fontSize: 10.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Divider(
-                                    endIndent: 18,
-                                    indent: 18,
-                                    thickness: 1.0,
-                                    color: Color(0xFFA8A8A8),
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                    const Divider(
+                                      endIndent: 18,
+                                      indent: 18,
+                                      thickness: 1.0,
+                                      color: Color(0xFFA8A8A8),
+                                    ),
+                                  ],
+                                ),
                               );
                             },
                           );
@@ -1166,6 +1172,11 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                         Icons.search_outlined,
                       ),
                     ),
+                    onChanged: (value){
+                      setState(() {
+
+                      });
+                    },
                     style: FlutterFlowTheme.of(context).bodyMedium,
                     validator:
                         _model.textControllerValidator.asValidator(context),
