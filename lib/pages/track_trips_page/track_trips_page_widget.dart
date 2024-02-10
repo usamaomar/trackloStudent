@@ -58,10 +58,8 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
         });
       }
       _model.apiResultLastTrips =
-          await StudentApisGroup.getAllTravileApiCall.call(
+          await StudentApisGroup.getLastTravileApiCall.call(
         token: FFAppState().userModel.token,
-        lat: 31.989959,
-        lng: 35.870176,
       );
       if ((_model.apiResultLastTrips?.succeeded ?? true)) {
         setState(() {
@@ -76,6 +74,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
               .withoutNulls
               .toList()
               .cast<TravelModelStruct>();
+          _model.localTravelsLastTravelList.removeWhere((element) => element.travel.travelStartName.isEmpty == true);
           _model.isLoading = false;
         });
       } else {
@@ -191,7 +190,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                             itemBuilder: (context, listIndex) {
                               final listItem2 = list2[listIndex];
                               return Visibility(
-                                visible:_model.textController.text.isNotEmpty ?  listItem2.travelStartName.contains(_model.textController.text) : true,
+                                visible:_model.textController.text.isNotEmpty ?  listItem2.travel.travelStartName.contains(_model.textController.text) : true,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -247,7 +246,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                       5.0,
                                                                       0.0),
                                                               child: Text(
-                                                                listItem2
+                                                                listItem2.travel
                                                                     .travelStartName,
                                                                 style: FlutterFlowTheme
                                                                         .of(context)
@@ -262,7 +261,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                               ),
                                                             ),
                                                             Text(
-                                                              listItem2.wayPoints
+                                                              listItem2.travel.wayPoints
                                                                   .first.time,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -289,7 +288,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                       5.0,
                                                                       0.0),
                                                               child: Text(
-                                                                listItem2.way,
+                                                                listItem2.travel.way,
                                                                 style: FlutterFlowTheme
                                                                         .of(context)
                                                                     .bodyMedium
@@ -312,7 +311,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                   .spaceAround,
                                                           children: [
                                                             Text(
-                                                              listItem2.wayPoints
+                                                              listItem2.travel.wayPoints
                                                                   .last.time,
                                                               style: FlutterFlowTheme
                                                                       .of(context)
@@ -336,7 +335,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                       5.0,
                                                                       0.0),
                                                               child: Text(
-                                                                listItem2
+                                                                listItem2.travel
                                                                     .travelEndName,
                                                                 style: FlutterFlowTheme
                                                                         .of(context)
@@ -389,7 +388,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                     builder:
                                                                         (context) {
                                                                       final locationPoints =
-                                                                          listItem2
+                                                                          listItem2.travel
                                                                               .wayPoints
                                                                               .toList();
                                                                       return Row(

@@ -65,7 +65,7 @@ class WayPointModelStruct extends BaseStruct {
         label: data['label'] as String?,
         disabled: data['disabled'] as bool?,
         time: data['time'] as String?,
-        id: data['id'] as String?,
+        id: data['_id'] as String?,
       );
 
   static WayPointModelStruct? maybeFromMap(dynamic data) => data is Map

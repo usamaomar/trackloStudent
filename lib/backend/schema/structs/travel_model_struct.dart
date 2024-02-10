@@ -23,7 +23,7 @@ class TravelModelStruct extends BaseStruct {
         _isMoreClicked = isMoreClicked,
         _wayPoint = wayPoint,
         _travel = travel,
-        _range = range;
+        _range = range.toString();
 
   // "id" field.
   String? _id;
@@ -98,7 +98,7 @@ class TravelModelStruct extends BaseStruct {
         isMoreClicked: data['isMoreClicked'] as bool?,
         wayPoint: WayPointModelStruct.maybeFromMap(data['wayPoint']),
         travel: TravelModelStruct.maybeFromMap(data['travel']),
-        range: data['range'] as String?,
+        range: data['range'].toString() as String?,
       );
 
   static TravelModelStruct? maybeFromMap(dynamic data) => data is Map
