@@ -15,6 +15,7 @@ class StudentApisGroup {
   };
   static LoginApiCall loginApiCall = LoginApiCall();
   static GetAllTravileApiCall getAllTravileApiCall = GetAllTravileApiCall();
+  static GetLastTravileApiCall getLastTravileApiCall = GetLastTravileApiCall();
 }
 
 class LoginApiCall {
@@ -64,6 +65,27 @@ class GetAllTravileApiCall {
         'lat': lat,
         'lng': lng,
       },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetLastTravileApiCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetLastTravileApi',
+      apiUrl: '${StudentApisGroup.baseUrl}/v1/travels/tracked',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': '$token',
+      },
+      params: {},
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
