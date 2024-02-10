@@ -12,14 +12,18 @@ class TravelModelStruct extends BaseStruct {
     String? way,
     List<WayPointModelStruct>? wayPoints,
     bool? isMoreClicked,
-    bool? isVisble,
+    WayPointModelStruct? wayPoint,
+    TravelModelStruct? travel,
+    String? range,
   })  : _id = id,
         _travelStartName = travelStartName,
         _travelEndName = travelEndName,
         _way = way,
         _wayPoints = wayPoints,
         _isMoreClicked = isMoreClicked,
-        _isVisble = isVisble;
+        _wayPoint = wayPoint,
+        _travel = travel,
+        _range = range;
 
   // "id" field.
   String? _id;
@@ -59,11 +63,27 @@ class TravelModelStruct extends BaseStruct {
   set isMoreClicked(bool? val) => _isMoreClicked = val;
   bool hasIsMoreClicked() => _isMoreClicked != null;
 
-  // "isVisble" field.
-  bool? _isVisble;
-  bool get isVisble => _isVisble ?? true;
-  set isVisble(bool? val) => _isVisble = val;
-  bool hasIsVisble() => _isVisble != null;
+  // "wayPoint" field.
+  WayPointModelStruct? _wayPoint;
+  WayPointModelStruct get wayPoint => _wayPoint ?? WayPointModelStruct();
+  set wayPoint(WayPointModelStruct? val) => _wayPoint = val;
+  void updateWayPoint(Function(WayPointModelStruct) updateFn) =>
+      updateFn(_wayPoint ??= WayPointModelStruct());
+  bool hasWayPoint() => _wayPoint != null;
+
+  // "travel" field.
+  TravelModelStruct? _travel;
+  TravelModelStruct get travel => _travel ?? TravelModelStruct();
+  set travel(TravelModelStruct? val) => _travel = val;
+  void updateTravel(Function(TravelModelStruct) updateFn) =>
+      updateFn(_travel ??= TravelModelStruct());
+  bool hasTravel() => _travel != null;
+
+  // "range" field.
+  String? _range;
+  String get range => _range ?? '';
+  set range(String? val) => _range = val;
+  bool hasRange() => _range != null;
 
   static TravelModelStruct fromMap(Map<String, dynamic> data) =>
       TravelModelStruct(
@@ -76,7 +96,9 @@ class TravelModelStruct extends BaseStruct {
           WayPointModelStruct.fromMap,
         ),
         isMoreClicked: data['isMoreClicked'] as bool?,
-        isVisble: data['isVisble'] as bool?,
+        wayPoint: WayPointModelStruct.maybeFromMap(data['wayPoint']),
+        travel: TravelModelStruct.maybeFromMap(data['travel']),
+        range: data['range'] as String?,
       );
 
   static TravelModelStruct? maybeFromMap(dynamic data) => data is Map
@@ -90,7 +112,9 @@ class TravelModelStruct extends BaseStruct {
         'way': _way,
         'way_points': _wayPoints?.map((e) => e.toMap()).toList(),
         'isMoreClicked': _isMoreClicked,
-        'isVisble': _isVisble,
+        'wayPoint': _wayPoint?.toMap(),
+        'travel': _travel?.toMap(),
+        'range': _range,
       }.withoutNulls;
 
   @override
@@ -120,9 +144,17 @@ class TravelModelStruct extends BaseStruct {
           _isMoreClicked,
           ParamType.bool,
         ),
-        'isVisble': serializeParam(
-          _isVisble,
-          ParamType.bool,
+        'wayPoint': serializeParam(
+          _wayPoint,
+          ParamType.DataStruct,
+        ),
+        'travel': serializeParam(
+          _travel,
+          ParamType.DataStruct,
+        ),
+        'range': serializeParam(
+          _range,
+          ParamType.String,
         ),
       }.withoutNulls;
 
@@ -159,9 +191,21 @@ class TravelModelStruct extends BaseStruct {
           ParamType.bool,
           false,
         ),
-        isVisble: deserializeParam(
-          data['isVisble'],
-          ParamType.bool,
+        wayPoint: deserializeStructParam(
+          data['wayPoint'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: WayPointModelStruct.fromSerializableMap,
+        ),
+        travel: deserializeStructParam(
+          data['travel'],
+          ParamType.DataStruct,
+          false,
+          structBuilder: TravelModelStruct.fromSerializableMap,
+        ),
+        range: deserializeParam(
+          data['range'],
+          ParamType.String,
           false,
         ),
       );
@@ -179,7 +223,9 @@ class TravelModelStruct extends BaseStruct {
         way == other.way &&
         listEquality.equals(wayPoints, other.wayPoints) &&
         isMoreClicked == other.isMoreClicked &&
-        isVisble == other.isVisble;
+        wayPoint == other.wayPoint &&
+        travel == other.travel &&
+        range == other.range;
   }
 
   @override
@@ -190,7 +236,9 @@ class TravelModelStruct extends BaseStruct {
         way,
         wayPoints,
         isMoreClicked,
-        isVisble
+        wayPoint,
+        travel,
+        range
       ]);
 }
 
@@ -200,7 +248,9 @@ TravelModelStruct createTravelModelStruct({
   String? travelEndName,
   String? way,
   bool? isMoreClicked,
-  bool? isVisble,
+  WayPointModelStruct? wayPoint,
+  TravelModelStruct? travel,
+  String? range,
 }) =>
     TravelModelStruct(
       id: id,
@@ -208,5 +258,7 @@ TravelModelStruct createTravelModelStruct({
       travelEndName: travelEndName,
       way: way,
       isMoreClicked: isMoreClicked,
-      isVisble: isVisble,
+      wayPoint: wayPoint ?? WayPointModelStruct(),
+      travel: travel ?? TravelModelStruct(),
+      range: range,
     );
