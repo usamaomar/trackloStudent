@@ -11,11 +11,13 @@ class TravelModelStruct extends BaseStruct {
     String? travelEndName,
     String? way,
     List<WayPointModelStruct>? wayPoints,
+    bool? isMoreClicked,
   })  : _id = id,
         _travelStartName = travelStartName,
         _travelEndName = travelEndName,
         _way = way,
-        _wayPoints = wayPoints;
+        _wayPoints = wayPoints,
+        _isMoreClicked = isMoreClicked;
 
   // "id" field.
   String? _id;
@@ -49,6 +51,12 @@ class TravelModelStruct extends BaseStruct {
       updateFn(_wayPoints ??= []);
   bool hasWayPoints() => _wayPoints != null;
 
+  // "isMoreClicked" field.
+  bool? _isMoreClicked;
+  bool get isMoreClicked => _isMoreClicked ?? false;
+  set isMoreClicked(bool? val) => _isMoreClicked = val;
+  bool hasIsMoreClicked() => _isMoreClicked != null;
+
   static TravelModelStruct fromMap(Map<String, dynamic> data) =>
       TravelModelStruct(
         id: data['id'] as String?,
@@ -59,6 +67,7 @@ class TravelModelStruct extends BaseStruct {
           data['way_points'],
           WayPointModelStruct.fromMap,
         ),
+        isMoreClicked: data['isMoreClicked'] as bool?,
       );
 
   static TravelModelStruct? maybeFromMap(dynamic data) => data is Map
@@ -71,6 +80,7 @@ class TravelModelStruct extends BaseStruct {
         'travel_end_name': _travelEndName,
         'way': _way,
         'way_points': _wayPoints?.map((e) => e.toMap()).toList(),
+        'isMoreClicked': _isMoreClicked,
       }.withoutNulls;
 
   @override
@@ -95,6 +105,10 @@ class TravelModelStruct extends BaseStruct {
           _wayPoints,
           ParamType.DataStruct,
           true,
+        ),
+        'isMoreClicked': serializeParam(
+          _isMoreClicked,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -126,6 +140,11 @@ class TravelModelStruct extends BaseStruct {
           true,
           structBuilder: WayPointModelStruct.fromSerializableMap,
         ),
+        isMoreClicked: deserializeParam(
+          data['isMoreClicked'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -139,12 +158,13 @@ class TravelModelStruct extends BaseStruct {
         travelStartName == other.travelStartName &&
         travelEndName == other.travelEndName &&
         way == other.way &&
-        listEquality.equals(wayPoints, other.wayPoints);
+        listEquality.equals(wayPoints, other.wayPoints) &&
+        isMoreClicked == other.isMoreClicked;
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([id, travelStartName, travelEndName, way, wayPoints]);
+  int get hashCode => const ListEquality().hash(
+      [id, travelStartName, travelEndName, way, wayPoints, isMoreClicked]);
 }
 
 TravelModelStruct createTravelModelStruct({
@@ -152,10 +172,12 @@ TravelModelStruct createTravelModelStruct({
   String? travelStartName,
   String? travelEndName,
   String? way,
+  bool? isMoreClicked,
 }) =>
     TravelModelStruct(
       id: id,
       travelStartName: travelStartName,
       travelEndName: travelEndName,
       way: way,
+      isMoreClicked: isMoreClicked,
     );
