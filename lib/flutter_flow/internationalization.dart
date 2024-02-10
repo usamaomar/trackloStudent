@@ -307,6 +307,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'More',
       'ar': 'أكثر',
     },
+
+    'less': {
+      'en': 'Less',
+      'ar': 'اقل',
+    },
     '4eklp4ju': {
       'en': 'Select Line',
       'ar': 'اختر الخط',

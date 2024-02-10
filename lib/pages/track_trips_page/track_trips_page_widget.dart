@@ -52,14 +52,11 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
               .withoutNulls
               .toList()
               .cast<TravelModelStruct>();
-          // _model.isLoading = false;
+          if(_model.localTravelsList.isNotEmpty) {
+            _model.isLoading = false;
+          }
         });
       }
-
-      // _model.apiResultLastTrips =
-      //     await StudentApisGroup.getLastTravileApiCall.call(
-      //   token: FFAppState().userModel.token,
-      // );
       _model.apiResultLastTrips =
           await StudentApisGroup.getAllTravileApiCall.call(
         token: FFAppState().userModel.token,
@@ -111,7 +108,6 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
     }
 
     context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -493,7 +489,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                       ),
                     ),
                     Visibility(
-                      visible: _model.localTravelsLastTravelList.isNotEmpty,
+                      visible: _model.localTravelsLastTravelList.isNotEmpty && _model.localTravelsList.isNotEmpty,
                       child: Container(
                         margin:
                             const EdgeInsets.only(top: 25, left: 15, right: 15),
@@ -518,7 +514,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                     Container(
                       margin: _model.localTravelsLastTravelList.isNotEmpty
                           ? const EdgeInsets.only(top: 10)
-                          : const EdgeInsets.only(top: 70),
+                          : const EdgeInsets.only(top: 10),
                       child: Builder(
                         builder: (context) {
                           final list = _model.localTravelsList.toList();
@@ -802,90 +798,160 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                           fit: BoxFit.cover,
                                                         ),
                                                       ),
-                                                      Builder(
-                                                        builder: (context) {
-                                                          final listOf =
-                                                              listItem.wayPoints
-                                                                  .toList();
-                                                          return Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: List.generate(
-                                                                listOf.length >
-                                                                        3
-                                                                    ? 3
-                                                                    : listOf
-                                                                        .length,
-                                                                (listOfIndex) {
-                                                              final listOfItem =
-                                                                  listOf[
-                                                                      listOfIndex];
-                                                              return Padding(
-                                                                padding:
-                                                                    const EdgeInsetsDirectional
+                                                      Stack(
+                                                        children: [
+                                                          Builder(
+                                                            builder: (context) {
+                                                              final listOf =
+                                                                  listItem
+                                                                      .wayPoints
+                                                                      .toList();
+                                                              return Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: List.generate(
+                                                                    listOf.length >
+                                                                            3
+                                                                        ? 3
+                                                                        : listOf
+                                                                            .length,
+                                                                    (listOfIndex) {
+                                                                  final listOfItem =
+                                                                      listOf[
+                                                                          listOfIndex];
+                                                                  return Padding(
+                                                                    padding: const EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                         3.0,
                                                                         0.0,
                                                                         3.0,
                                                                         0.0),
-                                                                child:
-                                                                    Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .alternate,
-                                                                    borderRadius:
-                                                                        const BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              2.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              2.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              2.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              2.0),
-                                                                    ),
-                                                                  ),
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                        3.0,
-                                                                        3.0,
-                                                                        3.0,
-                                                                        3.0),
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Text(
-                                                                          FFLocalizations.of(context)
-                                                                              .getText(
-                                                                            'p0zzvg9x' /* 022/25 */,
-                                                                          ),
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Readex Pro',
-                                                                                color: FlutterFlowTheme.of(context).primary,
-                                                                              ),
+                                                                    child:
+                                                                        Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .alternate,
+                                                                        borderRadius:
+                                                                            const BorderRadius.only(
+                                                                          bottomLeft:
+                                                                              Radius.circular(2.0),
+                                                                          bottomRight:
+                                                                              Radius.circular(2.0),
+                                                                          topLeft:
+                                                                              Radius.circular(2.0),
+                                                                          topRight:
+                                                                              Radius.circular(2.0),
                                                                         ),
-                                                                      ],
+                                                                      ),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: const EdgeInsetsDirectional
+                                                                            .fromSTEB(
+                                                                            3.0,
+                                                                            3.0,
+                                                                            3.0,
+                                                                            3.0),
+                                                                        child:
+                                                                            Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Text(
+                                                                              FFLocalizations.of(context).getText(
+                                                                                'p0zzvg9x' /* 022/25 */,
+                                                                              ),
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                    fontFamily: 'Readex Pro',
+                                                                                    color: FlutterFlowTheme.of(context).primary,
+                                                                                  ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                ),
+                                                                  );
+                                                                }),
                                                               );
-                                                            }),
-                                                          );
-                                                        },
+                                                            },
+                                                          ),
+                                                          Visibility(
+                                                              visible: listItem
+                                                                  .isMoreClicked,
+                                                              child: Container(
+                                                                color: Colors
+                                                                    .white,
+                                                                width: 190,
+                                                                child: GridView
+                                                                    .builder(
+                                                                  physics:
+                                                                      const NeverScrollableScrollPhysics(),
+                                                                  gridDelegate:
+                                                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                                                    crossAxisCount:
+                                                                        3,
+                                                                    mainAxisSpacing:
+                                                                        1,
+                                                                    crossAxisSpacing:
+                                                                        0.1,
+                                                                    childAspectRatio:
+                                                                        2.7, // Aspect ratio of each item
+                                                                  ),
+                                                                  shrinkWrap: true,
+                                                                  itemCount: listItem
+                                                                      .wayPoints
+                                                                      .length,
+                                                                  itemBuilder:
+                                                                      (BuildContext
+                                                                              context,
+                                                                          int index) {
+                                                                    final listOfItem =
+                                                                        listItem
+                                                                            .wayPoints[index];
+                                                                    return Padding(
+                                                                      padding: const EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                          3.0,
+                                                                          0.0,
+                                                                          3.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Container(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).alternate,
+                                                                          borderRadius: const BorderRadius
+                                                                              .all(
+                                                                              Radius.circular(2.0)),
+                                                                        ),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding: const EdgeInsets
+                                                                              .all(
+                                                                              3.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children: [
+                                                                              Text(
+                                                                                FFLocalizations.of(context).getText('p0zzvg9x' /* 022/25 */),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Readex Pro',
+                                                                                      color: FlutterFlowTheme.of(context).primary,
+                                                                                    ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                ),
+                                                              )),
+                                                        ],
                                                       ),
                                                       Visibility(
                                                         visible: listItem
@@ -895,9 +961,44 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                             3,
                                                         child: InkWell(
                                                           onTap: () {
+                                                            if (listItem
+                                                                .isMoreClicked) {
+                                                              setState(() {
+                                                                list
+                                                                    .map((e) =>
+                                                                        e.isMoreClicked =
+                                                                            false)
+                                                                    .toList();
 
+                                                                list
+                                                                    .map((e) => e.id ==
+                                                                            listItem
+                                                                                .id
+                                                                        ? e.isMoreClicked =
+                                                                            false
+                                                                        : e.isMoreClicked =
+                                                                            true)
+                                                                    .toList();
+                                                              });
+                                                            } else {
+                                                              setState(() {
+                                                                list
+                                                                    .map((e) =>
+                                                                        e.isMoreClicked =
+                                                                            false)
+                                                                    .toList();
 
-
+                                                                list
+                                                                    .map((e) => e.id ==
+                                                                            listItem
+                                                                                .id
+                                                                        ? e.isMoreClicked =
+                                                                            true
+                                                                        : e.isMoreClicked =
+                                                                            false)
+                                                                    .toList();
+                                                              });
+                                                            }
                                                           },
                                                           child: Container(
                                                             decoration:
@@ -936,11 +1037,16 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                         .max,
                                                                 children: [
                                                                   Text(
-                                                                    FFLocalizations.of(
-                                                                            context)
-                                                                        .getText(
-                                                                      'aqchkde4' /* More */,
-                                                                    ),
+                                                                    listItem
+                                                                            .isMoreClicked
+                                                                        ? FFLocalizations.of(context)
+                                                                            .getText(
+                                                                            'less' /* More */,
+                                                                          )
+                                                                        : FFLocalizations.of(context)
+                                                                            .getText(
+                                                                            'aqchkde4' /* More */,
+                                                                          ),
                                                                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                         fontFamily:
                                                                             'Readex Pro',
@@ -1021,8 +1127,6 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                       const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                   child: TextFormField(
                     controller: _model.textController,
-                    focusNode: _model.textFieldFocusNode,
-                    autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: FFLocalizations.of(context).getText(
@@ -1074,4 +1178,5 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
       ),
     );
   }
+
 }

@@ -59,7 +59,7 @@ class TravelModelStruct extends BaseStruct {
 
   static TravelModelStruct fromMap(Map<String, dynamic> data) =>
       TravelModelStruct(
-        id: data['id'] as String?,
+        id: data['_id'] as String?,
         travelStartName: data['travel_start_name'] as String?,
         travelEndName: data['travel_end_name'] as String?,
         way: data['way'] as String?,
