@@ -101,6 +101,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'TrackTripsPage',
           path: '/trackTripsPage',
           builder: (context, params) => const TrackTripsPageWidget(),
+        ),
+        FFRoute(
+          name: 'DetailsTrackingPage',
+          path: '/detailsTrackingPage',
+          builder: (context, params) => DetailsTrackingPageWidget(
+            travelModelStruct:
+                params.getParam('travelModelStruct', ParamType.JSON),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

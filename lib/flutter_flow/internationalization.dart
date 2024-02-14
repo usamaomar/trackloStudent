@@ -308,6 +308,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': '',
     },
   },
+  // DetailsTrackingPage
+  {
+    'sy46gnu4': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
   // Miscellaneous
   {
     'rfskuapi': {

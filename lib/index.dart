@@ -11,3 +11,5 @@ export '/pages/help_page/help_page_widget.dart' show HelpPageWidget;
 export '/pages/login_page/login_page_widget.dart' show LoginPageWidget;
 export '/pages/track_trips_page/track_trips_page_widget.dart'
     show TrackTripsPageWidget;
+export '/pages/details_tracking_page/details_tracking_page_widget.dart'
+    show DetailsTrackingPageWidget;

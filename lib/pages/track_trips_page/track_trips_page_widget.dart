@@ -566,19 +566,36 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     5.0, 0.0, 5.0, 0.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    '4eklp4ju' /* Select Line */,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed(
+                                      'DetailsTrackingPage',
+                                      queryParameters: {
+                                        'travelModelStruct': serializeParam(
+                                          listItem.toMap(),
+                                          ParamType.JSON,
+                                        ),
+                                      }.withoutNulls,
+                                    );
+                                  },
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      '4eklp4ju' /* Select Line */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          color: FlutterFlowTheme.of(context)
+                                              .primary,
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Cairo',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
                                 ),
                               ),
                             ],
