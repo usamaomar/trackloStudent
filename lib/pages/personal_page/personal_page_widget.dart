@@ -63,10 +63,7 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
               model: _model.appBarModel,
               updateCallback: () => setState(() {}),
               child: AppBarWidget(
-                rightIcon: Icon(
-                  Icons.notifications_sharp,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                ),
+                rightIcon: Container(),
                 isRightHedding: false,
                 isLeftHedding: false,
                 title: FFLocalizations.of(context).getVariableText(
@@ -74,7 +71,7 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                   arText: 'الملف الشخصي',
                 ),
                 rightButtonAction: () async {
-                  context.pushNamed('NotificationPage');
+                  // context.pushNamed('NotificationPage');
                 },
               ),
             ),

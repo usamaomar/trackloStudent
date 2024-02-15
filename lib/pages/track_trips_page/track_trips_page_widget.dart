@@ -483,6 +483,10 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                   listItem2.toMap(),
                                                   ParamType.JSON,
                                                 ),
+                                                'isTripSelected': serializeParam(
+                                                  true,
+                                                  ParamType.bool,
+                                                ),
                                               }.withoutNulls,
                                             );
                                           },
@@ -1113,6 +1117,10 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                 'travelModelStruct': serializeParam(
                                                   listItem.toMap(),
                                                   ParamType.JSON,
+                                                ),
+                                                'isTripSelected': serializeParam(
+                                                  false,
+                                                  ParamType.bool,
                                                 ),
                                               }.withoutNulls,
                                             );

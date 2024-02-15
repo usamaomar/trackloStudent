@@ -61,10 +61,7 @@ class _LangugePageWidgetState extends State<LangugePageWidget> {
               model: _model.appBarModel,
               updateCallback: () => setState(() {}),
               child: AppBarWidget(
-                rightIcon: Icon(
-                  Icons.notifications_sharp,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                ),
+                rightIcon: Container(),
                 isRightHedding: false,
                 isLeftHedding: false,
                 title: FFLocalizations.of(context).getVariableText(
@@ -72,7 +69,7 @@ class _LangugePageWidgetState extends State<LangugePageWidget> {
                   arText: 'اللغة',
                 ),
                 rightButtonAction: () async {
-                  context.pushNamed('NotificationPage');
+                  // context.pushNamed('NotificationPage');
                 },
               ),
             ),

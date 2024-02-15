@@ -94,7 +94,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                   arText: 'تتبع الرحلات',
                 ),
                 rightButtonAction: () async {
-                  context.pushNamed('HelpPage');
+                  context.pushNamed('NotificationPage');
                 },
               ),
             ),
@@ -123,7 +123,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                           ),
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 10.0, 0.0, 0.0),
+                                0.0, 30.0, 0.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -148,12 +148,12 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                             size: 24.0,
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 0.0, 5.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                             child: Text(
-                                              _model.travelModelStruct!
-                                                  .travelStartName,
+                                              widget.isTripSelected
+                                                  ? _model.travelModelStruct?.travel.travelStartName ?? ''
+                                                  : _model.travelModelStruct?.travelStartName ?? '',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -167,23 +167,28 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                             ),
                                           ),
                                           Text(
-                                            _model.travelModelStruct!.wayPoints
-                                                .first.time,
+                                            widget.isTripSelected
+                                                ? _model.travelModelStruct?.travel.wayPoints.first.time ?? ''
+                                                : _model.travelModelStruct?.wayPoints.first.time ?? '',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Readex Pro',
-                                                  color: const Color(0xFF48CD48),
+                                                  color:
+                                                      const Color(0xFF48CD48),
                                                   fontSize: 12.0,
                                                 ),
                                           ),
                                         ],
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            5.0, 0.0, 5.0, 0.0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                         child: Text(
-                                          _model.travelModelStruct!.way,
+                                          widget.isTripSelected
+                                              ? _model
+                                                  .travelModelStruct?.travel.way ?? ''
+                                              : _model.travelModelStruct?.way ?? '',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -200,8 +205,9 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                             MainAxisAlignment.spaceAround,
                                         children: [
                                           Text(
-                                            _model.travelModelStruct!.wayPoints
-                                                .last.time,
+                                            widget.isTripSelected
+                                                ? _model.travelModelStruct?.travel.wayPoints.last.time ?? ''
+                                                : _model.travelModelStruct?.wayPoints.last.time ?? '',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -213,12 +219,11 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                 ),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 0.0, 5.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                             child: Text(
-                                              _model.travelModelStruct!
-                                                  .travelEndName,
+                                              widget.isTripSelected
+                                                  ? _model.travelModelStruct?.travel.travelEndName ?? '': _model.travelModelStruct?.travelEndName ?? '',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -250,16 +255,16 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    15.0, 0.0, 15.0, 0.0),
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(15.0, 0.0, 15.0, 0.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Builder(
                                                   builder: (context) {
                                                     final locationPoints =
-                                                        _model.travelModelStruct
+                                                    widget.isTripSelected ? _model.travelModelStruct?.travel.wayPoints
+                                                         :    _model.travelModelStruct
                                                                 ?.wayPoints
                                                                 .toList() ??
                                                             [];
@@ -270,10 +275,10 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                           MainAxisAlignment
                                                               .spaceEvenly,
                                                       children: List.generate(
-                                                          locationPoints.length,
+                                                          locationPoints?.length ?? 0,
                                                           (locationPointsIndex) {
                                                         final locationPointsItem =
-                                                            locationPoints[
+                                                            locationPoints?[
                                                                 locationPointsIndex];
                                                         return Row(
                                                           mainAxisSize:
@@ -289,7 +294,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                             ),
                                                             Text(
                                                               locationPointsItem
-                                                                  .label,
+                                                                  ?.label ?? '',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium,
@@ -315,122 +320,127 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                     ),
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 10.0, 0.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Builder(
-                                        builder: (context) {
-                                          final listOf = _model
-                                                  .travelModelStruct?.wayPoints
-                                                  .toList() ??
-                                              [];
-                                          return Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: List.generate(
-                                                listOf.length, (listOfIndex) {
-                                              final listOfItem =
-                                                  listOf[listOfIndex];
-                                              return Padding(
-                                                padding: const EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        5.0, 0.0, 5.0, 0.0),
-                                                child: Container(
-                                                  decoration: const BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      bottomLeft:
-                                                          Radius.circular(8.0),
-                                                      bottomRight:
-                                                          Radius.circular(8.0),
-                                                      topLeft:
-                                                          Radius.circular(8.0),
-                                                      topRight:
-                                                          Radius.circular(8.0),
+                                  Visibility(
+                                    visible:   !widget.isTripSelected ,
+                                    child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 10.0, 0.0, 0.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Builder(
+                                          builder: (context) {
+                                            final listOf = _model
+                                                    .travelModelStruct?.wayPoints
+                                                    .toList() ??
+                                                [];
+                                            return Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: List.generate(
+                                                  listOf.length, (listOfIndex) {
+                                                final listOfItem =
+                                                    listOf[listOfIndex];
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(
+                                                          5.0, 0.0, 5.0, 0.0),
+                                                  child: Container(
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        bottomLeft:
+                                                            Radius.circular(8.0),
+                                                        bottomRight:
+                                                            Radius.circular(8.0),
+                                                        topLeft:
+                                                            Radius.circular(8.0),
+                                                        topRight:
+                                                            Radius.circular(8.0),
+                                                      ),
                                                     ),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(5.0, 5.0,
-                                                                5.0, 5.0),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Text(
-                                                          listOfItem.label,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                              5.0, 5.0, 5.0, 5.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Text(
+                                                            listOfItem.label,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                ),
+                                                          ),
+                                                          Theme(
+                                                            data: ThemeData(
+                                                              checkboxTheme:
+                                                                  CheckboxThemeData(
+                                                                visualDensity:
+                                                                    VisualDensity
+                                                                        .compact,
+                                                                materialTapTargetSize:
+                                                                    MaterialTapTargetSize
+                                                                        .shrinkWrap,
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              4.0),
+                                                                ),
                                                               ),
-                                                        ),
-                                                        Theme(
-                                                          data: ThemeData(
-                                                            checkboxTheme:
-                                                                CheckboxThemeData(
-                                                              visualDensity:
-                                                                  VisualDensity
-                                                                      .compact,
-                                                              materialTapTargetSize:
-                                                                  MaterialTapTargetSize
-                                                                      .shrinkWrap,
-                                                              shape:
-                                                                  RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            4.0),
-                                                              ),
+                                                              unselectedWidgetColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
                                                             ),
-                                                            unselectedWidgetColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryText,
+                                                            child: Checkbox(
+                                                              value: _model
+                                                                      .checkboxValueMap[
+                                                                  listOfItem] ??= true,
+                                                              onChanged:
+                                                                  (newValue) async {
+                                                                setState(() =>
+                                                                    _model.checkboxValueMap[
+                                                                            listOfItem] =
+                                                                        newValue!);
+                                                              },
+                                                              activeColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                              checkColor:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .info,
+                                                            ),
                                                           ),
-                                                          child: Checkbox(
-                                                            value: _model
-                                                                    .checkboxValueMap[
-                                                                listOfItem] ??= true,
-                                                            onChanged:
-                                                                (newValue) async {
-                                                              setState(() =>
-                                                                  _model.checkboxValueMap[
-                                                                          listOfItem] =
-                                                                      newValue!);
-                                                            },
-                                                            activeColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                            checkColor:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .info,
-                                                          ),
-                                                        ),
-                                                      ],
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            }),
-                                          );
-                                        },
-                                      ),
-                                    ],
+                                                );
+                                              }),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                                                    ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
@@ -438,129 +448,272 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                       ),
                     ],
                   ),
-                  const Divider(
-                    thickness: 1.0,
-                    color: Color(0xFFA8A8A8),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(25.0, 15.0, 25.0, 15.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              'f2yd6pz8' /* Bus tracking distance from the... */,
-                            ),
-                            textAlign: TextAlign.start,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  color: FlutterFlowTheme.of(context).black,
-                                  fontSize: 12.0,
-                                ),
-                          ),
-                        ),
-                      ],
+                  Visibility(
+                    visible:   !widget.isTripSelected ,
+                    child: const Divider(
+                      thickness: 1.0,
+                      color: Color(0xFFA8A8A8),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderColor: const Color(0xFF0BBC0B),
-                          borderRadius: 12.0,
-                          borderWidth: 1.0,
-                          buttonSize: 40.0,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          icon: const Icon(
-                            Icons.add,
-                            color: Color(0xFF0BBC0B),
-                            size: 24.0,
-                          ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                        Flexible(
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                8.0, 0.0, 8.0, 0.0),
-                            child: TextFormField(
-                              controller: _model.textController,
-                              focusNode: _model.textFieldFocusNode,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                labelText: FFLocalizations.of(context).getText(
-                                  'yvozjdfo' /* 00 */,
-                                ),
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
-                                hintStyle:
-                                    FlutterFlowTheme.of(context).labelMedium,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
-                                    width: 2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
+                  Visibility(
+                    visible:   !widget.isTripSelected ,
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          25.0, 15.0, 25.0, 15.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'f2yd6pz8' /* Bus tracking distance from the... */,
                               ),
-                              style: FlutterFlowTheme.of(context).bodyMedium,
                               textAlign: TextAlign.start,
-                              keyboardType: TextInputType.number,
-                              validator: _model.textControllerValidator
-                                  .asValidator(context),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Cairo',
+                                    color: FlutterFlowTheme.of(context).black,
+                                    fontSize: 12.0,
+                                  ),
                             ),
                           ),
-                        ),
-                        FlutterFlowIconButton(
-                          borderColor: FlutterFlowTheme.of(context).error,
-                          borderRadius: 12.0,
-                          borderWidth: 1.0,
-                          buttonSize: 40.0,
-                          fillColor:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          icon: Icon(
-                            Icons.minimize_outlined,
-                            color: FlutterFlowTheme.of(context).error,
-                            size: 24.0,
+                        ],
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible:   !widget.isTripSelected ,
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          15.0, 0.0, 15.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          FlutterFlowIconButton(
+                            borderColor: const Color(0xFF0BBC0B),
+                            borderRadius: 12.0,
+                            borderWidth: 1.0,
+                            buttonSize: 40.0,
+                            fillColor:
+                                FlutterFlowTheme.of(context).secondaryBackground,
+                            icon: const Icon(
+                              Icons.add,
+                              color: Color(0xFF0BBC0B),
+                              size: 24.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
                           ),
-                          onPressed: () {
-                            print('IconButton pressed ...');
-                          },
-                        ),
-                        Flexible(
-                          child: Row(
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 0.0, 8.0, 0.0),
+                              child: TextFormField(
+                                controller: _model.textController,
+                                focusNode: _model.textFieldFocusNode,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: FFLocalizations.of(context).getText(
+                                    'yvozjdfo' /* 00 */,
+                                  ),
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  hintStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).alternate,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color:
+                                          FlutterFlowTheme.of(context).alternate,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: FlutterFlowTheme.of(context).error,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                textAlign: TextAlign.start,
+                                keyboardType: TextInputType.number,
+                                validator: _model.textControllerValidator
+                                    .asValidator(context),
+                              ),
+                            ),
+                          ),
+                          FlutterFlowIconButton(
+                            borderColor: FlutterFlowTheme.of(context).error,
+                            borderRadius: 12.0,
+                            borderWidth: 1.0,
+                            buttonSize: 40.0,
+                            fillColor:
+                                FlutterFlowTheme.of(context).secondaryBackground,
+                            icon: Icon(
+                              Icons.minimize_outlined,
+                              color: FlutterFlowTheme.of(context).error,
+                              size: 24.0,
+                            ),
+                            onPressed: () {
+                              print('IconButton pressed ...');
+                            },
+                          ),
+                          Flexible(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  width: 100.0,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFF527ED2),
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.circular(7.0),
+                                      bottomRight: Radius.circular(7.0),
+                                      topLeft: Radius.circular(7.0),
+                                      topRight: Radius.circular(7.0),
+                                    ),
+                                    border: Border.all(
+                                      color: const Color(0xFF90BAE2),
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        15.0, 15.0, 15.0, 15.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'rit21eza' /* KM */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible:   widget.isTripSelected ,
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          25.0, 15.0, 25.0, 15.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'k9q4znl3' /* Breakpoint */,
+                              ),
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Cairo',
+                                    color: FlutterFlowTheme.of(context).black,
+                                    fontSize: 12.0,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible:   widget.isTripSelected ,
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          25.0, 0.0, 25.0, 5.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: 8.0,
+                            height: 8.0,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF527ED2),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                5.0, 0.0, 5.0, 0.0),
+                            child: Text(
+                              _model.travelModelStruct?.wayPoint.label ?? '',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: const Color(0xFF527ED2),
+                                    fontSize: 12.0,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible:widget.isTripSelected ,
+                    child: const Divider(
+                      thickness: 0.5,
+                      indent: 15.0,
+                      endIndent: 15.0,
+                      color: Color(0xFFA8A8A8),
+                    ),
+                  ),
+                  Visibility(
+                    visible:   widget.isTripSelected ,
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          15.0, 0.0, 15.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                'jufmqx2g' /* Bus tracking distance from the... */,
+                              ),
+                              style: FlutterFlowTheme.of(context).bodyMedium,
+                            ),
+                          ),
+                          Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -586,16 +739,15 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        FFLocalizations.of(context).getText(
-                                          'rit21eza' /* KM */,
-                                        ),
+                                      '${_model.travelModelStruct?.range} ${FFLocalizations.of(context).getText(
+                                        'jjrem21y' /* KM */,
+                                      )}' ,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
+                                              color: FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
                                             ),
                                       ),
                                     ],
@@ -604,13 +756,13 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 30.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -643,137 +795,14 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
+                                    fontFamily: 'Readex Pro',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(25.0, 15.0, 25.0, 15.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              'k9q4znl3' /* Breakpoint */,
-                            ),
-                            textAlign: TextAlign.start,
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Cairo',
-                                  color: FlutterFlowTheme.of(context).black,
-                                  fontSize: 12.0,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 25.0, 5.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Container(
-                          width: 8.0,
-                          height: 8.0,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF527ED2),
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              5.0, 0.0, 5.0, 0.0),
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              '9wuwep12' /* Hello World */,
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: const Color(0xFF527ED2),
-                                  fontSize: 12.0,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Divider(
-                    thickness: 0.5,
-                    indent: 15.0,
-                    endIndent: 15.0,
-                    color: Color(0xFFA8A8A8),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              'jufmqx2g' /* Bus tracking distance from the... */,
-                            ),
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                          ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              width: 100.0,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF527ED2),
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(7.0),
-                                  bottomRight: Radius.circular(7.0),
-                                  topLeft: Radius.circular(7.0),
-                                  topRight: Radius.circular(7.0),
-                                ),
-                                border: Border.all(
-                                  color: const Color(0xFF90BAE2),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    15.0, 15.0, 15.0, 15.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        'jjrem21y' /* KM */,
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Readex Pro',
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
                         ),
                       ],
                     ),

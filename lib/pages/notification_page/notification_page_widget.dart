@@ -61,9 +61,7 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
               model: _model.appBarModel,
               updateCallback: () => setState(() {}),
               child: AppBarWidget(
-                rightIcon: const Icon(
-                  Icons.onetwothree_outlined,
-                ),
+                rightIcon: Container(),
                 isRightHedding: false,
                 isLeftHedding: false,
                 title: FFLocalizations.of(context).getVariableText(
@@ -71,7 +69,7 @@ class _NotificationPageWidgetState extends State<NotificationPageWidget> {
                   arText: 'الاشعارات',
                 ),
                 rightButtonAction: () async {
-                  context.pushNamed('NotificationPage');
+                  // context.pushNamed('NotificationPage');
                 },
               ),
             ),

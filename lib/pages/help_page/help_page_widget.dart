@@ -62,17 +62,15 @@ class _HelpPageWidgetState extends State<HelpPageWidget> {
               model: _model.appBarModel,
               updateCallback: () => setState(() {}),
               child: AppBarWidget(
-                rightIcon: const Icon(
-                  Icons.onetwothree_outlined,
-                ),
+                rightIcon: Container(),
                 isRightHedding: false,
                 isLeftHedding: false,
                 title: FFLocalizations.of(context).getVariableText(
-                  enText: 'Notification',
-                  arText: 'الاشعارات',
+                  enText: 'Help',
+                  arText: 'المساعدة والدعم',
                 ),
                 rightButtonAction: () async {
-                  context.pushNamed('HelpPage');
+                  // context.pushNamed('HelpPage');
                 },
               ),
             ),
