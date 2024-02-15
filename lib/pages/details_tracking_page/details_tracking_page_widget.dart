@@ -68,7 +68,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
               updateCallback: () => setState(() {}),
               child: AppBarWidget(
                 rightIcon: const Icon(
-                  Icons.onetwothree_outlined,
+                  Icons.notifications,
                 ),
                 isRightHedding: false,
                 isLeftHedding: false,

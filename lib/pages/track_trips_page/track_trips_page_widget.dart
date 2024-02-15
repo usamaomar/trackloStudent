@@ -455,24 +455,37 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(5.0, 0.0, 5.0, 0.0),
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              'flow' /* flow Line */,
+                                        InkWell(
+                                          child: Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                            child: Text(
+                                              FFLocalizations.of(context).getText(
+                                                'flow' /* flow Line */,
+                                              ),
+                                              style: FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    color:
+                                                        FlutterFlowTheme.of(context)
+                                                            .primary,
+                                                    fontSize: 10.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Cairo',
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .primary,
-                                                  fontSize: 10.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
                                           ),
+                                          onTap: (){
+                                            context.pushNamed(
+                                              'DetailsTrackingPage',
+                                              queryParameters: {
+                                                'travelModelStruct': serializeParam(
+                                                  listItem2.toMap(),
+                                                  ParamType.JSON,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),
@@ -1073,24 +1086,37 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(5.0, 0.0, 5.0, 0.0),
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              '4eklp4ju' /* Select Line */,
+                                        InkWell(
+                                          child: Padding(
+                                            padding: const EdgeInsetsDirectional
+                                                .fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                            child: Text(
+                                              FFLocalizations.of(context).getText(
+                                                '4eklp4ju' /* Select Line */,
+                                              ),
+                                              style: FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Cairo',
+                                                    color:
+                                                        FlutterFlowTheme.of(context)
+                                                            .primary,
+                                                    fontSize: 10.0,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Cairo',
-                                                  color:
-                                                      FlutterFlowTheme.of(context)
-                                                          .primary,
-                                                  fontSize: 10.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
                                           ),
+                                          onTap: (){
+                                            context.pushNamed(
+                                              'DetailsTrackingPage',
+                                              queryParameters: {
+                                                'travelModelStruct': serializeParam(
+                                                  listItem.toMap(),
+                                                  ParamType.JSON,
+                                                ),
+                                              }.withoutNulls,
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),
