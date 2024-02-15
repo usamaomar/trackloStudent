@@ -16,6 +16,8 @@ class StudentApisGroup {
   static LoginApiCall loginApiCall = LoginApiCall();
   static GetAllTravileApiCall getAllTravileApiCall = GetAllTravileApiCall();
   static GetLastTravileApiCall getLastTravileApiCall = GetLastTravileApiCall();
+  static StartTrackingBusesCall startTrackingBusesCall =
+      StartTrackingBusesCall();
 }
 
 class LoginApiCall {
@@ -86,6 +88,49 @@ class GetLastTravileApiCall {
         'Authorization': '$token',
       },
       params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class StartTrackingBusesCall {
+  Future<ApiCallResponse> call({
+    double? currentLat,
+    double? currentLng,
+    dynamic wayPointJson,
+    int? range,
+    double? lat,
+    double? lng,
+    String? label = '',
+    String? id = '',
+    String? token = '',
+  }) async {
+    final wayPoint = _serializeJson(wayPointJson);
+    final ffApiRequestBody = '''
+{
+  "currentLat": $currentLat,
+  "currentLng": $currentLng,
+  "wayPoint": {
+    "lat": $lat,
+    "lng": $lng,
+    "label": "$label"
+  },
+  "range": $range
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'startTrackingBuses',
+      apiUrl: '${StudentApisGroup.baseUrl}/v1/travels/$id/startTrackingBuses',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': '$token',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
