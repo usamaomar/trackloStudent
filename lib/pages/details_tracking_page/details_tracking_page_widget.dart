@@ -843,42 +843,67 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 100.0,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF527ED2),
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(7.0),
-                                bottomRight: Radius.circular(7.0),
-                                topLeft: Radius.circular(7.0),
-                                topRight: Radius.circular(7.0),
+                          InkWell(
+                            child: Container(
+                              width: 100.0,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF527ED2),
+                                borderRadius: const BorderRadius.only(
+                                  bottomLeft: Radius.circular(7.0),
+                                  bottomRight: Radius.circular(7.0),
+                                  topLeft: Radius.circular(7.0),
+                                  topRight: Radius.circular(7.0),
+                                ),
+                                border: Border.all(
+                                  color: const Color(0xFF90BAE2),
+                                ),
                               ),
-                              border: Border.all(
-                                color: const Color(0xFF90BAE2),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  15.0, 15.0, 15.0, 15.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    FFLocalizations.of(context).getText(
-                                      'vxl7mb76' /* Start Trip */,
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    15.0, 15.0, 15.0, 15.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      FFLocalizations.of(context).getText(
+                                        'vxl7mb76' /* Start Trip */,
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
                                     ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                        ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
+                            onTap: (){
+                              if(_model.textController.text.isEmpty){
+
+
+
+                              }
+
+                              if(_model.counter <= 0){
+
+
+
+                              }
+
+
+
+                              if(_model.counter <= 0){
+
+
+
+                              }
+
+
+                            },
                           ),
                         ],
                       ),
