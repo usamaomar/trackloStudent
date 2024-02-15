@@ -310,6 +310,38 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // DetailsTrackingPage
   {
+    'f2yd6pz8': {
+      'en': 'Bus tracking distance from the selected stopping point',
+      'ar': 'مسافة تتبع الحافلة عن نقطة التوقف المحددة',
+    },
+    'yvozjdfo': {
+      'en': '00',
+      'ar': '',
+    },
+    'rit21eza': {
+      'en': 'KM',
+      'ar': 'كيلو متر',
+    },
+    'vxl7mb76': {
+      'en': 'Start Trip',
+      'ar': ' ابدأ التتبع',
+    },
+    'k9q4znl3': {
+      'en': 'Breakpoint',
+      'ar': 'نقطة التوقف',
+    },
+    '9wuwep12': {
+      'en': 'Hello World',
+      'ar': '',
+    },
+    'jufmqx2g': {
+      'en': 'Bus tracking distance from the selected stopping point',
+      'ar': 'مسافة تتبع الحافلة من نقطة التوقف المحددة',
+    },
+    'jjrem21y': {
+      'en': 'KM',
+      'ar': 'كيلو متر',
+    },
     'sy46gnu4': {
       'en': 'Home',
       'ar': '',
