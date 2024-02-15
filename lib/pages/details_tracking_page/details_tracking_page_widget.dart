@@ -1,9 +1,11 @@
+import '/backend/schema/structs/index.dart';
 import '/components/app_bar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:styled_divider/styled_divider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'details_tracking_page_model.dart';
@@ -33,6 +35,14 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => DetailsTrackingPageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.travelModelStruct =
+            TravelModelStruct.maybeFromMap(widget.travelModelStruct);
+      });
+    });
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
