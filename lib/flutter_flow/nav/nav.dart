@@ -108,6 +108,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => DetailsTrackingPageWidget(
             travelModelStruct:
                 params.getParam('travelModelStruct', ParamType.JSON),
+            isTripSelected: params.getParam('isTripSelected', ParamType.bool),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
