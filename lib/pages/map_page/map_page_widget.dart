@@ -101,7 +101,19 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('TrackTripsPage');
+                        context.pushNamed(
+                          'TrackTripsPage',
+                          queryParameters: {
+                            'latitude': serializeParam(
+                              0.0,
+                              ParamType.double,
+                            ),
+                            'longitude': serializeParam(
+                              0.0,
+                              ParamType.double,
+                            ),
+                          }.withoutNulls,
+                        );
                       },
                       text: FFLocalizations.of(context).getText(
                         'jula7u30' /* Track Trips */,
