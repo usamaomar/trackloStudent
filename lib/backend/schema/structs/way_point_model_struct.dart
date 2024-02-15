@@ -13,12 +13,14 @@ class WayPointModelStruct extends BaseStruct {
     bool? disabled,
     String? time,
     String? id,
+    bool? isSelected,
   })  : _lat = lat,
         _lng = lng,
         _label = label,
         _disabled = disabled,
         _time = time,
-        _id = id;
+        _id = id,
+        _isSelected = isSelected;
 
   // "lat" field.
   double? _lat;
@@ -58,6 +60,12 @@ class WayPointModelStruct extends BaseStruct {
   set id(String? val) => _id = val;
   bool hasId() => _id != null;
 
+  // "isSelected" field.
+  bool? _isSelected;
+  bool get isSelected => _isSelected ?? false;
+  set isSelected(bool? val) => _isSelected = val;
+  bool hasIsSelected() => _isSelected != null;
+
   static WayPointModelStruct fromMap(Map<String, dynamic> data) =>
       WayPointModelStruct(
         lat: castToType<double>(data['lat']),
@@ -66,6 +74,7 @@ class WayPointModelStruct extends BaseStruct {
         disabled: data['disabled'] as bool?,
         time: data['time'] as String?,
         id: data['id'] as String?,
+        isSelected: data['isSelected'] as bool?,
       );
 
   static WayPointModelStruct? maybeFromMap(dynamic data) => data is Map
@@ -79,6 +88,7 @@ class WayPointModelStruct extends BaseStruct {
         'disabled': _disabled,
         'time': _time,
         'id': _id,
+        'isSelected': _isSelected,
       }.withoutNulls;
 
   @override
@@ -106,6 +116,10 @@ class WayPointModelStruct extends BaseStruct {
         'id': serializeParam(
           _id,
           ParamType.String,
+        ),
+        'isSelected': serializeParam(
+          _isSelected,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -141,6 +155,11 @@ class WayPointModelStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        isSelected: deserializeParam(
+          data['isSelected'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -154,12 +173,13 @@ class WayPointModelStruct extends BaseStruct {
         label == other.label &&
         disabled == other.disabled &&
         time == other.time &&
-        id == other.id;
+        id == other.id &&
+        isSelected == other.isSelected;
   }
 
   @override
-  int get hashCode =>
-      const ListEquality().hash([lat, lng, label, disabled, time, id]);
+  int get hashCode => const ListEquality()
+      .hash([lat, lng, label, disabled, time, id, isSelected]);
 }
 
 WayPointModelStruct createWayPointModelStruct({
@@ -169,6 +189,7 @@ WayPointModelStruct createWayPointModelStruct({
   bool? disabled,
   String? time,
   String? id,
+  bool? isSelected,
 }) =>
     WayPointModelStruct(
       lat: lat,
@@ -177,4 +198,5 @@ WayPointModelStruct createWayPointModelStruct({
       disabled: disabled,
       time: time,
       id: id,
+      isSelected: isSelected,
     );
