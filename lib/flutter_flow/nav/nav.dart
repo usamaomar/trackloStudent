@@ -100,7 +100,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'TrackTripsPage',
           path: '/trackTripsPage',
-          builder: (context, params) => const TrackTripsPageWidget(),
+          builder: (context, params) => TrackTripsPageWidget(
+            latitude: params.getParam('latitude', ParamType.double),
+            longitude: params.getParam('longitude', ParamType.double),
+          ),
         ),
         FFRoute(
           name: 'DetailsTrackingPage',

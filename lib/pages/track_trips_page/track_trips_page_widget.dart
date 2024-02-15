@@ -13,7 +13,14 @@ import 'track_trips_page_model.dart';
 export 'track_trips_page_model.dart';
 
 class TrackTripsPageWidget extends StatefulWidget {
-  const TrackTripsPageWidget({super.key});
+  const TrackTripsPageWidget({
+    super.key,
+    required this.latitude,
+    required this.longitude,
+  });
+
+  final double? latitude;
+  final double? longitude;
 
   @override
   State<TrackTripsPageWidget> createState() => _TrackTripsPageWidgetState();
