@@ -13,7 +13,7 @@ class DetailsTrackingPageModel
       updateFn(travelModelStruct ??= TravelModelStruct());
 
   ///  State fields for stateful widgets in this page.
-
+  int counter = 0;
   final unfocusNode = FocusNode();
   // State field(s) for Checkbox widget.
 
