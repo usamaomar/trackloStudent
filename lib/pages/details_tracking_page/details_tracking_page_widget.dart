@@ -13,9 +13,11 @@ class DetailsTrackingPageWidget extends StatefulWidget {
   const DetailsTrackingPageWidget({
     super.key,
     required this.travelModelStruct,
-  });
+    bool? isTripSelected,
+  }) : isTripSelected = isTripSelected ?? false;
 
   final dynamic travelModelStruct;
+  final bool isTripSelected;
 
   @override
   State<DetailsTrackingPageWidget> createState() =>
