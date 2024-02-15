@@ -152,8 +152,14 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                 .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                             child: Text(
                                               widget.isTripSelected
-                                                  ? _model.travelModelStruct?.travel.travelStartName ?? ''
-                                                  : _model.travelModelStruct?.travelStartName ?? '',
+                                                  ? _model
+                                                          .travelModelStruct
+                                                          ?.travel
+                                                          .travelStartName ??
+                                                      ''
+                                                  : _model.travelModelStruct
+                                                          ?.travelStartName ??
+                                                      '',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -168,8 +174,19 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                           ),
                                           Text(
                                             widget.isTripSelected
-                                                ? _model.travelModelStruct?.travel.wayPoints.first.time ?? ''
-                                                : _model.travelModelStruct?.wayPoints.first.time ?? '',
+                                                ? _model
+                                                        .travelModelStruct
+                                                        ?.travel
+                                                        .wayPoints
+                                                        .first
+                                                        .time ??
+                                                    ''
+                                                : _model
+                                                        .travelModelStruct
+                                                        ?.wayPoints
+                                                        .first
+                                                        .time ??
+                                                    '',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -186,9 +203,11 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                             .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                         child: Text(
                                           widget.isTripSelected
-                                              ? _model
-                                                  .travelModelStruct?.travel.way ?? ''
-                                              : _model.travelModelStruct?.way ?? '',
+                                              ? _model.travelModelStruct?.travel
+                                                      .way ??
+                                                  ''
+                                              : _model.travelModelStruct?.way ??
+                                                  '',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -206,8 +225,16 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                         children: [
                                           Text(
                                             widget.isTripSelected
-                                                ? _model.travelModelStruct?.travel.wayPoints.last.time ?? ''
-                                                : _model.travelModelStruct?.wayPoints.last.time ?? '',
+                                                ? _model
+                                                        .travelModelStruct
+                                                        ?.travel
+                                                        .wayPoints
+                                                        .last
+                                                        .time ??
+                                                    ''
+                                                : _model.travelModelStruct
+                                                        ?.wayPoints.last.time ??
+                                                    '',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -223,7 +250,14 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                 .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                             child: Text(
                                               widget.isTripSelected
-                                                  ? _model.travelModelStruct?.travel.travelEndName ?? '': _model.travelModelStruct?.travelEndName ?? '',
+                                                  ? _model
+                                                          .travelModelStruct
+                                                          ?.travel
+                                                          .travelEndName ??
+                                                      ''
+                                                  : _model.travelModelStruct
+                                                          ?.travelEndName ??
+                                                      '',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -262,9 +296,13 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                               children: [
                                                 Builder(
                                                   builder: (context) {
-                                                    final locationPoints =
-                                                    widget.isTripSelected ? _model.travelModelStruct?.travel.wayPoints
-                                                         :    _model.travelModelStruct
+                                                    final locationPoints = widget
+                                                            .isTripSelected
+                                                        ? _model
+                                                            .travelModelStruct
+                                                            ?.travel
+                                                            .wayPoints
+                                                        : _model.travelModelStruct
                                                                 ?.wayPoints
                                                                 .toList() ??
                                                             [];
@@ -275,7 +313,9 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                           MainAxisAlignment
                                                               .spaceEvenly,
                                                       children: List.generate(
-                                                          locationPoints?.length ?? 0,
+                                                          locationPoints
+                                                                  ?.length ??
+                                                              0,
                                                           (locationPointsIndex) {
                                                         final locationPointsItem =
                                                             locationPoints?[
@@ -294,7 +334,8 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                             ),
                                                             Text(
                                                               locationPointsItem
-                                                                  ?.label ?? '',
+                                                                      ?.label ??
+                                                                  '',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyMedium,
@@ -320,127 +361,120 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                     ),
                                   ],
                                 ),
-                                  Visibility(
-                                    visible:   !widget.isTripSelected ,
-                                    child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 10.0, 0.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        Builder(
-                                          builder: (context) {
-                                            final listOf = _model
-                                                    .travelModelStruct?.wayPoints
-                                                    .toList() ??
-                                                [];
-                                            return Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: List.generate(
-                                                  listOf.length, (listOfIndex) {
-                                                final listOfItem =
-                                                    listOf[listOfIndex];
-                                                return Padding(
-                                                  padding:
-                                                      const EdgeInsetsDirectional
-                                                          .fromSTEB(
-                                                          5.0, 0.0, 5.0, 0.0),
-                                                  child: Container(
-                                                    decoration:
-                                                        const BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                        bottomLeft:
-                                                            Radius.circular(8.0),
-                                                        bottomRight:
-                                                            Radius.circular(8.0),
-                                                        topLeft:
-                                                            Radius.circular(8.0),
-                                                        topRight:
-                                                            Radius.circular(8.0),
-                                                      ),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                              5.0, 5.0, 5.0, 5.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          Text(
-                                                            listOfItem.label,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                ),
-                                                          ),
-                                                          Theme(
-                                                            data: ThemeData(
-                                                              checkboxTheme:
-                                                                  CheckboxThemeData(
-                                                                visualDensity:
-                                                                    VisualDensity
-                                                                        .compact,
-                                                                materialTapTargetSize:
-                                                                    MaterialTapTargetSize
-                                                                        .shrinkWrap,
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              4.0),
-                                                                ),
-                                                              ),
-                                                              unselectedWidgetColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryText,
-                                                            ),
-                                                            child: Checkbox(
-                                                              value: _model
-                                                                      .checkboxValueMap[
-                                                                  listOfItem] ??= true,
-                                                              onChanged:
-                                                                  (newValue) async {
-                                                                setState(() =>
-                                                                    _model.checkboxValueMap[
-                                                                            listOfItem] =
-                                                                        newValue!);
-                                                              },
-                                                              activeColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                              checkColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .info,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
+                                Visibility(
+                                  visible: !widget.isTripSelected,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 10.0, 0.0, 0.0),
+                                    child: Container(
+                                      height: 60,
+                                      child: Builder(
+                                        builder: (context) {
+                                          final list2 = _model
+                                              .travelModelStruct?.wayPoints
+                                              .toList();
+                                          return ListView.builder(
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.horizontal,
+                                            itemCount: list2?.length,
+                                            itemBuilder: (context, listIndex) {
+                                              final listItem2 = list2?[listIndex];
+                                              return Padding(
+                                                padding:
+                                                const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                    5.0, 0.0, 5.0, 0.0),
+                                                child: Container(
+                                                  decoration: const BoxDecoration(
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                      bottomLeft:
+                                                      Radius.circular(8.0),
+                                                      bottomRight:
+                                                      Radius.circular(8.0),
+                                                      topLeft:
+                                                      Radius.circular(8.0),
+                                                      topRight:
+                                                      Radius.circular(8.0),
                                                     ),
                                                   ),
-                                                );
-                                              }),
-                                            );
-                                          },
-                                        ),
-                                      ],
+                                                  child: Padding(
+                                                    padding:
+                                                    const EdgeInsetsDirectional
+                                                        .fromSTEB(
+                                                        5.0, 5.0, 5.0, 5.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                      MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          listItem2?.label ?? '',
+                                                          style: FlutterFlowTheme
+                                                              .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                              fontFamily:
+                                                              'Readex Pro',
+                                                              color: FlutterFlowTheme.of(
+                                                                  context)
+                                                                  .primary,
+                                                              fontSize: 10),
+                                                        ),
+                                                        Theme(
+                                                          data: ThemeData(
+                                                            checkboxTheme:
+                                                            CheckboxThemeData(
+                                                              visualDensity:
+                                                              VisualDensity
+                                                                  .compact,
+                                                              materialTapTargetSize:
+                                                              MaterialTapTargetSize
+                                                                  .shrinkWrap,
+                                                              shape:
+                                                              RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    4.0),
+                                                              ),
+                                                            ),
+                                                            unselectedWidgetColor:
+                                                            FlutterFlowTheme.of(
+                                                                context)
+                                                                .secondaryText,
+                                                          ),
+                                                          child: Checkbox(
+                                                            value:  false,
+                                                            onChanged:
+                                                                (newValue) async {
+                                                              // setState(() => _model
+                                                              //             .checkboxValueMap[
+                                                              //         listOfItem] =
+                                                              //     newValue!);
+                                                            },
+                                                            activeColor:
+                                                            FlutterFlowTheme.of(
+                                                                context)
+                                                                .primary,
+                                                            checkColor:
+                                                            FlutterFlowTheme.of(
+                                                                context)
+                                                                .info,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                      ),
                                     ),
-                                                                    ),
                                   ),
+                                ),
                               ],
                             ),
                           ),
@@ -449,14 +483,14 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                     ],
                   ),
                   Visibility(
-                    visible:   !widget.isTripSelected ,
+                    visible: !widget.isTripSelected,
                     child: const Divider(
                       thickness: 1.0,
                       color: Color(0xFFA8A8A8),
                     ),
                   ),
                   Visibility(
-                    visible:   !widget.isTripSelected ,
+                    visible: !widget.isTripSelected,
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           25.0, 15.0, 25.0, 15.0),
@@ -483,7 +517,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                     ),
                   ),
                   Visibility(
-                    visible:   !widget.isTripSelected ,
+                    visible: !widget.isTripSelected,
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           15.0, 0.0, 15.0, 0.0),
@@ -495,8 +529,8 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                             borderRadius: 12.0,
                             borderWidth: 1.0,
                             buttonSize: 40.0,
-                            fillColor:
-                                FlutterFlowTheme.of(context).secondaryBackground,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             icon: const Icon(
                               Icons.add,
                               color: Color(0xFF0BBC0B),
@@ -515,7 +549,8 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                 focusNode: _model.textFieldFocusNode,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: FFLocalizations.of(context).getText(
+                                  labelText:
+                                      FFLocalizations.of(context).getText(
                                     'yvozjdfo' /* 00 */,
                                   ),
                                   labelStyle:
@@ -524,16 +559,16 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                       FlutterFlowTheme.of(context).labelMedium,
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).alternate,
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
                                       width: 2.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color:
-                                          FlutterFlowTheme.of(context).alternate,
+                                      color: FlutterFlowTheme.of(context)
+                                          .alternate,
                                       width: 2.0,
                                     ),
                                     borderRadius: BorderRadius.circular(8.0),
@@ -566,8 +601,8 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                             borderRadius: 12.0,
                             borderWidth: 1.0,
                             buttonSize: 40.0,
-                            fillColor:
-                                FlutterFlowTheme.of(context).secondaryBackground,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             icon: Icon(
                               Icons.minimize_outlined,
                               color: FlutterFlowTheme.of(context).error,
@@ -597,11 +632,13 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        15.0, 15.0, 15.0, 15.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            15.0, 15.0, 15.0, 15.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           FFLocalizations.of(context).getText(
@@ -628,7 +665,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                     ),
                   ),
                   Visibility(
-                    visible:   widget.isTripSelected ,
+                    visible: widget.isTripSelected,
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           25.0, 15.0, 25.0, 15.0),
@@ -655,7 +692,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                     ),
                   ),
                   Visibility(
-                    visible:   widget.isTripSelected ,
+                    visible: widget.isTripSelected,
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           25.0, 0.0, 25.0, 5.0),
@@ -689,7 +726,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                     ),
                   ),
                   Visibility(
-                    visible:widget.isTripSelected ,
+                    visible: widget.isTripSelected,
                     child: const Divider(
                       thickness: 0.5,
                       indent: 15.0,
@@ -698,7 +735,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                     ),
                   ),
                   Visibility(
-                    visible:   widget.isTripSelected ,
+                    visible: widget.isTripSelected,
                     child: Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(
                           15.0, 0.0, 15.0, 0.0),
@@ -739,15 +776,16 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                      '${_model.travelModelStruct?.range} ${FFLocalizations.of(context).getText(
-                                        'jjrem21y' /* KM */,
-                                      )}' ,
+                                        '${_model.travelModelStruct?.range} ${FFLocalizations.of(context).getText(
+                                          'jjrem21y' /* KM */,
+                                        )}',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Readex Pro',
-                                              color: FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
                                             ),
                                       ),
                                     ],
@@ -795,10 +833,10 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                  ),
+                                        fontFamily: 'Readex Pro',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
                                 ),
                               ],
                             ),

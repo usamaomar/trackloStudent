@@ -110,11 +110,11 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                               'TrackTripsPage',
                               queryParameters: {
                                 'latitude': serializeParam(
-                                  0.0,
+                                  value.latitude,
                                   ParamType.double,
                                 ),
                                 'longitude': serializeParam(
-                                  0.0,
+                                  value.longitude,
                                   ParamType.double,
                                 ),
                               }.withoutNulls,

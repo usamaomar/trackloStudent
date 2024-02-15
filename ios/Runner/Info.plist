@@ -21,7 +21,10 @@
 		<string>en</string>
 		<string>ar</string>
 	</array>
-
+    <key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need to know your location as bus driver to be share with students trip, your location will be shared only at trip time.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>We need to know your location as bus driver to be share with students trip, your location will be shared only at trip time.</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>

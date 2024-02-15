@@ -30,6 +30,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
+
+    // "password": "1234567",
+    // "phone": "+962775590580"
+
+
     _model.textController2 ??= TextEditingController();
     _model.textFieldFocusNode2 ??= FocusNode();
   }
