@@ -59,6 +59,35 @@ class FFAppState extends ChangeNotifier {
     updateFn(_userModel);
     prefs.setString('ff_userModel', _userModel.serialize());
   }
+
+  List<BusModelStruct> _updatedBusessList = [];
+  List<BusModelStruct> get updatedBusessList => _updatedBusessList;
+  set updatedBusessList(List<BusModelStruct> value) {
+    _updatedBusessList = value;
+  }
+
+  void addToUpdatedBusessList(BusModelStruct value) {
+    _updatedBusessList.add(value);
+  }
+
+  void removeFromUpdatedBusessList(BusModelStruct value) {
+    _updatedBusessList.remove(value);
+  }
+
+  void removeAtIndexFromUpdatedBusessList(int index) {
+    _updatedBusessList.removeAt(index);
+  }
+
+  void updateUpdatedBusessListAtIndex(
+    int index,
+    BusModelStruct Function(BusModelStruct) updateFn,
+  ) {
+    _updatedBusessList[index] = updateFn(_updatedBusessList[index]);
+  }
+
+  void insertAtIndexInUpdatedBusessList(int index, BusModelStruct value) {
+    _updatedBusessList.insert(index, value);
+  }
 }
 
 void _safeInit(Function() initializeField) {
