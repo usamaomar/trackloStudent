@@ -39,12 +39,12 @@ class BusModelStruct extends BaseStruct {
   void incrementLat(double amount) => _lat = lat + amount;
   bool hasLat() => _lat != null;
 
-  // "Ing" field.
+  // "lng" field.
   double? _lng;
   double get lng => _lng ?? 0.0;
   set lng(double? val) => _lng = val;
-  void incrementIng(double amount) => _lng = lng + amount;
-  bool hasIng() => _lng != null;
+  void incrementLng(double amount) => _lng = lng + amount;
+  bool hasLng() => _lng != null;
 
   // "maDistance" field.
   double? _maDistance;

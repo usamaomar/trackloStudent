@@ -13,3 +13,5 @@ export '/pages/track_trips_page/track_trips_page_widget.dart'
     show TrackTripsPageWidget;
 export '/pages/details_tracking_page/details_tracking_page_widget.dart'
     show DetailsTrackingPageWidget;
+export '/pages/notification_details_page/notification_details_page_widget.dart'
+    show NotificationDetailsPageWidget;

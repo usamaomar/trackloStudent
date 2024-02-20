@@ -115,6 +115,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             latitude: params.getParam('latitude', ParamType.double),
             longitude: params.getParam('longitude', ParamType.double),
           ),
+        ),
+        FFRoute(
+          name: 'NotificationDetailsPage',
+          path: '/notificationDetailsPage',
+          builder: (context, params) => NotificationDetailsPageWidget(
+            notiDynamic: params.getParam('notiDynamic', ParamType.JSON),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
