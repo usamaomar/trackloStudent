@@ -87,7 +87,7 @@ class WayPointModelStruct extends BaseStruct {
         'label': _label,
         'disabled': _disabled,
         'time': _time,
-        'id': _id,
+        '_id': _id,
         'isSelected': _isSelected,
       }.withoutNulls;
 
@@ -151,7 +151,7 @@ class WayPointModelStruct extends BaseStruct {
           false,
         ),
         id: deserializeParam(
-          data['id'],
+          data['_id'],
           ParamType.String,
           false,
         ),

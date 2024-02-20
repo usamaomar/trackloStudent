@@ -1,3 +1,5 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/app_bar_widget.dart';
@@ -11,6 +13,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'track_trips_page_model.dart';
 export 'track_trips_page_model.dart';
+import 'dart:ui' as ui;
+
 
 class TrackTripsPageWidget extends StatefulWidget {
   const TrackTripsPageWidget({
@@ -94,6 +98,23 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
   }
+
+  Future<BitmapDescriptor> getBitmapDescriptorFromAssetBytes(
+      String path, int width) async {
+    final Uint8List? imageData = await getBytesFromAsset(path, width);
+    return BitmapDescriptor.fromBytes(imageData!);
+  }
+
+  Future<Uint8List?> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+        ?.buffer
+        .asUint8List();
+  }
+
 
   @override
   void dispose() {
@@ -493,6 +514,14 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                 'isTripSelected': serializeParam(
                                                   true,
                                                   ParamType.bool,
+                                                ),
+                                                'latitude': serializeParam(
+                                                  widget.latitude,
+                                                  ParamType.double,
+                                                ),
+                                                'longitude': serializeParam(
+                                                  widget.longitude,
+                                                  ParamType.double,
                                                 ),
                                               }.withoutNulls,
                                             );
@@ -1128,6 +1157,14 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                 'isTripSelected': serializeParam(
                                                   false,
                                                   ParamType.bool,
+                                                ),
+                                                'latitude': serializeParam(
+                                                  widget.latitude,
+                                                  ParamType.double,
+                                                ),
+                                                'longitude': serializeParam(
+                                                  widget.longitude,
+                                                  ParamType.double,
                                                 ),
                                               }.withoutNulls,
                                             );

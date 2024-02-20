@@ -101,7 +101,6 @@ class StartTrackingBusesCall {
   Future<ApiCallResponse> call({
     double? currentLat,
     double? currentLng,
-    dynamic wayPointJson,
     int? range,
     double? lat,
     double? lng,
@@ -109,7 +108,6 @@ class StartTrackingBusesCall {
     String? id = '',
     String? token = '',
   }) async {
-    final wayPoint = _serializeJson(wayPointJson);
     final ffApiRequestBody = '''
 {
   "currentLat": $currentLat,

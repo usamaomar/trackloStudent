@@ -112,6 +112,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             travelModelStruct:
                 params.getParam('travelModelStruct', ParamType.JSON),
             isTripSelected: params.getParam('isTripSelected', ParamType.bool),
+            latitude: params.getParam('latitude', ParamType.double),
+            longitude: params.getParam('longitude', ParamType.double),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),

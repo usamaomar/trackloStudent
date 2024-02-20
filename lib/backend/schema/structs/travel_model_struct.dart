@@ -106,7 +106,7 @@ class TravelModelStruct extends BaseStruct {
       : null;
 
   Map<String, dynamic> toMap() => {
-        'id': _id,
+        '_id': _id,
         'travel_start_name': _travelStartName,
         'travel_end_name': _travelEndName,
         'way': _way,

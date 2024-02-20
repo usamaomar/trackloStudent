@@ -1,4 +1,9 @@
+import 'dart:io';
+
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 import '/components/app_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -9,6 +14,11 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'map_page_model.dart';
 export 'map_page_model.dart';
+// import 'package:flutter/material.dart';
+// import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:web_socket_client/web_socket_client.dart';
+import 'dart:ui' as ui;
+
 
 class MapPageWidget extends StatefulWidget {
   const MapPageWidget({super.key});
@@ -19,13 +29,34 @@ class MapPageWidget extends StatefulWidget {
 
 class _MapPageWidgetState extends State<MapPageWidget> {
   late MapPageModel _model;
+  late GoogleMapController mapController;
+  late Set<Marker> markers;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
+    markers = <Marker>{};
     super.initState();
+    updateDate();
     _model = createModel(context, () => MapPageModel());
+  }
+
+
+  void updateDate() async{
+    try{
+      final uri = Uri.parse('ws://tracllo-node-178a480f7a89.herokuapp.com');
+      final socket = WebSocket(uri);
+      socket.connection.listen((state) {
+        print('state: "$state"');
+      });
+      // Listen for incoming messages.
+      socket.messages.listen((message) {
+        print('message: "$message"');
+      });
+    }catch(ex){
+      ex.toString();
+    }
   }
 
   @override
@@ -91,6 +122,19 @@ class _MapPageWidgetState extends State<MapPageWidget> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              // GoogleMap(
+              //   zoomControlsEnabled: false,
+              //   myLocationEnabled: false,
+              //   myLocationButtonEnabled: false,
+              //   onMapCreated: (GoogleMapController controller) {
+              //     mapController = controller;
+              //   },
+              //   markers: markers,
+              //   // initialCameraPosition: CameraPosition(
+              //   //   // target: lats.LatLng(position.latitude, position.longitude),
+              //   //   zoom: 14.4746,
+              //   // ),
+              // ),
               Container(
                 width: double.infinity,
                 height: 64.0,
