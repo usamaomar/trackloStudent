@@ -488,7 +488,8 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                                 ),
                                                                 child: Checkbox(
                                                                   value: listItem2
-                                                                      ?.isSelected ?? false,
+                                                                          ?.isSelected ??
+                                                                      false,
                                                                   onChanged:
                                                                       (newValue) async {
                                                                     setState(
@@ -868,7 +869,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional
-                                            .fromSTEB(15.0, 15.0, 15.0, 15.0),
+                                            .fromSTEB(5.0, 5.0, 5.0, 5.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
@@ -955,8 +956,8 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                         .startTrackingBusesCall
                                         .call(
                                       token: FFAppState().userModel.token,
-                                      currentLat: 31.996401,
-                                      currentLng: 35.8828752,
+                                      currentLat: widget.latitude,
+                                      currentLng: widget.longitude,
                                       range: int.tryParse(
                                           (_model.travelModelStruct?.range ??
                                               '0')),
@@ -974,6 +975,27 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                       setState(() {
                                         _model.isLoading = false;
                                       });
+
+                                      FFAppState().updatedBusessList =
+                                          (getJsonField(
+                                        (_model.apiResult51f?.jsonBody ?? ''),
+                                        r'''$.buses''',
+                                        true,
+                                      )!
+                                                      .toList()
+                                                      .map<BusModelStruct?>(
+                                                          BusModelStruct
+                                                              .maybeFromMap)
+                                                      .toList()
+                                                  as Iterable<BusModelStruct?>)
+                                              .withoutNulls
+                                              .toList()
+                                              .cast<BusModelStruct>();
+
+                                      while (context.canPop() == true) {
+                                        context.pop();
+                                      }
+                                      context.pushReplacement('MapPage');
                                     } else {
                                       setState(() {
                                         _model.isLoading = false;
@@ -1073,7 +1095,6 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                             ],
                                           );
                                         },
-
                                       );
                                       return;
                                     }
@@ -1120,8 +1141,8 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                         .startTrackingBusesCall
                                         .call(
                                       token: FFAppState().userModel.token,
-                                      currentLat: 31.996401,
-                                      currentLng: 35.8828752,
+                                      currentLat: widget.latitude,
+                                      currentLng: widget.longitude,
                                       range: _model.counter,
                                       lat: _model.wayPoint.lat,
                                       lng: _model.wayPoint.lng,
@@ -1132,6 +1153,26 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                         true)) {
                                       setState(() {
                                         _model.isLoading = false;
+
+                                        FFAppState().updatedBusessList =
+                                            (getJsonField(
+                                              (_model.apiResult51f?.jsonBody ?? ''),
+                                              r'''$.buses''',
+                                              true,
+                                            )!
+                                                .toList()
+                                                .map<BusModelStruct?>(
+                                                BusModelStruct
+                                                    .maybeFromMap)
+                                                .toList()
+                                            as Iterable<BusModelStruct?>)
+                                                .withoutNulls
+                                                .toList()
+                                                .cast<BusModelStruct>();
+                                        while (context.canPop() == true) {
+                                          context.pop();
+                                        }
+                                        context.pushReplacement('MapPage');
                                       });
                                     } else {
                                       setState(() {

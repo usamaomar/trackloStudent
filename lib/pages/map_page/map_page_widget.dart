@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:trackllo_student/backend/schema/structs/bus_model_struct.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -14,11 +15,12 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'map_page_model.dart';
 export 'map_page_model.dart';
+
 // import 'package:flutter/material.dart';
 // import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_client/web_socket_client.dart';
 import 'dart:ui' as ui;
-
+import 'package:google_maps_flutter/google_maps_flutter.dart' as lats;
 
 class MapPageWidget extends StatefulWidget {
   const MapPageWidget({super.key});
@@ -31,30 +33,63 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   late MapPageModel _model;
   late GoogleMapController mapController;
   late Set<Marker> markers;
+  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     markers = <Marker>{};
+    addCustomIcon();
     super.initState();
     updateDate();
     _model = createModel(context, () => MapPageModel());
   }
 
-
-  void updateDate() async{
-    try{
+  void updateDate() async {
+    try {
       final uri = Uri.parse('ws://tracllo-node-178a480f7a89.herokuapp.com');
       final socket = WebSocket(uri);
       socket.connection.listen((state) {
-        print('state: "$state"');
+        setState(() {
+          FFAppState().updatedBusessList.add(BusModelStruct(
+              busld: 'oisdmfoimsdf',
+              busIdentity: '4444',
+              lat: 31.9936463,
+              lng: 35.8881964,
+              maDistance: 20),);
+          FFAppState().updatedBusessList.add(BusModelStruct(
+              busld: 'ccjjjkjkjk',
+              busIdentity: '99909',
+              lat: 31.9942722,
+              lng: 35.8876487,
+              maDistance: 20),);
+
+          mapController.moveCamera(CameraUpdate.newLatLng(
+            lats.LatLng(FFAppState().updatedBusessList.isNotEmpty ? FFAppState()
+                .updatedBusessList[0].lat : 0.0,
+                FFAppState().updatedBusessList.isNotEmpty ? FFAppState()
+                    .updatedBusessList[0].lng : 0.0),
+
+          ));
+          FFAppState().updatedBusessList.forEach((element) {
+            markers.add(Marker(
+              markerId: const MarkerId("marker1"),
+              position: lats.LatLng(element.lat, element.lng),
+              draggable: false,
+              icon: markerIcon,
+            ));
+          });
+
+
+
+          });
       });
       // Listen for incoming messages.
       socket.messages.listen((message) {
-        print('message: "$message"');
+
       });
-    }catch(ex){
+    } catch (ex) {
       ex.toString();
     }
   }
@@ -71,7 +106,9 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     if (isiOS) {
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
+          statusBarBrightness: Theme
+              .of(context)
+              .brightness,
           systemStatusBarContrastEnforced: true,
         ),
       );
@@ -80,16 +117,21 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
+      onTap: () =>
+      _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme
+            .of(context)
+            .primaryBackground,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(53.0),
           child: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            backgroundColor: FlutterFlowTheme
+                .of(context)
+                .secondaryBackground,
             automaticallyImplyLeading: false,
             title: wrapWithModel(
               model: _model.appBarModel,
@@ -97,7 +139,9 @@ class _MapPageWidgetState extends State<MapPageWidget> {
               child: AppBarWidget(
                 rightIcon: Icon(
                   Icons.notes,
-                  color: FlutterFlowTheme.of(context).secondaryText,
+                  color: FlutterFlowTheme
+                      .of(context)
+                      .secondaryText,
                 ),
                 isRightHedding: false,
                 isLeftHedding: true,
@@ -118,97 +162,113 @@ class _MapPageWidgetState extends State<MapPageWidget> {
         ),
         body: SafeArea(
           top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
+          child: Stack(
             children: [
-              // GoogleMap(
-              //   zoomControlsEnabled: false,
-              //   myLocationEnabled: false,
-              //   myLocationButtonEnabled: false,
-              //   onMapCreated: (GoogleMapController controller) {
-              //     mapController = controller;
-              //   },
-              //   markers: markers,
-              //   // initialCameraPosition: CameraPosition(
-              //   //   // target: lats.LatLng(position.latitude, position.longitude),
-              //   //   zoom: 14.4746,
-              //   // ),
-              // ),
-              Container(
-                width: double.infinity,
-                height: 64.0,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF6A5BF6),
+              GoogleMap(
+                zoomControlsEnabled: false,
+                myLocationEnabled: false,
+                myLocationButtonEnabled: false,
+                onMapCreated: (GoogleMapController controller) {
+                  mapController = controller;
+                },
+                markers: markers,
+                initialCameraPosition: CameraPosition(
+                  target: lats.LatLng(
+                      FFAppState().updatedBusessList.isNotEmpty ? FFAppState()
+                          .updatedBusessList[0].lat : 0.0,
+                      FFAppState().updatedBusessList.isNotEmpty ? FFAppState()
+                          .updatedBusessList[0].lng : 0.0),
+                  zoom: 14.4746,
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FFButtonWidget(
-                      onPressed: () async {
-                        checkPermition().catchError((onError) {
-                          if (onError.toString().isEmpty) {
-                            _determinePosition().then((value) => {
-                              context.pushNamed(
-                              'TrackTripsPage',
-                              queryParameters: {
-                                'latitude': serializeParam(
-                                  value.latitude,
-                                  ParamType.double,
-                                ),
-                                'longitude': serializeParam(
-                                  value.longitude,
-                                  ParamType.double,
-                                ),
-                              }.withoutNulls,
-                            )
-                            });
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  FFLocalizations.of(context).getVariableText(
-                                    enText: onError,
-                                    arText: onError,
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  height: 64.0,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF6A5BF6),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FFButtonWidget(
+                        onPressed: () async {
+                          checkPermition().catchError((onError) {
+                            if (onError
+                                .toString()
+                                .isEmpty) {
+                              _determinePosition().then((value) =>
+                              {
+                                context.pushNamed(
+                                  'TrackTripsPage',
+                                  queryParameters: {
+                                    'latitude': serializeParam(
+                                      value.latitude,
+                                      ParamType.double,
+                                    ),
+                                    'longitude': serializeParam(
+                                      value.longitude,
+                                      ParamType.double,
+                                    ),
+                                  }.withoutNulls,
+                                )
+                              });
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    FFLocalizations.of(context).getVariableText(
+                                      enText: onError,
+                                      arText: onError,
+                                    ),
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme
+                                          .of(context)
+                                          .primaryText,
+                                    ),
                                   ),
-                                  style: TextStyle(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                  FlutterFlowTheme
+                                      .of(context)
+                                      .secondary,
                                 ),
-                                duration: Duration(milliseconds: 4000),
-                                backgroundColor:
-                                FlutterFlowTheme.of(context).secondary,
-                              ),
-                            );
-                          }
-                        });
-                      },
-                      text: FFLocalizations.of(context).getText(
-                        'jula7u30' /* Track Trips */,
-                      ),
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            44.0, 0.0, 44.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Readex Pro',
-                                  color: const Color(0xFF6A5BF6),
-                                ),
-                        elevation: 3.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
+                              );
+                            }
+                          });
+                        },
+                        text: FFLocalizations.of(context).getText(
+                          'jula7u30' /* Track Trips */,
                         ),
-                        borderRadius: BorderRadius.circular(10.0),
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              44.0, 0.0, 44.0, 0.0),
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme
+                              .of(context)
+                              .secondaryBackground,
+                          textStyle:
+                          FlutterFlowTheme
+                              .of(context)
+                              .titleSmall
+                              .override(
+                            fontFamily: 'Readex Pro',
+                            color: const Color(0xFF6A5BF6),
+                          ),
+                          elevation: 3.0,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -252,7 +312,6 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     return Future.error('');
   }
 
-
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -289,4 +348,45 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
   }
+
+
+  Future<Uint8List?> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
+        ?.buffer
+        .asUint8List();
+  }
+
+  Future<BitmapDescriptor> getBitmapDescriptorFromAssetBytes(
+      String path, int width) async {
+    final Uint8List? imageData = await getBytesFromAsset(path, width);
+    return BitmapDescriptor.fromBytes(imageData!);
+  }
+
+  void addCustomIcon() async {
+    await getBitmapDescriptorFromAssetBytes("assets/images/bus_5.png", 100)
+        .then((icon) {
+      setState(() {
+        markerIcon = icon;
+        // dynamic line = FFAppState().travilLine;
+        //
+        // if(line!=null) {
+        //   for (var setting in line['way_points']) {
+        //     markers.add(Marker(
+        //       markerId: MarkerId(setting['label']),
+        //       position: lats.LatLng(
+        //           setting['lat'].toDouble(), setting['lng'].toDouble()),
+        //       draggable: false,
+        //       icon: BitmapDescriptor.defaultMarkerWithHue(
+        //           BitmapDescriptor.hueGreen),
+        //     ));
+        //   }
+        // }
+      });
+    });
+  }
+
 }

@@ -534,8 +534,10 @@ class _SideMenuePageWidgetState extends State<SideMenuePageWidget> {
                           setState(() {
                             FFAppState().userModel = UserModelStruct();
                           });
-
-                          context.goNamed('LoginPage');
+                          while (context.canPop() == true) {
+                            context.pop();
+                          }
+                          context.pushReplacement('LoginPage');
                         }
                       },
                       child: Column(
