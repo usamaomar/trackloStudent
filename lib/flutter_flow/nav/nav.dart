@@ -113,6 +113,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 params.getParam('travelModelStruct', ParamType.JSON),
             isTripSelected: params.getParam('isTripSelected', ParamType.bool),
           ),
+        ),
+        FFRoute(
+          name: 'NotificationDetailsPage',
+          path: '/notificationDetailsPage',
+          builder: (context, params) => NotificationDetailsPageWidget(
+            notiDynamic: params.getParam('notiDynamic', ParamType.JSON),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

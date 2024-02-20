@@ -10,13 +10,13 @@ class BusModelStruct extends BaseStruct {
     String? busld,
     String? busIdentity,
     double? lat,
-    double? ing,
+    double? lng,
     double? maDistance,
     List<double>? startPoint,
   })  : _busld = busld,
         _busIdentity = busIdentity,
         _lat = lat,
-        _ing = ing,
+        _lng = lng,
         _maDistance = maDistance,
         _startPoint = startPoint;
 
@@ -39,12 +39,12 @@ class BusModelStruct extends BaseStruct {
   void incrementLat(double amount) => _lat = lat + amount;
   bool hasLat() => _lat != null;
 
-  // "Ing" field.
-  double? _ing;
-  double get ing => _ing ?? 0.0;
-  set ing(double? val) => _ing = val;
-  void incrementIng(double amount) => _ing = ing + amount;
-  bool hasIng() => _ing != null;
+  // "lng" field.
+  double? _lng;
+  double get lng => _lng ?? 0.0;
+  set lng(double? val) => _lng = val;
+  void incrementLng(double amount) => _lng = lng + amount;
+  bool hasLng() => _lng != null;
 
   // "maDistance" field.
   double? _maDistance;
@@ -65,7 +65,7 @@ class BusModelStruct extends BaseStruct {
         busld: data['busld'] as String?,
         busIdentity: data['busIdentity'] as String?,
         lat: castToType<double>(data['lat']),
-        ing: castToType<double>(data['Ing']),
+        lng: castToType<double>(data['lng']),
         maDistance: castToType<double>(data['maDistance']),
         startPoint: getDataList(data['startPoint']),
       );
@@ -77,7 +77,7 @@ class BusModelStruct extends BaseStruct {
         'busld': _busld,
         'busIdentity': _busIdentity,
         'lat': _lat,
-        'Ing': _ing,
+        'lng': _lng,
         'maDistance': _maDistance,
         'startPoint': _startPoint,
       }.withoutNulls;
@@ -96,8 +96,8 @@ class BusModelStruct extends BaseStruct {
           _lat,
           ParamType.double,
         ),
-        'Ing': serializeParam(
-          _ing,
+        'lng': serializeParam(
+          _lng,
           ParamType.double,
         ),
         'maDistance': serializeParam(
@@ -128,8 +128,8 @@ class BusModelStruct extends BaseStruct {
           ParamType.double,
           false,
         ),
-        ing: deserializeParam(
-          data['Ing'],
+        lng: deserializeParam(
+          data['lng'],
           ParamType.double,
           false,
         ),
@@ -155,27 +155,27 @@ class BusModelStruct extends BaseStruct {
         busld == other.busld &&
         busIdentity == other.busIdentity &&
         lat == other.lat &&
-        ing == other.ing &&
+        lng == other.lng &&
         maDistance == other.maDistance &&
         listEquality.equals(startPoint, other.startPoint);
   }
 
   @override
   int get hashCode => const ListEquality()
-      .hash([busld, busIdentity, lat, ing, maDistance, startPoint]);
+      .hash([busld, busIdentity, lat, lng, maDistance, startPoint]);
 }
 
 BusModelStruct createBusModelStruct({
   String? busld,
   String? busIdentity,
   double? lat,
-  double? ing,
+  double? lng,
   double? maDistance,
 }) =>
     BusModelStruct(
       busld: busld,
       busIdentity: busIdentity,
       lat: lat,
-      ing: ing,
+      lng: lng,
       maDistance: maDistance,
     );

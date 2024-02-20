@@ -125,18 +125,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // NotificationPage
   {
-    'fo5xlr6h': {
-      'en': 'Day',
-      'ar': '',
-    },
-    'ls9nyvur': {
-      'en': 'test',
-      'ar': '',
-    },
-    'apaxy7ks': {
-      'en': 'Day',
-      'ar': '',
-    },
     'nv23fc12': {
       'en': 'Home',
       'ar': '',
@@ -343,6 +331,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'كيلو متر',
     },
     'sy46gnu4': {
+      'en': 'Home',
+      'ar': '',
+    },
+  },
+  // NotificationDetailsPage
+  {
+    '9xjqbejq': {
       'en': 'Home',
       'ar': '',
     },

@@ -16,6 +16,7 @@ class StudentApisGroup {
   static LoginApiCall loginApiCall = LoginApiCall();
   static GetAllTravileApiCall getAllTravileApiCall = GetAllTravileApiCall();
   static GetLastTravileApiCall getLastTravileApiCall = GetLastTravileApiCall();
+  static NewsMobileApiCall newsMobileApiCall = NewsMobileApiCall();
   static StartTrackingBusesCall startTrackingBusesCall =
       StartTrackingBusesCall();
 }
@@ -83,6 +84,27 @@ class GetLastTravileApiCall {
     return ApiManager.instance.makeApiCall(
       callName: 'GetLastTravileApi',
       apiUrl: '${StudentApisGroup.baseUrl}/v1/travels/tracked',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': '$token',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class NewsMobileApiCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'NewsMobileApi',
+      apiUrl: '${StudentApisGroup.baseUrl}/v1/news-mobile',
       callType: ApiCallType.GET,
       headers: {
         'Authorization': '$token',
