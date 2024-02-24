@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:trackllo_student/backend/schema/structs/bus_model_struct.dart';
@@ -55,7 +57,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
         setState(() {
           FFAppState().updatedBusessList.add(
                 BusModelStruct(
-                    busld: 'oisdmfoimsdf',
+                    busId: 'oisdmfoimsdf',
                     busIdentity: '4444',
                     lat: 31.9936463,
                     lng: 35.8881964,
@@ -63,7 +65,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
               );
           FFAppState().updatedBusessList.add(
                 BusModelStruct(
-                    busld: 'ccjjjkjkjk',
+                    busId: 'ccjjjkjkjk',
                     busIdentity: '99909',
                     lat: 31.9942722,
                     lng: 35.8876487,
