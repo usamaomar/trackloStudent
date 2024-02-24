@@ -182,25 +182,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Student Name',
       'ar': 'أسم الطالب',
     },
-    'w0xupvlz': {
-      'en': 'Help & Support',
-      'ar': 'المساعدة والدعم',
-    },
     'xq8kmna6': {
       'en': 'University Number',
       'ar': 'رقم الجامعة',
     },
-    '4cv6zy9t': {
-      'en': 'Help & Support',
-      'ar': 'المساعدة والدعم',
-    },
     'p7uex74q': {
       'en': 'Phone Number',
       'ar': 'رقم التليفون',
-    },
-    '8qfxyvnm': {
-      'en': 'Help & Support',
-      'ar': 'المساعدة والدعم',
     },
     '9vt5fluj': {
       'en': 'Change Password',
@@ -277,7 +265,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'biniyc1q': {
       'en': 'Search',
-      'ar': 'يبحث',
+      'ar': 'كلمة السر الحالية',
     },
     'p0zzvg9x': {
       'en': '022/25',
@@ -339,6 +327,60 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     '9xjqbejq': {
       'en': 'Home',
+      'ar': '',
+    },
+  },
+  // Action2SheetSimple
+  {
+    'x1izf1vf': {
+      'en': 'Old Password',
+      'ar': 'كلمة المرور القديمة',
+    },
+    'xv08bf1e': {
+      'en': 'Old Password Is WRONG',
+      'ar': 'كلمة المرور القديمة خاطئة',
+    },
+    '14jtjame': {
+      'en': 'Current Password',
+      'ar': 'كلمة السر الحالية',
+    },
+    '7s3bhrik': {
+      'en': 'Not Confirmed',
+      'ar': 'غير مؤكد',
+    },
+    'khvvdmta': {
+      'en': 'Confirm Password',
+      'ar': 'تأكيد كلمة المرور',
+    },
+    '3isjn59w': {
+      'en': 'Not Confirmed',
+      'ar': 'غير مؤكد',
+    },
+    'miv75kup': {
+      'en': 'Update',
+      'ar': 'تحديث',
+    },
+    '9h8886vl': {
+      'en': 'Cancel',
+      'ar': '',
+    },
+  },
+  // UpdatePhoneNumberComponent
+  {
+    'hyzji0om': {
+      'en': 'new Phone Number',
+      'ar': 'رقم الهاتف الجديد',
+    },
+    'v82sdnvn': {
+      'en': 'Phone Not Correct',
+      'ar': 'الهاتف غير صحيح',
+    },
+    'wducx0ke': {
+      'en': 'Update',
+      'ar': 'تحديث',
+    },
+    'i1qz50h9': {
+      'en': 'Cancel',
       'ar': '',
     },
   },

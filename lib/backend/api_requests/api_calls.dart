@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -19,6 +20,8 @@ class StudentApisGroup {
   static NewsMobileApiCall newsMobileApiCall = NewsMobileApiCall();
   static StartTrackingBusesCall startTrackingBusesCall =
       StartTrackingBusesCall();
+  static UploadImageApiCall uploadImageApiCall = UploadImageApiCall();
+  static UpdateStudentFileCall updateStudentFileCall = UpdateStudentFileCall();
 }
 
 class LoginApiCall {
@@ -147,6 +150,67 @@ class StartTrackingBusesCall {
       callName: 'startTrackingBuses',
       apiUrl: '${StudentApisGroup.baseUrl}/v1/travels/$id/startTrackingBuses',
       callType: ApiCallType.POST,
+      headers: {
+        'Authorization': '$token',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UploadImageApiCall {
+  Future<ApiCallResponse> call({
+    FFUploadedFile? file,
+    String? token = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'UploadImageApi',
+      apiUrl: '${StudentApisGroup.baseUrl}/image',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': '$token',
+      },
+      params: {
+        'file': file,
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class UpdateStudentFileCall {
+  Future<ApiCallResponse> call({
+    String? name = '',
+    String? studentId = '',
+    String? profilePhoto = '',
+    String? phoneNumber = '',
+    String? password = '',
+    String? token = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "name": "$name",
+  "student_id": "$studentId",
+  "profile_photo": "$profilePhoto",
+  "phone_number": "$phoneNumber",
+  "password": "$password"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'UpdateStudentFile',
+      apiUrl: '${StudentApisGroup.baseUrl}/students/$studentId',
+      callType: ApiCallType.PUT,
       headers: {
         'Authorization': '$token',
       },
