@@ -479,11 +479,12 @@ class _Action2SheetSimpleWidgetState extends State<Action2SheetSimpleWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: const Color(0xFFF1F4F8),
+                            color: const Color(0xFF527ED2),
                             textStyle:
                                 FlutterFlowTheme.of(context).bodyLarge.override(
                                       fontFamily: 'Plus Jakarta Sans',
-                                      color: const Color(0xFF14181B),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.normal,
                                     ),
