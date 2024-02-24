@@ -48,29 +48,37 @@ class _MapPageWidgetState extends State<MapPageWidget> {
 
   void updateDate() async {
     try {
-      final uri = Uri.parse('ws://tracllo-node-178a480f7a89.herokuapp.com');
+      // final uri = Uri.parse('ws://tracllo-node-178a480f7a89.herokuapp.com');
+      final uri = Uri.parse(
+          'wss://free.blr2.piesocket.com/v3/1?api_key=sLX4pLahmfUQ0kFI4FxNwUT9KbEECXCM6MmmEDUS&notify_self=1');
       final socket = WebSocket(uri);
       socket.connection.listen((state) {
         setState(() {
-          FFAppState().updatedBusessList.add(BusModelStruct(
-              busld: 'oisdmfoimsdf',
-              busIdentity: '4444',
-              lat: 31.9936463,
-              lng: 35.8881964,
-              maDistance: 20),);
-          FFAppState().updatedBusessList.add(BusModelStruct(
-              busld: 'ccjjjkjkjk',
-              busIdentity: '99909',
-              lat: 31.9942722,
-              lng: 35.8876487,
-              maDistance: 20),);
+          FFAppState().updatedBusessList.add(
+                BusModelStruct(
+                    busld: 'oisdmfoimsdf',
+                    busIdentity: '4444',
+                    lat: 31.9936463,
+                    lng: 35.8881964,
+                    maDistance: 20),
+              );
+          FFAppState().updatedBusessList.add(
+                BusModelStruct(
+                    busld: 'ccjjjkjkjk',
+                    busIdentity: '99909',
+                    lat: 31.9942722,
+                    lng: 35.8876487,
+                    maDistance: 20),
+              );
 
           mapController.moveCamera(CameraUpdate.newLatLng(
-            lats.LatLng(FFAppState().updatedBusessList.isNotEmpty ? FFAppState()
-                .updatedBusessList[0].lat : 0.0,
-                FFAppState().updatedBusessList.isNotEmpty ? FFAppState()
-                    .updatedBusessList[0].lng : 0.0),
-
+            lats.LatLng(
+                FFAppState().updatedBusessList.isNotEmpty
+                    ? FFAppState().updatedBusessList[0].lat
+                    : 0.0,
+                FFAppState().updatedBusessList.isNotEmpty
+                    ? FFAppState().updatedBusessList[0].lng
+                    : 0.0),
           ));
           FFAppState().updatedBusessList.forEach((element) {
             markers.add(Marker(
@@ -80,14 +88,11 @@ class _MapPageWidgetState extends State<MapPageWidget> {
               icon: markerIcon,
             ));
           });
-
-
-
-          });
+        });
       });
       // Listen for incoming messages.
       socket.messages.listen((message) {
-
+        print('');
       });
     } catch (ex) {
       ex.toString();
@@ -106,9 +111,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     if (isiOS) {
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
-          statusBarBrightness: Theme
-              .of(context)
-              .brightness,
+          statusBarBrightness: Theme.of(context).brightness,
           systemStatusBarContrastEnforced: true,
         ),
       );
@@ -117,21 +120,16 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () =>
-      _model.unfocusNode.canRequestFocus
+      onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme
-            .of(context)
-            .primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(53.0),
           child: AppBar(
-            backgroundColor: FlutterFlowTheme
-                .of(context)
-                .secondaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             automaticallyImplyLeading: false,
             title: wrapWithModel(
               model: _model.appBarModel,
@@ -139,9 +137,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
               child: AppBarWidget(
                 rightIcon: Icon(
                   Icons.notes,
-                  color: FlutterFlowTheme
-                      .of(context)
-                      .secondaryText,
+                  color: FlutterFlowTheme.of(context).secondaryText,
                 ),
                 isRightHedding: false,
                 isLeftHedding: true,
@@ -174,10 +170,12 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                 markers: markers,
                 initialCameraPosition: CameraPosition(
                   target: lats.LatLng(
-                      FFAppState().updatedBusessList.isNotEmpty ? FFAppState()
-                          .updatedBusessList[0].lat : 0.0,
-                      FFAppState().updatedBusessList.isNotEmpty ? FFAppState()
-                          .updatedBusessList[0].lng : 0.0),
+                      FFAppState().updatedBusessList.isNotEmpty
+                          ? FFAppState().updatedBusessList[0].lat
+                          : 0.0,
+                      FFAppState().updatedBusessList.isNotEmpty
+                          ? FFAppState().updatedBusessList[0].lng
+                          : 0.0),
                   zoom: 14.4746,
                 ),
               ),
@@ -196,25 +194,22 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                       FFButtonWidget(
                         onPressed: () async {
                           checkPermition().catchError((onError) {
-                            if (onError
-                                .toString()
-                                .isEmpty) {
-                              _determinePosition().then((value) =>
-                              {
-                                context.pushNamed(
-                                  'TrackTripsPage',
-                                  queryParameters: {
-                                    'latitude': serializeParam(
-                                      value.latitude,
-                                      ParamType.double,
-                                    ),
-                                    'longitude': serializeParam(
-                                      value.longitude,
-                                      ParamType.double,
-                                    ),
-                                  }.withoutNulls,
-                                )
-                              });
+                            if (onError.toString().isEmpty) {
+                              _determinePosition().then((value) => {
+                                    context.pushNamed(
+                                      'TrackTripsPage',
+                                      queryParameters: {
+                                        'latitude': serializeParam(
+                                          value.latitude,
+                                          ParamType.double,
+                                        ),
+                                        'longitude': serializeParam(
+                                          value.longitude,
+                                          ParamType.double,
+                                        ),
+                                      }.withoutNulls,
+                                    )
+                                  });
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -224,16 +219,13 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                       arText: onError,
                                     ),
                                     style: TextStyle(
-                                      color: FlutterFlowTheme
-                                          .of(context)
+                                      color: FlutterFlowTheme.of(context)
                                           .primaryText,
                                     ),
                                   ),
                                   duration: Duration(milliseconds: 4000),
                                   backgroundColor:
-                                  FlutterFlowTheme
-                                      .of(context)
-                                      .secondary,
+                                      FlutterFlowTheme.of(context).secondary,
                                 ),
                               );
                             }
@@ -248,17 +240,13 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                               44.0, 0.0, 44.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme
-                              .of(context)
-                              .secondaryBackground,
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
                           textStyle:
-                          FlutterFlowTheme
-                              .of(context)
-                              .titleSmall
-                              .override(
-                            fontFamily: 'Readex Pro',
-                            color: const Color(0xFF6A5BF6),
-                          ),
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: const Color(0xFF6A5BF6),
+                                  ),
                           elevation: 3.0,
                           borderSide: const BorderSide(
                             color: Colors.transparent,
@@ -349,7 +337,6 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     return await Geolocator.getCurrentPosition();
   }
 
-
   Future<Uint8List?> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
@@ -388,5 +375,4 @@ class _MapPageWidgetState extends State<MapPageWidget> {
       });
     });
   }
-
 }
