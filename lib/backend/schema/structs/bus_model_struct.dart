@@ -7,24 +7,24 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class BusModelStruct extends BaseStruct {
   BusModelStruct({
-    String? busld,
+    String? busId,
     String? busIdentity,
     double? lat,
     double? lng,
     double? maDistance,
     List<double>? startPoint,
-  })  : _busld = busld,
+  })  : _busId = busId,
         _busIdentity = busIdentity,
         _lat = lat,
         _lng = lng,
         _maDistance = maDistance,
         _startPoint = startPoint;
 
-  // "busld" field.
-  String? _busld;
-  String get busld => _busld ?? '';
-  set busld(String? val) => _busld = val;
-  bool hasBusld() => _busld != null;
+  // "busId" field.
+  String? _busId;
+  String get busId => _busId ?? '';
+  set busId(String? val) => _busId = val;
+  bool hasBusId() => _busId != null;
 
   // "busIdentity" field.
   String? _busIdentity;
@@ -62,7 +62,7 @@ class BusModelStruct extends BaseStruct {
   bool hasStartPoint() => _startPoint != null;
 
   static BusModelStruct fromMap(Map<String, dynamic> data) => BusModelStruct(
-        busld: data['busld'] as String?,
+        busId: data['busId'] as String?,
         busIdentity: data['busIdentity'] as String?,
         lat: castToType<double>(data['lat']),
         lng: castToType<double>(data['lng']),
@@ -74,7 +74,7 @@ class BusModelStruct extends BaseStruct {
       data is Map ? BusModelStruct.fromMap(data.cast<String, dynamic>()) : null;
 
   Map<String, dynamic> toMap() => {
-        'busld': _busld,
+        'busId': _busId,
         'busIdentity': _busIdentity,
         'lat': _lat,
         'lng': _lng,
@@ -84,8 +84,8 @@ class BusModelStruct extends BaseStruct {
 
   @override
   Map<String, dynamic> toSerializableMap() => {
-        'busld': serializeParam(
-          _busld,
+        'busId': serializeParam(
+          _busId,
           ParamType.String,
         ),
         'busIdentity': serializeParam(
@@ -113,8 +113,8 @@ class BusModelStruct extends BaseStruct {
 
   static BusModelStruct fromSerializableMap(Map<String, dynamic> data) =>
       BusModelStruct(
-        busld: deserializeParam(
-          data['busld'],
+        busId: deserializeParam(
+          data['busId'],
           ParamType.String,
           false,
         ),
@@ -152,7 +152,7 @@ class BusModelStruct extends BaseStruct {
   bool operator ==(Object other) {
     const listEquality = ListEquality();
     return other is BusModelStruct &&
-        busld == other.busld &&
+        busId == other.busId &&
         busIdentity == other.busIdentity &&
         lat == other.lat &&
         lng == other.lng &&
@@ -162,18 +162,18 @@ class BusModelStruct extends BaseStruct {
 
   @override
   int get hashCode => const ListEquality()
-      .hash([busld, busIdentity, lat, lng, maDistance, startPoint]);
+      .hash([busId, busIdentity, lat, lng, maDistance, startPoint]);
 }
 
 BusModelStruct createBusModelStruct({
-  String? busld,
+  String? busId,
   String? busIdentity,
   double? lat,
   double? lng,
   double? maDistance,
 }) =>
     BusModelStruct(
-      busld: busld,
+      busId: busId,
       busIdentity: busIdentity,
       lat: lat,
       lng: lng,
