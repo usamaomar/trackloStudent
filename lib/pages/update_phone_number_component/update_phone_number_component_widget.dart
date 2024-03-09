@@ -165,7 +165,7 @@ class _UpdatePhoneNumberComponentWidgetState
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 16.0, 0.0, 0.0),
+                              0.0, 16.0, 5.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
                               if (functions.isValidPhoneNumber(
@@ -181,7 +181,8 @@ class _UpdatePhoneNumberComponentWidgetState
                                   studentId: FFAppState().userModel.studentId,
                                   profilePhoto:
                                       FFAppState().userModel.profilePhoto,
-                                  phoneNumber: _model.textController.text,
+                                  phoneNumber:functions.convertPhoneNumber(
+                                      _model.textController.text),
                                   password: FFAppState().userModel.password,
                                 );
                                 if ((_model.apiResult6vm?.succeeded ?? true)) {
@@ -207,13 +208,41 @@ class _UpdatePhoneNumberComponentWidgetState
                                     ),
                                   );
                                   Navigator.pop(context);
+                                }else{
+                                  await showDialog(
+                                    context: context,
+                                    builder: (alertDialogContext) {
+                                      return AlertDialog(
+                                        title: Text(
+                                            FFLocalizations.of(context)
+                                                .getVariableText(
+                                              enText: 'Error',
+                                              arText: 'خطأ',
+                                            )),
+                                        content: Text(functions.parseErrorMsg(
+                                            (_model.apiResult6vm?.bodyText ??
+                                                ''))),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                alertDialogContext),
+                                            child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getVariableText(
+                                                  enText: 'Ok',
+                                                  arText: 'حسنا',
+                                                )),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 }
                               } else {
                                 setState(() {
                                   _model.newPhoneIsWrong = true;
                                 });
                               }
-
                               setState(() {});
                             },
                             text: FFLocalizations.of(context).getText(
@@ -248,7 +277,7 @@ class _UpdatePhoneNumberComponentWidgetState
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 16.0, 0.0, 0.0),
+                              5.0, 16.0, 0.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
                               context.pop();
@@ -273,9 +302,9 @@ class _UpdatePhoneNumberComponentWidgetState
                                     fontWeight: FontWeight.normal,
                                   ),
                               elevation: 0.0,
-                              borderSide: const BorderSide(
-                                color: Colors.transparent,
-                                width: 0.0,
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 1.0,
                               ),
                             ),
                           ),

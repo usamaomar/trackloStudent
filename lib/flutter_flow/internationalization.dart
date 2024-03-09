@@ -265,7 +265,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'biniyc1q': {
       'en': 'Search',
-      'ar': 'كلمة السر الحالية',
+      'ar': 'بحث',
     },
     'p0zzvg9x': {
       'en': '022/25',
@@ -358,8 +358,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ar': 'كلمة المرور القديمة خاطئة',
     },
     '14jtjame': {
-      'en': 'Current Password',
-      'ar': 'كلمة السر الحالية',
+      'en': 'New Password',
+      'ar': 'كلمة السر الجديدة',
     },
     '7s3bhrik': {
       'en': 'Not Confirmed',
@@ -375,17 +375,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'miv75kup': {
       'en': 'Update',
-      'ar': 'تحديث',
+      'ar': 'تعديل',
     },
     '9h8886vl': {
       'en': 'Cancel',
-      'ar': '',
+      'ar': 'الغاء',
     },
   },
   // UpdatePhoneNumberComponent
   {
     'hyzji0om': {
-      'en': 'new Phone Number',
+      'en': 'New Phone Number',
       'ar': 'رقم الهاتف الجديد',
     },
     'v82sdnvn': {
@@ -394,11 +394,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'wducx0ke': {
       'en': 'Update',
-      'ar': 'تحديث',
+      'ar': 'تعديل',
     },
     'i1qz50h9': {
       'en': 'Cancel',
-      'ar': '',
+      'ar': 'الغاء',
     },
   },
   // Miscellaneous

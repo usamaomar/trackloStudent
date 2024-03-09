@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCxfQlczb8gt85pOJNdJGtQ90kDXmdf8_M</string>
+	<string>AIzaSyAl0oD45AxKuzqUERLd8HOvG2RaSL66mwk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>148177471752</string>
+	<string>273373531113</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.tracllo.student</string>
 	<key>PROJECT_ID</key>
-	<string>trackllostudent</string>
+	<string>tracllo-live-locations-844bb</string>
 	<key>STORAGE_BUCKET</key>
-	<string>trackllostudent.appspot.com</string>
+	<string>tracllo-live-locations-844bb.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:148177471752:ios:1c7c948ddb277ecc6cc4bd</string>
+	<string>1:273373531113:ios:f73f5c70d4ac3f511c9978</string>
+	<key>DATABASE_URL</key>
+	<string>https://tracllo-live-locations-844bb-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

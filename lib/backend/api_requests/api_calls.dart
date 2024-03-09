@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -165,7 +166,7 @@ class StartTrackingBusesCall {
 
 class UploadImageApiCall {
   Future<ApiCallResponse> call({
-    FFUploadedFile? file,
+    File? file,
     String? token = '',
   }) async {
     return ApiManager.instance.makeApiCall(
@@ -176,7 +177,7 @@ class UploadImageApiCall {
         'Authorization': '$token',
       },
       params: {
-        'file': file,
+        'image': file,
       },
       bodyType: BodyType.MULTIPART,
       returnBody: true,

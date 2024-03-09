@@ -8,6 +8,7 @@
     <application
         android:label="TracklloStudent"
         tools:replace="android:label"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
 
@@ -57,7 +58,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCs7zjEbOg76QfJbB6pLSuOh5OvWSgbG80"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCBEOBg-A2XsEjRXRjkKbdis4BTTiCktI0"/>
 
 
     </application>

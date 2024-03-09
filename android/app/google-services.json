@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "148177471752",
-    "project_id": "trackllostudent",
-    "storage_bucket": "trackllostudent.appspot.com"
+    "project_number": "273373531113",
+    "firebase_url": "https://tracllo-live-locations-844bb-default-rtdb.firebaseio.com",
+    "project_id": "tracllo-live-locations-844bb",
+    "storage_bucket": "tracllo-live-locations-844bb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:148177471752:android:deafa60dcafeb7ac6cc4bd",
+        "mobilesdk_app_id": "1:273373531113:android:d768ddaeac818bd31c9978",
         "android_client_info": {
           "package_name": "com.tracllo.student"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBaXQ0jctcZtMAPFiqznZM8RzHPa4kzvao"
+          "current_key": "AIzaSyC9bZ-h1TuLEPlU830yDt_va36X9EiGoPs"
         }
       ],
       "services": {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
+import '../../pages/saved_track_trips_page/saved_track_trips_page_widget.dart';
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -106,12 +107,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
+          name: 'SavedTrackTripsPage',
+          path: '/savedtrackTripsPage',
+          builder: (context, params) => SavedTrackTripsPageWidget(
+          ),
+        ),
+        FFRoute(
           name: 'DetailsTrackingPage',
           path: '/detailsTrackingPage',
           builder: (context, params) => DetailsTrackingPageWidget(
             travelModelStruct:
                 params.getParam('travelModelStruct', ParamType.JSON),
             isTripSelected: params.getParam('isTripSelected', ParamType.bool),
+            isFromSide: params.getParam('isFromSide', ParamType.bool),
             latitude: params.getParam('latitude', ParamType.double),
             longitude: params.getParam('longitude', ParamType.double),
           ),

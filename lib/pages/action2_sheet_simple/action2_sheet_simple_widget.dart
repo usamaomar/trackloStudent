@@ -382,13 +382,23 @@ class _Action2SheetSimpleWidgetState extends State<Action2SheetSimpleWidget> {
                               setState(() {
                                 _model.isOldPasswordWrong = false;
                               });
+
+                              if (_model.textController2.text.isEmpty) {
+                                setState(() {
+                                  _model.isConfirmPasswordIsWrong = true;
+                                });
+                                return;
+                              }
+
                               if (_model.textController2.text ==
                                   _model.textController3.text) {
                                 setState(() {
                                   _model.isConfirmPasswordIsWrong = false;
+                                  return;
                                 });
                                 setState(() {
                                   _model.isCurrentPasswordIsWrong = false;
+                                  return;
                                 });
                                 _model.apiResult6vm = await StudentApisGroup
                                     .updateStudentFileCall

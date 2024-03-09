@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '/backend/api_requests/api_calls.dart';
 import '/components/app_bar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -11,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'personal_page_model.dart';
 export 'personal_page_model.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 
 class PersonalPageWidget extends StatefulWidget {
   const PersonalPageWidget({super.key});
@@ -21,7 +24,7 @@ class PersonalPageWidget extends StatefulWidget {
 
 class _PersonalPageWidgetState extends State<PersonalPageWidget> {
   late PersonalPageModel _model;
-
+  String? imagePath;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -85,73 +88,15 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 37.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 37.0, 0.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        final selectedFiles = await selectFiles(
-                          multiFile: false,
-                        );
-                        if (selectedFiles != null) {
-                          setState(() => _model.isDataUploading = true);
-                          var selectedUploadedFiles = <FFUploadedFile>[];
-
-                          try {
-                            selectedUploadedFiles = selectedFiles
-                                .map((m) => FFUploadedFile(
-                                      name: m.storagePath.split('/').last,
-                                      bytes: m.bytes,
-                                    ))
-                                .toList();
-                          } finally {
-                            _model.isDataUploading = false;
-                          }
-                          if (selectedUploadedFiles.length ==
-                              selectedFiles.length) {
-                            setState(() {
-                              _model.uploadedLocalFile =
-                                  selectedUploadedFiles.first;
-                            });
-                          } else {
-                            setState(() {});
-                            return;
-                          }
-                        }
-
-                        setState(() {
-                          _model.uploadedFile = _model.uploadedLocalFile;
-                        });
-                        _model.apiResulthhj =
-                            await StudentApisGroup.uploadImageApiCall.call(
-                          token: FFAppState().userModel.token,
-                          file: _model.uploadedFile,
-                        );
-                        if ((_model.apiResulthhj?.succeeded ?? true)) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                FFLocalizations.of(context).getVariableText(
-                                  enText: 'Data Is Updated',
-                                  arText: 'تم تحديث البيانات',
-                                ),
-                                style: TextStyle(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              duration: const Duration(milliseconds: 4000),
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).primaryText,
-                            ),
-                          );
-                        }
-
-                        setState(() {});
+                        onClickPressed();
                       },
                       child: Stack(
                         alignment: const AlignmentDirectional(1.0, 1.0),
@@ -164,11 +109,11 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                               shape: BoxShape.circle,
                             ),
                             child: Image.network(
-                              '',
+                              FFAppState().userModel.profilePhoto.isEmpty ? 'https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg' : FFAppState().userModel.profilePhoto,
                               fit: BoxFit.cover,
                             ),
                           ),
-                          if (_model.uploadedFile != null &&
+                          if (imagePath != null &&
                               (_model.uploadedFile?.bytes?.isNotEmpty ?? false))
                             Container(
                               width: 108.0,
@@ -177,8 +122,8 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
-                              child: Image.network(
-                                '',
+                              child: Image.file(
+                                File(imagePath ?? ''),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -204,7 +149,7 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                               size: 15.0,
                             ),
                             onPressed: () {
-                              print('IconButton pressed ...');
+                              onClickPressed();
                             },
                           ),
                         ],
@@ -214,13 +159,14 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          5.0, 0.0, 5.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -284,13 +230,14 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 5.0, 20.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(20.0, 5.0, 20.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          5.0, 0.0, 5.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -354,13 +301,14 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          5.0, 0.0, 5.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -398,15 +346,17 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                                   elevation: 0,
                                   insetPadding: EdgeInsets.zero,
                                   backgroundColor: Colors.transparent,
-                                  alignment: const AlignmentDirectional(0.0, 0.0)
-                                      .resolve(Directionality.of(context)),
+                                  alignment:
+                                      const AlignmentDirectional(0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
                                   child: GestureDetector(
                                     onTap: () => _model
                                             .unfocusNode.canRequestFocus
                                         ? FocusScope.of(context)
                                             .requestFocus(_model.unfocusNode)
                                         : FocusScope.of(context).unfocus(),
-                                    child: const UpdatePhoneNumberComponentWidget(),
+                                    child:
+                                        const UpdatePhoneNumberComponentWidget(),
                                   ),
                                 );
                               },
@@ -428,8 +378,9 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                                       size: 24.0,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          10.0, 0.0, 0.0, 0.0),
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              10.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         FFAppState().userModel.phone,
                                         style: FlutterFlowTheme.of(context)
@@ -467,8 +418,8 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
               ),
               Expanded(
                 child: Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(20.0, 43.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      20.0, 43.0, 20.0, 0.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -498,7 +449,8 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                                                       _model.unfocusNode)
                                               : FocusScope.of(context)
                                                   .unfocus(),
-                                          child: const Action2SheetSimpleWidget(),
+                                          child:
+                                              const Action2SheetSimpleWidget(),
                                         ),
                                       );
                                     },
@@ -511,14 +463,15 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                                   height: 40.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
                                   color: const Color(0xFFE4E4E4),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
                                         fontFamily: 'Readex Pro',
-                                        color: const Color(0xFFA8A8A8),
+                                        color: const Color(0xFF000000),
                                       ),
                                   elevation: 3.0,
                                   borderSide: const BorderSide(
@@ -541,5 +494,144 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
         ),
       ),
     );
+  }
+
+
+  void onClickPressed() async{
+    final selectedFiles = await selectMedia(
+      multiImage: false,
+    );
+    if (selectedFiles?[0].filePath != null) {
+      imagePath = selectedFiles?[0].filePath ?? '';
+    }else{
+      return;
+    }
+    if (selectedFiles != null) {
+      setState(() => _model.isDataUploading = true);
+      var selectedUploadedFiles = <FFUploadedFile>[];
+
+      try {
+        selectedUploadedFiles = selectedFiles
+            .map((m) => FFUploadedFile(
+          name: m.storagePath.split('/').last,
+          bytes: m.bytes,
+        ))
+            .toList();
+      } finally {
+        _model.isDataUploading = false;
+      }
+      if (selectedUploadedFiles.length ==
+          selectedFiles.length) {
+        setState(() {
+          _model.uploadedLocalFile =
+              selectedUploadedFiles.first;
+        });
+      } else {
+        setState(() {});
+        return;
+      }
+    }
+    setState(() {
+      _model.uploadedFile = _model.uploadedLocalFile;
+    });
+    await showDialog(
+    context: context,
+    builder: (alertDialogContextP) {
+      return AlertDialog(
+        title: Text(
+            FFLocalizations.of(context)
+                .getVariableText(
+              enText: 'Upload',
+              arText: 'رفع الصورة',
+            )),
+        content: Text(FFLocalizations.of(context)
+            .getVariableText(
+          enText: 'Are you sure you want to upload image',
+          arText: 'هل انت متأكد من انك تود رفع الصورة',
+        )),
+        actions: [
+          TextButton(
+            onPressed: ()  async{
+              _model.apiResulthhj =
+              await StudentApisGroup.uploadImageApiCall.call(
+                token: FFAppState().userModel.token,
+                file: File(imagePath!),
+              );
+              if ((_model.apiResulthhj?.succeeded ?? true)) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      FFLocalizations.of(context).getVariableText(
+                        enText: 'Data Is Updated',
+                        arText: 'تم تحديث البيانات',
+                      ),
+                      style: TextStyle(
+                        color: FlutterFlowTheme.of(context)
+                            .secondaryBackground,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    duration: const Duration(milliseconds: 4000),
+                    backgroundColor:
+                    FlutterFlowTheme.of(context).primaryText,
+                  ),
+                );
+                Navigator.pop(
+                    alertDialogContextP);
+              }else{
+                await showDialog(
+                  context: context,
+                  builder: (alertDialogContext) {
+                    return AlertDialog(
+                      title: Text(
+                          FFLocalizations.of(context)
+                              .getVariableText(
+                            enText: 'Error',
+                            arText: 'خطأ',
+                          )),
+                      content: Text(functions.parseErrorMsg(
+                          (_model.apiResulthhj?.bodyText ??
+                              ''))),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(
+                              alertDialogContext),
+                          child: Text(
+                              FFLocalizations.of(context)
+                                  .getVariableText(
+                                enText: 'Ok',
+                                arText: 'حسنا',
+                              )),
+                        ),
+                      ],
+                    );
+                  },
+                );
+                Navigator.pop(
+                    alertDialogContextP);
+              }
+            },
+            child: Text(
+                FFLocalizations.of(context)
+                    .getVariableText(
+                  enText: 'Ok',
+                  arText: 'حسنا',
+                )),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(
+                alertDialogContextP),
+            child: Text(
+                FFLocalizations.of(context)
+                    .getVariableText(
+                  enText: 'Cancel',
+                  arText: 'الغاء',
+                )),
+          ),
+        ],
+      );
+    },
+    );
+    setState(() {});
   }
 }

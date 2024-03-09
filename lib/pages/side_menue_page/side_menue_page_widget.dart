@@ -321,59 +321,66 @@ class _SideMenuePageWidgetState extends State<SideMenuePageWidget> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              15.0, 10.0, 15.0, 10.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.location_pin,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 24.0,
-                              ),
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'prheb90k' /* Saved Lines */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Cairo',
-                                        color: Colors.black,
-                                      ),
+                        InkWell(
+                          onTap: (){
+                            context.pushNamed(
+                              'SavedTrackTripsPage'
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                15.0, 10.0, 15.0, 10.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.location_pin,
+                                  color:
+                                      FlutterFlowTheme.of(context).secondaryText,
+                                  size: 24.0,
                                 ),
-                              ),
-                              Flexible(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        if (FFAppState().slectedLanguge == 'ar')
-                                          const Icon(
-                                            Icons.keyboard_arrow_left,
-                                            color: Color(0xFFBFBFC1),
-                                            size: 24.0,
-                                          ),
-                                        if (FFAppState().slectedLanguge == 'en')
-                                          const Icon(
-                                            Icons.keyboard_arrow_right,
-                                            color: Color(0xFFBFBFC1),
-                                            size: 24.0,
-                                          ),
-                                      ],
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 0.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'prheb90k' /* Saved Lines */,
                                     ),
-                                  ],
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Cairo',
+                                          color: Colors.black,
+                                        ),
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Flexible(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          if (FFAppState().slectedLanguge == 'ar')
+                                            const Icon(
+                                              Icons.keyboard_arrow_left,
+                                              color: Color(0xFFBFBFC1),
+                                              size: 24.0,
+                                            ),
+                                          if (FFAppState().slectedLanguge == 'en')
+                                            const Icon(
+                                              Icons.keyboard_arrow_right,
+                                              color: Color(0xFFBFBFC1),
+                                              size: 24.0,
+                                            ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

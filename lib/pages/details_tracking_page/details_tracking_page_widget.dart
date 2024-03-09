@@ -18,10 +18,13 @@ class DetailsTrackingPageWidget extends StatefulWidget {
     required this.latitude,
     required this.longitude,
     bool? isTripSelected,
-  }) : isTripSelected = isTripSelected ?? false;
+    bool? isFromSide,
+  })  : isTripSelected = isTripSelected ?? false,
+        isFromSide = isFromSide ?? false;
 
   final dynamic travelModelStruct;
   final bool isTripSelected;
+  final bool isFromSide;
   final double? latitude;
   final double? longitude;
 
@@ -981,11 +984,18 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                               .withoutNulls
                                               .toList()
                                               .cast<BusModelStruct>();
-
-                                      while (context.canPop() == true) {
-                                        context.pop();
+                                      if (widget.isFromSide == true) {
+                                        while (context.canPop() == true) {
+                                          context.pop();
+                                        }
+                                        context.pushReplacementNamed('MapPage');
+                                      }else{
+                                        while (context.canPop() == true) {
+                                          context.pop();
+                                        }
+                                        context.pushReplacement('MapPage');
                                       }
-                                      context.pushReplacement('MapPage');
+
                                     } else {
                                       setState(() {
                                         _model.isLoading = false;
@@ -1146,16 +1156,17 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
 
                                         FFAppState().updatedBusessList =
                                             (getJsonField(
-                                              (_model.apiResult51f?.jsonBody ?? ''),
-                                              r'''$.buses''',
-                                              true,
-                                            )!
-                                                .toList()
-                                                .map<BusModelStruct?>(
-                                                BusModelStruct
-                                                    .maybeFromMap)
-                                                .toList()
-                                            as Iterable<BusModelStruct?>)
+                                          (_model.apiResult51f?.jsonBody ?? ''),
+                                          r'''$.buses''',
+                                          true,
+                                        )!
+                                                        .toList()
+                                                        .map<BusModelStruct?>(
+                                                            BusModelStruct
+                                                                .maybeFromMap)
+                                                        .toList()
+                                                    as Iterable<
+                                                        BusModelStruct?>)
                                                 .withoutNulls
                                                 .toList()
                                                 .cast<BusModelStruct>();
