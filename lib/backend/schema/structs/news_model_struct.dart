@@ -11,10 +11,12 @@ class NewsModelStruct extends BaseStruct {
     String? description,
     String? time,
     String? date,
+    String? img,
   })  : _title = title,
         _description = description,
         _time = time,
-        _date = date;
+        _date = date,
+        _img = img;
 
   // "title" field.
   String? _title;
@@ -40,11 +42,18 @@ class NewsModelStruct extends BaseStruct {
   set date(String? val) => _date = val;
   bool hasDate() => _date != null;
 
+  // "img" field.
+  String? _img;
+  String get img => _img ?? '';
+  set img(String? val) => _img = val;
+  bool hasImg() => _img != null;
+
   static NewsModelStruct fromMap(Map<String, dynamic> data) => NewsModelStruct(
         title: data['title'] as String?,
         description: data['description'] as String?,
         time: data['time'] as String?,
         date: data['date'] as String?,
+        img: data['img'] as String?,
       );
 
   static NewsModelStruct? maybeFromMap(dynamic data) => data is Map
@@ -56,6 +65,7 @@ class NewsModelStruct extends BaseStruct {
         'description': _description,
         'time': _time,
         'date': _date,
+        'img': _img,
       }.withoutNulls;
 
   @override
@@ -74,6 +84,10 @@ class NewsModelStruct extends BaseStruct {
         ),
         'date': serializeParam(
           _date,
+          ParamType.String,
+        ),
+        'img': serializeParam(
+          _img,
           ParamType.String,
         ),
       }.withoutNulls;
@@ -100,6 +114,11 @@ class NewsModelStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        img: deserializeParam(
+          data['img'],
+          ParamType.String,
+          false,
+        ),
       );
 
   @override
@@ -111,12 +130,13 @@ class NewsModelStruct extends BaseStruct {
         title == other.title &&
         description == other.description &&
         time == other.time &&
-        date == other.date;
+        date == other.date &&
+        img == other.img;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([title, description, time, date]);
+      const ListEquality().hash([title, description, time, date, img]);
 }
 
 NewsModelStruct createNewsModelStruct({
@@ -124,10 +144,12 @@ NewsModelStruct createNewsModelStruct({
   String? description,
   String? time,
   String? date,
+  String? img,
 }) =>
     NewsModelStruct(
       title: title,
       description: description,
       time: time,
       date: date,
+      img: img,
     );
