@@ -169,6 +169,8 @@ class _UpdatePhoneNumberComponentWidgetState
                               0.0, 16.0, 5.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
+                              // FFAppState().userModel.id = '657cb260f3d7cf7f5add9549';
+
                               if (functions.isValidPhoneNumber(
                                   _model.textController.text)) {
                                 setState(() {
@@ -177,6 +179,7 @@ class _UpdatePhoneNumberComponentWidgetState
                                 _model.apiResult6vm = await StudentApisGroup
                                     .updateStudentFileCall
                                     .call(
+                                  id: FFAppState().userModel.id,
                                   token: FFAppState().userModel.token,
                                   name: FFAppState().userModel.name,
                                   studentId: FFAppState().userModel.studentId,
@@ -187,9 +190,6 @@ class _UpdatePhoneNumberComponentWidgetState
                                   password: FFAppState().userModel.password,
                                 );
                                 if ((_model.apiResult6vm?.succeeded ?? true)) {
-
-                                  //todo update user info
-
                                   setState(() {
                                     FFAppState().userModel =
                                     UserModelStruct.maybeFromMap(

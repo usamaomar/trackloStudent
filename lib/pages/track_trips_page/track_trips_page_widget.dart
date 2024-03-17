@@ -829,7 +829,8 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                       ),
                                                     ],
                                                   ),
-                                                  Padding(
+                                                  listItem
+                                                      .activeBuses.isEmpty ? Container(height: 15,) : Padding(
                                                     padding:
                                                         const EdgeInsetsDirectional
                                                             .fromSTEB(15.0, 15.0,
@@ -854,9 +855,9 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                               builder: (context) {
                                                                 final listOf =
                                                                     listItem
-                                                                        .wayPoints
+                                                                        .activeBuses
                                                                         .toList();
-                                                                return Row(
+                                                                return  Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
                                                                           .max,
@@ -907,11 +908,11 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                               Row(
                                                                             mainAxisSize:
                                                                                 MainAxisSize.max,
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                             children: [
                                                                               Text(
-                                                                                FFLocalizations.of(context).getText(
-                                                                                  'p0zzvg9x' /* 022/25 */,
-                                                                                ),
+                                                                                 '${listOfItem.busIdentity}/${listOfItem.availableSeats}',
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                       fontFamily: 'Readex Pro',
                                                                                       color: FlutterFlowTheme.of(context).primary,
@@ -950,7 +951,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                     ),
                                                                     shrinkWrap: true,
                                                                     itemCount: listItem
-                                                                        .wayPoints
+                                                                        .activeBuses
                                                                         .length,
                                                                     itemBuilder:
                                                                         (BuildContext
@@ -958,7 +959,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                             int index) {
                                                                       final listOfItem =
                                                                           listItem
-                                                                              .wayPoints[index];
+                                                                              .activeBuses[index];
                                                                       return Padding(
                                                                         padding: const EdgeInsetsDirectional
                                                                             .fromSTEB(
@@ -985,9 +986,11 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                                                 Row(
                                                                               mainAxisSize:
                                                                                   MainAxisSize.max,
+                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
                                                                               children: [
                                                                                 Text(
-                                                                                  FFLocalizations.of(context).getText('p0zzvg9x' /* 022/25 */),
+                                                                                '${listOfItem.busIdentity}/${listOfItem.availableSeats}',
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Readex Pro',
                                                                                         color: FlutterFlowTheme.of(context).primary,
@@ -1005,7 +1008,7 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
                                                         ),
                                                         Visibility(
                                                           visible: listItem
-                                                                  .wayPoints
+                                                                  .activeBuses
                                                                   .toList()
                                                                   .length >
                                                               3,

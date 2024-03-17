@@ -30,7 +30,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
 
     // "password": "1234567",
-    // "phone": "+962775590580"
+    // "phone": "20212051"
 
 
     _model.textController2 ??= TextEditingController();

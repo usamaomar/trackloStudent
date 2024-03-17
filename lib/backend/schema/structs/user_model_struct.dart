@@ -121,7 +121,7 @@ class UserModelStruct extends BaseStruct {
   bool hasSemester() => _semester != null;
 
   static UserModelStruct fromMap(Map<String, dynamic> data) => UserModelStruct(
-        id: data['id'] as String?,
+        id: data['_id'] as String?,
         name: data['name'] as String?,
         sisCode: data['sis_code'] as String?,
         password: data['password'] as String?,
@@ -221,7 +221,7 @@ class UserModelStruct extends BaseStruct {
   static UserModelStruct fromSerializableMap(Map<String, dynamic> data) =>
       UserModelStruct(
         id: deserializeParam(
-          data['id'],
+          data['_id'],
           ParamType.String,
           false,
         ),

@@ -76,9 +76,8 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
                   if (FFAppState().userModel.token != '') {
                     context.pushNamed('MapPage');
                   } else {
-                    context.pushNamed('LoginPage');
+                    context.pushReplacementNamed('LoginPage');
                   }
-
                   _model.timerController.onStopTimer();
                 },
                 textAlign: TextAlign.start,

@@ -191,6 +191,7 @@ class UploadImageApiCall {
 
 class UpdateStudentFileCall {
   Future<ApiCallResponse> call({
+    String? id = '',
     String? name = '',
     String? studentId = '',
     String? profilePhoto = '',
@@ -201,14 +202,14 @@ class UpdateStudentFileCall {
     final ffApiRequestBody = '''
 {
   "name": "$name",
-  "student_id": "644792f2ebf3175a169cc11b",
+  "student_id": "$studentId",
   "profile_photo": "profilePhoto",
   "phone": "$phoneNumber",
   "password": "$password"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'UpdateStudentFile',
-      apiUrl: '${StudentApisGroup.baseUrl}/v1/students/644792f2ebf3175a169cc11b',
+      apiUrl: '${StudentApisGroup.baseUrl}/v1/students/$id',
       callType: ApiCallType.PUT,
       headers: {
         'Authorization': '$token',

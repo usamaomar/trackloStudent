@@ -532,107 +532,107 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
       }
     }
 
-    await showDialog(
-    context: context,
-    builder: (alertDialogContextP) {
-      return AlertDialog(
-        title: Text(
-            FFLocalizations.of(context)
-                .getVariableText(
-              enText: 'Upload',
-              arText: 'رفع الصورة',
-            )),
-        content: Text(FFLocalizations.of(context)
-            .getVariableText(
-          enText: 'Are you sure you want to upload image',
-          arText: 'هل انت متأكد من انك تود رفع الصورة',
-        )),
-        actions: [
-          TextButton(
-            onPressed: ()  async{
-              _model.apiResulthhj =
-              await StudentApisGroup.uploadImageApiCall.call(
-                token: FFAppState().userModel.token,
-                file:  _model.uploadedLocalFile,
-              );
-              if ((_model.apiResulthhj?.succeeded ?? true)) {
-                setState(() {
-                  _model.uploadedFile = _model.uploadedLocalFile;
-                });
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      FFLocalizations.of(context).getVariableText(
-                        enText: 'Data Is Updated',
-                        arText: 'تم تحديث البيانات',
-                      ),
-                      style: TextStyle(
-                        color: FlutterFlowTheme.of(context)
-                            .secondaryBackground,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    duration: const Duration(milliseconds: 4000),
-                    backgroundColor:
-                    FlutterFlowTheme.of(context).primaryText,
-                  ),
-                );
-                Navigator.pop(
-                    alertDialogContextP);
-              }else{
-                await showDialog(
-                  context: context,
-                  builder: (alertDialogContext) {
-                    return AlertDialog(
-                      title: Text(
-                          FFLocalizations.of(context)
-                              .getVariableText(
-                            enText: 'Error',
-                            arText: 'خطأ',
-                          )),
-                      content: Text(functions.parseErrorMsg(
-                          (_model.apiResulthhj?.bodyText ??
-                              ''))),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(
-                              alertDialogContext),
-                          child: Text(
-                              FFLocalizations.of(context)
-                                  .getVariableText(
-                                enText: 'Ok',
-                                arText: 'حسنا',
-                              )),
-                        ),
-                      ],
-                    );
-                  },
-                );
-                Navigator.pop(
-                    alertDialogContextP);
-              }
-            },
-            child: Text(
-                FFLocalizations.of(context)
-                    .getVariableText(
-                  enText: 'Ok',
-                  arText: 'حسنا',
-                )),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(
-                alertDialogContextP),
-            child: Text(
-                FFLocalizations.of(context)
-                    .getVariableText(
-                  enText: 'Cancel',
-                  arText: 'الغاء',
-                )),
-          ),
-        ],
-      );
-    },
-    );
+    // await showDialog(
+    // context: context,
+    // builder: (alertDialogContextP) {
+    //   return AlertDialog(
+    //     title: Text(
+    //         FFLocalizations.of(context)
+    //             .getVariableText(
+    //           enText: 'Upload',
+    //           arText: 'رفع الصورة',
+    //         )),
+    //     content: Text(FFLocalizations.of(context)
+    //         .getVariableText(
+    //       enText: 'Are you sure you want to upload image',
+    //       arText: 'هل انت متأكد من انك تود رفع الصورة',
+    //     )),
+    //     actions: [
+    //       TextButton(
+    //         onPressed: ()  async{
+    //           _model.apiResulthhj =
+    //           await StudentApisGroup.uploadImageApiCall.call(
+    //             token: FFAppState().userModel.token,
+    //             file:  _model.uploadedLocalFile,
+    //           );
+    //           if ((_model.apiResulthhj?.succeeded ?? true)) {
+    //             setState(() {
+    //               _model.uploadedFile = _model.uploadedLocalFile;
+    //             });
+    //             ScaffoldMessenger.of(context).showSnackBar(
+    //               SnackBar(
+    //                 content: Text(
+    //                   FFLocalizations.of(context).getVariableText(
+    //                     enText: 'Data Is Updated',
+    //                     arText: 'تم تحديث البيانات',
+    //                   ),
+    //                   style: TextStyle(
+    //                     color: FlutterFlowTheme.of(context)
+    //                         .secondaryBackground,
+    //                     fontWeight: FontWeight.w500,
+    //                   ),
+    //                 ),
+    //                 duration: const Duration(milliseconds: 4000),
+    //                 backgroundColor:
+    //                 FlutterFlowTheme.of(context).primaryText,
+    //               ),
+    //             );
+    //             Navigator.pop(
+    //                 alertDialogContextP);
+    //           }else{
+    //             await showDialog(
+    //               context: context,
+    //               builder: (alertDialogContext) {
+    //                 return AlertDialog(
+    //                   title: Text(
+    //                       FFLocalizations.of(context)
+    //                           .getVariableText(
+    //                         enText: 'Error',
+    //                         arText: 'خطأ',
+    //                       )),
+    //                   content: Text(functions.parseErrorMsg(
+    //                       (_model.apiResulthhj?.bodyText ??
+    //                           ''))),
+    //                   actions: [
+    //                     TextButton(
+    //                       onPressed: () => Navigator.pop(
+    //                           alertDialogContext),
+    //                       child: Text(
+    //                           FFLocalizations.of(context)
+    //                               .getVariableText(
+    //                             enText: 'Ok',
+    //                             arText: 'حسنا',
+    //                           )),
+    //                     ),
+    //                   ],
+    //                 );
+    //               },
+    //             );
+    //             Navigator.pop(
+    //                 alertDialogContextP);
+    //           }
+    //         },
+    //         child: Text(
+    //             FFLocalizations.of(context)
+    //                 .getVariableText(
+    //               enText: 'Ok',
+    //               arText: 'حسنا',
+    //             )),
+    //       ),
+    //       TextButton(
+    //         onPressed: () => Navigator.pop(
+    //             alertDialogContextP),
+    //         child: Text(
+    //             FFLocalizations.of(context)
+    //                 .getVariableText(
+    //               enText: 'Cancel',
+    //               arText: 'الغاء',
+    //             )),
+    //       ),
+    //     ],
+    //   );
+    // },
+    // );
     setState(() {});
   }
 }
