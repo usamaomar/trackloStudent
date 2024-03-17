@@ -32,6 +32,9 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _profileImage = prefs.getString('ff_profileImage') ?? _profileImage;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -87,6 +90,13 @@ class FFAppState extends ChangeNotifier {
 
   void insertAtIndexInUpdatedBusessList(int index, BusModelStruct value) {
     _updatedBusessList.insert(index, value);
+  }
+
+  String _profileImage = '';
+  String get profileImage => _profileImage;
+  set profileImage(String value) {
+    _profileImage = value;
+    prefs.setString('ff_profileImage', value);
   }
 }
 
