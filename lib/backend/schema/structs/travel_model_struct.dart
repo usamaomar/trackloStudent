@@ -15,6 +15,7 @@ class TravelModelStruct extends BaseStruct {
     WayPointModelStruct? wayPoint,
     TravelModelStruct? travel,
     String? range,
+    List<ActiveBusesStruct>? activeBuses,
   })  : _id = id,
         _travelStartName = travelStartName,
         _travelEndName = travelEndName,
@@ -23,7 +24,8 @@ class TravelModelStruct extends BaseStruct {
         _isMoreClicked = isMoreClicked,
         _wayPoint = wayPoint,
         _travel = travel,
-        _range = range;
+        _range = range,
+        _activeBuses = activeBuses;
 
   // "id" field.
   String? _id;
@@ -85,6 +87,14 @@ class TravelModelStruct extends BaseStruct {
   set range(String? val) => _range = val;
   bool hasRange() => _range != null;
 
+  // "activeBuses" field.
+  List<ActiveBusesStruct>? _activeBuses;
+  List<ActiveBusesStruct> get activeBuses => _activeBuses ?? const [];
+  set activeBuses(List<ActiveBusesStruct>? val) => _activeBuses = val;
+  void updateActiveBuses(Function(List<ActiveBusesStruct>) updateFn) =>
+      updateFn(_activeBuses ??= []);
+  bool hasActiveBuses() => _activeBuses != null;
+
   static TravelModelStruct fromMap(Map<String, dynamic> data) =>
       TravelModelStruct(
         id: data['id'] as String?,
@@ -99,6 +109,10 @@ class TravelModelStruct extends BaseStruct {
         wayPoint: WayPointModelStruct.maybeFromMap(data['wayPoint']),
         travel: TravelModelStruct.maybeFromMap(data['travel']),
         range: data['range'] as String?,
+        activeBuses: getStructList(
+          data['activeBuses'],
+          ActiveBusesStruct.fromMap,
+        ),
       );
 
   static TravelModelStruct? maybeFromMap(dynamic data) => data is Map
@@ -115,6 +129,7 @@ class TravelModelStruct extends BaseStruct {
         'wayPoint': _wayPoint?.toMap(),
         'travel': _travel?.toMap(),
         'range': _range,
+        'activeBuses': _activeBuses?.map((e) => e.toMap()).toList(),
       }.withoutNulls;
 
   @override
@@ -155,6 +170,11 @@ class TravelModelStruct extends BaseStruct {
         'range': serializeParam(
           _range,
           ParamType.String,
+        ),
+        'activeBuses': serializeParam(
+          _activeBuses,
+          ParamType.DataStruct,
+          true,
         ),
       }.withoutNulls;
 
@@ -208,6 +228,12 @@ class TravelModelStruct extends BaseStruct {
           ParamType.String,
           false,
         ),
+        activeBuses: deserializeStructParam<ActiveBusesStruct>(
+          data['activeBuses'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: ActiveBusesStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -225,7 +251,8 @@ class TravelModelStruct extends BaseStruct {
         isMoreClicked == other.isMoreClicked &&
         wayPoint == other.wayPoint &&
         travel == other.travel &&
-        range == other.range;
+        range == other.range &&
+        listEquality.equals(activeBuses, other.activeBuses);
   }
 
   @override
@@ -238,7 +265,8 @@ class TravelModelStruct extends BaseStruct {
         isMoreClicked,
         wayPoint,
         travel,
-        range
+        range,
+        activeBuses
       ]);
 }
 
