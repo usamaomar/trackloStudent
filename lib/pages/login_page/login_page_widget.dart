@@ -155,7 +155,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   10.0, 7.0, 10.0, 5.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
-                                  'igrr73ni' /* Phone Number Is Invalid */,
+                                  'igrr73ni' /* student id Number Is Invalid */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -311,8 +311,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   _model.apiResultanu =
                                       await StudentApisGroup.loginApiCall.call(
                                     password: _model.textController2.text,
-                                    phone: functions.convertPhoneNumber(
-                                        _model.textController1.text),
+                                    phone: _model.textController1.text,
                                   );
                                   if ((_model.apiResultanu?.succeeded ??
                                       true)) {

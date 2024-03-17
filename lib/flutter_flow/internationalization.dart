@@ -233,12 +233,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // LoginPage
   {
     'lc0ocz4a': {
-      'en': 'Phone Number',
-      'ar': 'رقم التليفون',
+      'en': 'Student Number',
+      'ar': 'رقم الطالب',
     },
     'igrr73ni': {
-      'en': 'Phone Number Is Invalid',
-      'ar': 'رقم الهاتف غير صالح',
+      'en': 'Student Number Is Invalid',
+      'ar': 'رقم الطالب غير صالح',
     },
     'ac2zq5ys': {
       'en': 'Password',

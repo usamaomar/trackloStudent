@@ -90,7 +90,7 @@ class _NotificationDetailsPageWidgetState
               ClipRRect(
                 borderRadius: BorderRadius.circular(0.0),
                 child: Image.network(
-                  'https://picsum.photos/seed/342/600',
+                  _model.notiModel!.img,
                   width: double.infinity,
                   height: 200.0,
                   fit: BoxFit.cover,

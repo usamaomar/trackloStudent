@@ -1,3 +1,4 @@
+import '../../backend/schema/structs/user_model_struct.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -186,6 +187,17 @@ class _UpdatePhoneNumberComponentWidgetState
                                   password: FFAppState().userModel.password,
                                 );
                                 if ((_model.apiResult6vm?.succeeded ?? true)) {
+
+                                  //todo update user info
+
+                                  setState(() {
+                                    FFAppState().userModel =
+                                    UserModelStruct.maybeFromMap(
+                                        getJsonField(
+                                          (_model.apiResult6vm?.jsonBody ?? ''),
+                                          r'''$.data''',
+                                        ))!;
+                                  });
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(

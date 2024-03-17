@@ -34,7 +34,7 @@ class LoginApiCall {
     final ffApiRequestBody = '''
 {
   "password": "$password",
-  "phone": "$phone"
+  "student_id": "$phone"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'LoginApi',
@@ -166,7 +166,7 @@ class StartTrackingBusesCall {
 
 class UploadImageApiCall {
   Future<ApiCallResponse> call({
-    File? file,
+    FFUploadedFile? file,
     String? token = '',
   }) async {
     return ApiManager.instance.makeApiCall(
@@ -201,14 +201,14 @@ class UpdateStudentFileCall {
     final ffApiRequestBody = '''
 {
   "name": "$name",
-  "student_id": "$studentId",
-  "profile_photo": "$profilePhoto",
-  "phone_number": "$phoneNumber",
+  "student_id": "644792f2ebf3175a169cc11b",
+  "profile_photo": "profilePhoto",
+  "phone": "$phoneNumber",
   "password": "$password"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'UpdateStudentFile',
-      apiUrl: '${StudentApisGroup.baseUrl}/students/$studentId',
+      apiUrl: '${StudentApisGroup.baseUrl}/v1/students/644792f2ebf3175a169cc11b',
       callType: ApiCallType.PUT,
       headers: {
         'Authorization': '$token',

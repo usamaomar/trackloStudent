@@ -66,7 +66,7 @@ class _SplashPageWidgetState extends State<SplashPageWidget> {
                   milliSecond: false,
                 ),
                 controller: _model.timerController,
-                updateStateInterval: const Duration(milliseconds: 0),
+                updateStateInterval: const Duration(milliseconds: 3000),
                 onChanged: (value, displayTime, shouldUpdate) {
                   _model.timerMilliseconds = value;
                   _model.timerValue = displayTime;

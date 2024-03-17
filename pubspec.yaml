@@ -30,9 +30,8 @@ dependencies:
   collection: ^1.18.0
   equatable: 2.0.5
   file_picker: 6.1.1
-  firebase_core: 2.24.2
+  firebase_core: ^2.25.5
   firebase_core_platform_interface: 5.0.0
-  firebase_core_web: 2.10.0
   firebase_performance: 0.9.3+8
   firebase_performance_platform_interface: 0.1.4+16
   firebase_performance_web: 0.1.4+16
@@ -85,6 +84,8 @@ dependencies:
   google_maps: 6.3.0
   google_maps_flutter: ^2.5.0
   google_maps_flutter_platform_interface: 2.4.1
+  cloud_firestore: ^4.15.6
+  firebase_database: ^10.4.5
 #  http: ^0.13.6
 #  socket_io_client: ^2.0.3+1
 #  socket_io_client: ^2.0.3+1
