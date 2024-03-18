@@ -35,6 +35,17 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _profileImage = prefs.getString('ff_profileImage') ?? _profileImage;
     });
+    _safeInit(() {
+      if (prefs.containsKey('ff_tripTravileModel')) {
+        try {
+          final serializedData = prefs.getString('ff_tripTravileModel') ?? '{}';
+          _tripTravileModel =
+              TravelModelStruct.fromSerializableMap(jsonDecode(serializedData));
+        } catch (e) {
+          print("Can't decode persisted data type. Error: $e.");
+        }
+      }
+    });
   }
 
   void update(VoidCallback callback) {
@@ -98,6 +109,18 @@ class FFAppState extends ChangeNotifier {
   set profileImage(String value) {
     _profileImage = value;
     prefs.setString('ff_profileImage', value);
+  }
+
+  TravelModelStruct _tripTravileModel = TravelModelStruct();
+  TravelModelStruct get tripTravileModel => _tripTravileModel;
+  set tripTravileModel(TravelModelStruct value) {
+    _tripTravileModel = value;
+    prefs.setString('ff_tripTravileModel', value.serialize());
+  }
+
+  void updateTripTravileModelStruct(Function(TravelModelStruct) updateFn) {
+    updateFn(_tripTravileModel);
+    prefs.setString('ff_tripTravileModel', _tripTravileModel.serialize());
   }
 }
 
