@@ -5,42 +5,18 @@
 //   import 'dart:typed_data';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter_io_socket/flutter_io_socket.dart';
-// import 'package:flutter_io_socket/flutter_io_socket.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:socket_io_client/socket_io_client.dart';
-// import 'package:socket_io_client/socket_io_client.dart';
-// import 'package:socket_io_client/socket_io_client.dart';
-// import 'package:socket_io_client_flutter/socket_io_client_flutter.dart';
-// import 'package:socket_io_client/socket_io_client.dart';
-// import 'package:socket_io_client/socket_io_client.dart';
-// import 'package:trackllo_student/backend/schema/structs/bus_model_struct.dart';
-
-// import 'package:web_socket_channel/io.dart';
-// import 'package:web_socket_channel/web_socket_channel.dart';
-
 import '/components/app_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'map_page_model.dart';
-// export 'map_page_model.dart';
-// import 'package:socket_io_client/socket_io_client.dart' as IO;
-
-// import 'package:socket_io_client/socket_io_client.dart' as IO;
-// import 'package:socket_io_client/socket_io_client.dart' as IO;
-// import 'package:socket_io_client_flutter/socket_io_client_flutter.dart'  as IO;
-// import 'package:socket_io_client/socket_io_client_flutter.dart' as IO;
-
-// import 'package:flutter/material.dart';
-// import 'package:web_socket_channel/web_socket_channel.dart';
-// import 'package:web_socket_client/web_socket_client.dart';
 import 'dart:ui' as ui;
 import 'package:google_maps_flutter/google_maps_flutter.dart' as lats;
-// import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class MapPageWidget extends StatefulWidget {
   const MapPageWidget({super.key});
@@ -55,8 +31,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   late Set<Marker> markers;
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
   final mainRef = FirebaseDatabase.instance;
-
-
+   Position? defultPosition ;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -65,15 +40,36 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     addCustomIcon();
     update();
     super.initState();
-
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+     await _determinePosition().then((value) {
+        setState(() {
+          defultPosition = value;
+          mapController.animateCamera(CameraUpdate.newLatLngZoom(lats.LatLng(defultPosition?.latitude ?? 0, defultPosition?.longitude ?? 0), 18));
+        });
+      });
+    });
     _model = createModel(context, () => MapPageModel());
   }
 
-  void update(){
-    if(FFAppState().updatedBusessList.isNotEmpty){
+  void update() {
+
+
+    mainRef
+        .ref()
+        .child('live-locations')
+        .onValue
+        .listen((event) {
+      print('object');
+    });
+
+    if (FFAppState().updatedBusessList.isNotEmpty) {
       for (var element in FFAppState().updatedBusessList) {
         mainRef
-            .ref().child('live-locations').child(element.busId).onChildChanged.listen((event) {
+            .ref()
+            .child('live-locations')
+            .child(element.busId)
+            .onChildChanged
+            .listen((event) {
           print('object');
         });
       }
@@ -83,7 +79,6 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
@@ -138,15 +133,11 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                   mapController = controller;
                 },
                 markers: markers,
-                initialCameraPosition: CameraPosition(
+                initialCameraPosition: const CameraPosition(
                   target: lats.LatLng(
-                      FFAppState().updatedBusessList.isNotEmpty
-                          ? FFAppState().updatedBusessList[0].lat
-                          : 0.0,
-                      FFAppState().updatedBusessList.isNotEmpty
-                          ? FFAppState().updatedBusessList[0].lng
-                          : 0.0),
-                  zoom: 14.4746,
+                      31.987482,
+                      35.884539),
+                  zoom: 10.4746,
                 ),
               ),
               Align(

@@ -66,7 +66,8 @@ class FFAppState extends ChangeNotifier {
   List<BusModelStruct> _updatedBusessList = [];
   List<BusModelStruct> get updatedBusessList => _updatedBusessList;
   set updatedBusessList(List<BusModelStruct> value) {
-    _updatedBusessList = value;
+    // _updatedBusessList = value;
+    _updatedBusessList = [BusModelStruct(busId: '655cd5e89b2c502dd0598111',busIdentity: '122',lat: 31.994232,lng: 35.887132)];
   }
 
   void addToUpdatedBusessList(BusModelStruct value) {

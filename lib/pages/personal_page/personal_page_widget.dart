@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:flutter/scheduler.dart';
+import 'package:trackllo_student/app_state.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/components/app_bar_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -31,6 +34,13 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => PersonalPageModel());
+
+
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        imagePath = FFAppState().profileImage;
+      });
+    });
   }
 
   @override
@@ -114,8 +124,7 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            if (imagePath != null &&
-                                (_model.uploadedFile?.bytes?.isNotEmpty ?? false))
+                            if (imagePath != null)
                               Container(
                                 width: 108.0,
                                 height: 108.0,
@@ -531,7 +540,8 @@ class _PersonalPageWidgetState extends State<PersonalPageWidget> {
         return;
       }
     }
-
+    print("");
+    FFAppState().profileImage =  imagePath ?? '';
     // await showDialog(
     // context: context,
     // builder: (alertDialogContextP) {

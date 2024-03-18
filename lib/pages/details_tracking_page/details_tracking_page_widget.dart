@@ -946,20 +946,16 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                         .startTrackingBusesCall
                                         .call(
                                       token: FFAppState().userModel.token,
-                                      // currentLat: widget.latitude,// 31.988936
-                                      currentLat:  31.988936,
-                                      // currentLng: widget.longitude,// 35.8642732
-                                      currentLng:   35.8642732,
-                                      // range: int.tryParse(
-                                      //     (_model.travelModelStruct?.range ??
-                                      //         '0')),
-                                      range: 10,
-                                      // lat: _model
-                                      //     .travelModelStruct?.wayPoint.lat,
-                                      // lng: _model
-                                      //     .travelModelStruct?.wayPoint.lng,
-                                      lat:  31.956707868422058,
-                                      lng: 35.955344248625785,
+                                      currentLat: widget.latitude,// 31.988936
+
+                                      currentLng: widget.longitude,// 35.8642732
+                                    range: int.tryParse(
+                                          (_model.travelModelStruct?.range ??
+                                              '0')),
+                                      lat: _model
+                                          .travelModelStruct?.wayPoint.lat,
+                                      lng: _model
+                                          .travelModelStruct?.wayPoint.lng,
                                       label: _model.travelModelStruct?.wayPoint
                                               .label ??
                                           '',
@@ -1175,7 +1171,7 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                         while (context.canPop() == true) {
                                           context.pop();
                                         }
-                                        context.pushReplacement('MapPage');
+                                        context.pushReplacementNamed('MapPage');
                                       });
                                     } else {
                                       setState(() {

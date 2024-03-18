@@ -49,8 +49,8 @@ class _TrackTripsPageWidgetState extends State<TrackTripsPageWidget> {
       });
       _model.apiResult51f = await StudentApisGroup.getAllTravileApiCall.call(
         token: FFAppState().userModel.token,
-        lat: 31.989959,
-        lng: 35.870176,
+        lat: widget.latitude,
+        lng: widget.longitude,
       );
       if ((_model.apiResult51f?.succeeded ?? true)) {
         setState(() {
