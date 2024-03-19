@@ -35,12 +35,15 @@ class _MapPageWidgetState extends State<MapPageWidget> {
 
   final mainRef = FirebaseDatabase.instance;
   Position? currentPosition;
+  late Set<Polyline> _polylines;
+  List<lats.LatLng> polylineCoordinates = [];
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     markers = <Marker>{};
+    _polylines = <Polyline>{};
     update();
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -61,6 +64,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     //
     if (FFAppState().updatedBusessList.isNotEmpty) {
       addBasicValuesOnMap();
+      _addPolyline();
       for (var element in FFAppState().updatedBusessList) {
         mainRef
             .ref()
@@ -81,6 +85,22 @@ class _MapPageWidgetState extends State<MapPageWidget> {
         });
       }
     }
+  }
+
+  void _addPolyline() {
+    setState(() {
+      _polylines.add(Polyline(
+        polylineId: PolylineId("poly"),
+        color: Colors.blue,
+        width: 3,
+        points: polylineCoordinates,
+      ));
+
+      for (var element in FFAppState().updatedBusessList) {
+        polylineCoordinates.add(lats.LatLng(
+            element['Latitude'].toDouble(), element['Longitude'].toDouble()));
+      }
+    });
   }
 
   void addBasicValuesOnMap() {

@@ -1181,6 +1181,26 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                 .withoutNulls
                                                 .toList()
                                                 .cast<BusModelStruct>();
+
+
+                                        FFAppState().updatedBusessList =
+                                            (getJsonField(
+                                              (_model.apiResult51f?.jsonBody ?? ''),
+                                              r'''$.coordinates''',
+                                              true,
+                                            )!
+                                                .toList()
+                                                .map<BusModelStruct?>(
+                                                BusModelStruct
+                                                    .maybeFromMap)
+                                                .toList()
+                                            as Iterable<
+                                                BusModelStruct?>)
+                                                .withoutNulls
+                                                .toList()
+                                                .cast<BusModelStruct>();
+
+
                                         while (context.canPop() == true) {
                                           context.pop();
                                         }

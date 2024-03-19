@@ -56,14 +56,18 @@ class FFAppState extends ChangeNotifier {
   late SharedPreferences prefs;
 
   String _slectedLanguge = 'en';
+
   String get slectedLanguge => _slectedLanguge;
+
   set slectedLanguge(String value) {
     _slectedLanguge = value;
     prefs.setString('ff_slectedLanguge', value);
   }
 
   UserModelStruct _userModel = UserModelStruct();
+
   UserModelStruct get userModel => _userModel;
+
   set userModel(UserModelStruct value) {
     _userModel = value;
     prefs.setString('ff_userModel', value.serialize());
@@ -75,10 +79,24 @@ class FFAppState extends ChangeNotifier {
   }
 
   List<BusModelStruct> _updatedBusessList = [];
+
   List<BusModelStruct> get updatedBusessList => _updatedBusessList;
+
   set updatedBusessList(List<BusModelStruct> value) {
     // _updatedBusessList = value;
-    _updatedBusessList = [BusModelStruct(busId: '655cd5e89b2c502dd0598111',busIdentity: '122',lat: 31.994232,lng: 35.887132)];
+    _updatedBusessList = [
+      BusModelStruct(
+          busId: '655cd5e89b2c502dd0598111',
+          busIdentity: '122',
+          lat: 31.994232,
+          lng: 35.887132,
+          coordinates: [
+            CoordinatesStruct(latitude: 31.999966, longitude: 35.878256),
+            CoordinatesStruct(latitude: 31.997597, longitude: 35.881867),
+            CoordinatesStruct(latitude: 31.994598, longitude: 35.886712),
+            CoordinatesStruct(latitude: 31.993148, longitude: 35.887038)
+          ])
+    ];
   }
 
   void addToUpdatedBusessList(BusModelStruct value) {
@@ -105,14 +123,18 @@ class FFAppState extends ChangeNotifier {
   }
 
   String _profileImage = '';
+
   String get profileImage => _profileImage;
+
   set profileImage(String value) {
     _profileImage = value;
     prefs.setString('ff_profileImage', value);
   }
 
   TravelModelStruct _tripTravileModel = TravelModelStruct();
+
   TravelModelStruct get tripTravileModel => _tripTravileModel;
+
   set tripTravileModel(TravelModelStruct value) {
     _tripTravileModel = value;
     prefs.setString('ff_tripTravileModel', value.serialize());
