@@ -33,6 +33,21 @@ class FFAppState extends ChangeNotifier {
       }
     });
     _safeInit(() {
+      _updatedBusessList = prefs
+              .getStringList('ff_updatedBusessList')
+              ?.map((x) {
+                try {
+                  return BusModelStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _updatedBusessList;
+    });
+    _safeInit(() {
       _profileImage = prefs.getString('ff_profileImage') ?? _profileImage;
     });
     _safeInit(() {
@@ -93,18 +108,26 @@ class FFAppState extends ChangeNotifier {
   List<BusModelStruct> get updatedBusessList => _updatedBusessList;
   set updatedBusessList(List<BusModelStruct> value) {
     _updatedBusessList = value;
+    prefs.setStringList(
+        'ff_updatedBusessList', value.map((x) => x.serialize()).toList());
   }
 
   void addToUpdatedBusessList(BusModelStruct value) {
     _updatedBusessList.add(value);
+    prefs.setStringList('ff_updatedBusessList',
+        _updatedBusessList.map((x) => x.serialize()).toList());
   }
 
   void removeFromUpdatedBusessList(BusModelStruct value) {
     _updatedBusessList.remove(value);
+    prefs.setStringList('ff_updatedBusessList',
+        _updatedBusessList.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromUpdatedBusessList(int index) {
     _updatedBusessList.removeAt(index);
+    prefs.setStringList('ff_updatedBusessList',
+        _updatedBusessList.map((x) => x.serialize()).toList());
   }
 
   void updateUpdatedBusessListAtIndex(
@@ -112,10 +135,14 @@ class FFAppState extends ChangeNotifier {
     BusModelStruct Function(BusModelStruct) updateFn,
   ) {
     _updatedBusessList[index] = updateFn(_updatedBusessList[index]);
+    prefs.setStringList('ff_updatedBusessList',
+        _updatedBusessList.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInUpdatedBusessList(int index, BusModelStruct value) {
     _updatedBusessList.insert(index, value);
+    prefs.setStringList('ff_updatedBusessList',
+        _updatedBusessList.map((x) => x.serialize()).toList());
   }
 
   String _profileImage = '';
