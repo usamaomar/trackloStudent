@@ -46,6 +46,21 @@ class FFAppState extends ChangeNotifier {
         }
       }
     });
+    _safeInit(() {
+      _coordinates = prefs
+              .getStringList('ff_coordinates')
+              ?.map((x) {
+                try {
+                  return CoordinatesStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _coordinates;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -143,6 +158,47 @@ class FFAppState extends ChangeNotifier {
   void updateTripTravileModelStruct(Function(TravelModelStruct) updateFn) {
     updateFn(_tripTravileModel);
     prefs.setString('ff_tripTravileModel', _tripTravileModel.serialize());
+  }
+
+  List<CoordinatesStruct> _coordinates = [];
+  List<CoordinatesStruct> get coordinates => _coordinates;
+  set coordinates(List<CoordinatesStruct> value) {
+    _coordinates = value;
+    prefs.setStringList(
+        'ff_coordinates', value.map((x) => x.serialize()).toList());
+  }
+
+  void addToCoordinates(CoordinatesStruct value) {
+    _coordinates.add(value);
+    prefs.setStringList(
+        'ff_coordinates', _coordinates.map((x) => x.serialize()).toList());
+  }
+
+  void removeFromCoordinates(CoordinatesStruct value) {
+    _coordinates.remove(value);
+    prefs.setStringList(
+        'ff_coordinates', _coordinates.map((x) => x.serialize()).toList());
+  }
+
+  void removeAtIndexFromCoordinates(int index) {
+    _coordinates.removeAt(index);
+    prefs.setStringList(
+        'ff_coordinates', _coordinates.map((x) => x.serialize()).toList());
+  }
+
+  void updateCoordinatesAtIndex(
+    int index,
+    CoordinatesStruct Function(CoordinatesStruct) updateFn,
+  ) {
+    _coordinates[index] = updateFn(_coordinates[index]);
+    prefs.setStringList(
+        'ff_coordinates', _coordinates.map((x) => x.serialize()).toList());
+  }
+
+  void insertAtIndexInCoordinates(int index, CoordinatesStruct value) {
+    _coordinates.insert(index, value);
+    prefs.setStringList(
+        'ff_coordinates', _coordinates.map((x) => x.serialize()).toList());
   }
 }
 
