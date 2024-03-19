@@ -4,11 +4,14 @@
 // import 'dart:io';
 //   import 'dart:typed_data';
 
+import 'dart:ui';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:trackllo_student/backend/schema/structs/index.dart';
 import '/components/app_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -29,22 +32,25 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   late MapPageModel _model;
   late GoogleMapController mapController;
   late Set<Marker> markers;
-  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
+
   final mainRef = FirebaseDatabase.instance;
-   Position? defultPosition ;
+  Position? currentPosition;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     markers = <Marker>{};
-    addCustomIcon();
     update();
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-     await _determinePosition().then((value) {
+      await _determinePosition().then((value) {
         setState(() {
-          defultPosition = value;
-          mapController.animateCamera(CameraUpdate.newLatLngZoom(lats.LatLng(defultPosition?.latitude ?? 0, defultPosition?.longitude ?? 0), 18));
+          currentPosition = value;
+          mapController.animateCamera(CameraUpdate.newLatLngZoom(
+              lats.LatLng(currentPosition?.latitude ?? 0,
+                  currentPosition?.longitude ?? 0),
+              18));
         });
       });
     });
@@ -52,28 +58,49 @@ class _MapPageWidgetState extends State<MapPageWidget> {
   }
 
   void update() {
-
-
-    mainRef
-        .ref()
-        .child('live-locations')
-        .onValue
-        .listen((event) {
-      print('object');
-    });
-
+    //
     if (FFAppState().updatedBusessList.isNotEmpty) {
+      addBasicValuesOnMap();
       for (var element in FFAppState().updatedBusessList) {
         mainRef
             .ref()
             .child('live-locations')
             .child(element.busId)
-            .onChildChanged
+            .onValue
             .listen((event) {
-          print('object');
+          if (event.snapshot.exists) {
+            Map<dynamic, dynamic> maps =
+                event.snapshot.value as Map<Object?, Object?>;
+            mapController.showMarkerInfoWindow(MarkerId(element.busId));
+            // mapController.showMarkerInfoWindow(const MarkerId('assets/images/artboar.png'));
+            // mapController.showMarkerInfoWindow(const MarkerId('assets/images/Group.png'));
+            // mapController.showMarkerInfoWindow(const MarkerId('assets/images/cc.png'));
+            addPointAsMarker(element.busId, maps['lat'], maps['lng'],
+                "assets/images/bus_5.png", "236/2",100);
+          }
         });
       }
     }
+  }
+
+  void addBasicValuesOnMap() {
+    WayPointModelStruct? startPoint;
+    WayPointModelStruct? endPoint;
+    WayPointModelStruct? wayPoint;
+    if (FFAppState().tripTravileModel.travel.way == 'go') {
+      startPoint = FFAppState().tripTravileModel.travel.wayPoints.first;
+      endPoint = FFAppState().tripTravileModel.travel.wayPoints.last;
+    } else {
+      endPoint = FFAppState().tripTravileModel.travel.wayPoints.first;
+      startPoint = FFAppState().tripTravileModel.travel.wayPoints.last;
+    }
+    wayPoint = FFAppState().tripTravileModel.wayPoint;
+    addPointAsMarker('assets/images/artboar.png', startPoint.lat,
+        startPoint.lng, 'assets/images/artboar.png',startPoint.label,100);
+    addPointAsMarker('assets/images/Group.png', endPoint.lat, endPoint.lng,
+        'assets/images/Group.png',endPoint.label,100);
+    addPointAsMarker('assets/images/cc.png', wayPoint.lat, wayPoint.lng,
+        'assets/images/cc.png',wayPoint.label,100);
   }
 
   @override
@@ -111,6 +138,8 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                   arText: 'الرئيسية',
                 ),
                 rightButtonAction: () async {
+                  // addCustomMarker("element.busId", 31.994911, 35.887722,
+                  //     "assets/images/bus_5.png", "225/23",100);
                   context.pushNamed('SideMenuePage');
                 },
               ),
@@ -127,16 +156,14 @@ class _MapPageWidgetState extends State<MapPageWidget> {
             children: [
               GoogleMap(
                 zoomControlsEnabled: false,
-                myLocationEnabled: false,
+                myLocationEnabled: true,
                 myLocationButtonEnabled: false,
                 onMapCreated: (GoogleMapController controller) {
                   mapController = controller;
                 },
                 markers: markers,
                 initialCameraPosition: const CameraPosition(
-                  target: lats.LatLng(
-                      31.987482,
-                      35.884539),
+                  target: lats.LatLng(31.987482, 35.884539),
                   zoom: 10.4746,
                 ),
               ),
@@ -184,7 +211,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                           .primaryText,
                                     ),
                                   ),
-                                  duration: Duration(milliseconds: 4000),
+                                  duration: const Duration(milliseconds: 4000),
                                   backgroundColor:
                                       FlutterFlowTheme.of(context).secondary,
                                 ),
@@ -314,20 +341,43 @@ class _MapPageWidgetState extends State<MapPageWidget> {
     return BitmapDescriptor.fromBytes(imageData!);
   }
 
-  void addCustomIcon() async {
-    await getBitmapDescriptorFromAssetBytes("assets/images/bus_5.png", 100)
-        .then((icon) {
+  void addPointAsMarker(
+      String id, double lat, double lng, String marker,String valueOfUpdatedObject,int value ) async {
+    await getBitmapDescriptorFromAssetBytes(marker, value).then((icon) {
       setState(() {
-        markerIcon = icon;
-        // markers.add(Marker(
-        //   markerId: MarkerId(setting['label']),
-        //   position: lats.LatLng(
-        //       setting['lat'].toDouble(), setting['lng'].toDouble()),
-        //   draggable: false,
-        //   icon: BitmapDescriptor.defaultMarkerWithHue(
-        //       BitmapDescriptor.hueGreen),
-        // ));
+        markers.add(Marker(
+          markerId: MarkerId(id),
+          position: lats.LatLng(lat, lng),
+          draggable: false,
+          icon: icon,
+          infoWindow: InfoWindow(
+            title: valueOfUpdatedObject,
+          ),
+        ));
       });
     });
   }
+
+  Future<BitmapDescriptor> getCustomIcon(String marker) async {
+    return SizedBox(
+      height: 50,
+      width: 50,
+      child: Image.asset(marker),
+    ).toBitmapDescriptor();
+  }
+
+  void addCustomMarker(
+      String id, double lat, double lng, String marker,String valueOfUpdatedObject,int value , Function click ) async {
+    await getCustomIcon(marker).then((value) {
+      markers.add(Marker(
+          markerId: MarkerId(id),
+          position: lats.LatLng(lat, lng),
+          draggable: false,
+          icon:value
+      ));
+    }).whenComplete(() {
+      click.call();
+    });
+  }
+
 }

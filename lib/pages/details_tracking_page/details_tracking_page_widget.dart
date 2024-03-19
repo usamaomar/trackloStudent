@@ -946,10 +946,12 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                         .startTrackingBusesCall
                                         .call(
                                       token: FFAppState().userModel.token,
-                                      currentLat: widget.latitude,// 31.988936
+                                      currentLat: widget.latitude,
+                                      // 31.988936
 
-                                      currentLng: widget.longitude,// 35.8642732
-                                    range: int.tryParse(
+                                      currentLng: widget.longitude,
+                                      // 35.8642732
+                                      range: int.tryParse(
                                           (_model.travelModelStruct?.range ??
                                               '0')),
                                       lat: _model
@@ -966,7 +968,9 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                       setState(() {
                                         _model.isLoading = false;
                                       });
-
+                                      FFAppState().tripTravileModel =
+                                          _model.travelModelStruct ??
+                                              TravelModelStruct();
                                       FFAppState().updatedBusessList =
                                           (getJsonField(
                                         (_model.apiResult51f?.jsonBody ?? ''),
@@ -987,13 +991,12 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                           context.pop();
                                         }
                                         context.pushReplacementNamed('MapPage');
-                                      }else{
+                                      } else {
                                         while (context.canPop() == true) {
                                           context.pop();
                                         }
                                         context.pushReplacementNamed('MapPage');
                                       }
-
                                     } else {
                                       setState(() {
                                         _model.isLoading = false;
@@ -1151,6 +1154,16 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                         true)) {
                                       setState(() {
                                         _model.isLoading = false;
+
+                                        _model.travelModelStruct?.range =
+                                            _model.counter.toString();
+                                        FFAppState().tripTravileModel =
+                                            TravelModelStruct(
+                                          travel: _model.travelModelStruct,
+                                          id: _model.travelModelStruct?.id,
+                                          range: _model.counter.toString(),
+                                              wayPoint:  _model.wayPoint
+                                        );
 
                                         FFAppState().updatedBusessList =
                                             (getJsonField(

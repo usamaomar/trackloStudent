@@ -528,13 +528,15 @@ class _SideMenuePageWidgetState extends State<SideMenuePageWidget> {
                             ) ??
                             false;
                         if (confirmDialogResponse) {
-                          setState(() {
-                            FFAppState().userModel = UserModelStruct();
+                          FFAppState().prefs.clear().whenComplete(() {
+                            setState(() {
+                              FFAppState().userModel = UserModelStruct();
+                            });
+                            while (context.canPop() == true) {
+                              context.pop();
+                            }
+                            context.pushReplacementNamed('LoginPage');
                           });
-                          while (context.canPop() == true) {
-                            context.pop();
-                          }
-                          context.pushReplacement('LoginPage');
                         }
                       },
                       child: Column(
