@@ -98,20 +98,14 @@ class FFAppState extends ChangeNotifier {
   List<BusModelStruct> get updatedBusessList => _updatedBusessList;
 
   set updatedBusessList(List<BusModelStruct> value) {
-    // _updatedBusessList = value;
-    _updatedBusessList = [
-      BusModelStruct(
-          busId: '655cd5e89b2c502dd0598111',
-          busIdentity: '122',
-          lat: 31.994232,
-          lng: 35.887132,
-          coordinates: [
-            CoordinatesStruct(latitude: 31.999966, longitude: 35.878256),
-            CoordinatesStruct(latitude: 31.997597, longitude: 35.881867),
-            CoordinatesStruct(latitude: 31.994598, longitude: 35.886712),
-            CoordinatesStruct(latitude: 31.993148, longitude: 35.887038)
-          ])
-    ];
+    _updatedBusessList = value;
+    // _updatedBusessList = [
+    //   BusModelStruct(
+    //       busId: '655cd5e89b2c502dd0598111',
+    //       busIdentity: '122',
+    //       lat: 31.994232,
+    //       lng: 35.887132)
+    // ];
   }
 
   void addToUpdatedBusessList(BusModelStruct value) {
@@ -163,6 +157,10 @@ class FFAppState extends ChangeNotifier {
   List<CoordinatesStruct> _coordinates = [];
   List<CoordinatesStruct> get coordinates => _coordinates;
   set coordinates(List<CoordinatesStruct> value) {
+    // _coordinates = [CoordinatesStruct(latitude: 31.999966, longitude: 35.878256),
+    //   CoordinatesStruct(latitude: 31.997597, longitude: 35.881867),
+    //   CoordinatesStruct(latitude: 31.994598, longitude: 35.886712),
+    //   CoordinatesStruct(latitude: 31.993148, longitude: 35.887038)];
     _coordinates = value;
     prefs.setStringList(
         'ff_coordinates', value.map((x) => x.serialize()).toList());

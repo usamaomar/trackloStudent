@@ -96,9 +96,9 @@ class _MapPageWidgetState extends State<MapPageWidget> {
         points: polylineCoordinates,
       ));
 
-      for (var element in FFAppState().updatedBusessList) {
+      for (var element in FFAppState().coordinates) {
         polylineCoordinates.add(lats.LatLng(
-            element['Latitude'].toDouble(), element['Longitude'].toDouble()));
+            element.latitude, element.longitude));
       }
     });
   }
@@ -186,6 +186,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                   target: lats.LatLng(31.987482, 35.884539),
                   zoom: 10.4746,
                 ),
+                polylines: _polylines,
               ),
               Align(
                 alignment: Alignment.bottomCenter,

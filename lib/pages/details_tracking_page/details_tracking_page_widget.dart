@@ -986,6 +986,89 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                               .withoutNulls
                                               .toList()
                                               .cast<BusModelStruct>();
+
+                                      if(getJsonField(
+                                        (_model.apiResult51f?.jsonBody ?? ''),
+                                        r'''$.coordinates''',
+                                        true,
+                                      )!=null){
+                                        FFAppState().coordinates =
+                                            (getJsonField(
+                                              (_model.apiResult51f?.jsonBody ?? ''),
+                                              r'''$.coordinates''',
+                                              true,
+                                            )!
+                                                .toList()
+                                                .map<CoordinatesStruct?>(
+                                                CoordinatesStruct
+                                                    .maybeFromMap)
+                                                .toList()
+                                            as Iterable<
+                                                CoordinatesStruct?>)
+                                                .withoutNulls
+                                                .toList()
+                                                .cast<CoordinatesStruct>();
+                                      }
+
+                                      if(FFAppState().updatedBusessList.isEmpty){
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  FFLocalizations.of(context)
+                                                      .getVariableText(
+                                                    enText: 'Error',
+                                                    arText: 'خطأ',
+                                                  )),
+                                              content: Text('لا يوجد حافلات على هذه الرحله يجب ان تعيد عملية التعيين مجدد هل ترغب في اختيار رحلة اخرى'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(
+                                                        alertDialogContext);
+                                                  },
+                                                  child: Text(
+                                                      FFLocalizations.of(context)
+                                                          .getVariableText(
+                                                        enText: 'Ok',
+                                                        arText: 'حسنا',
+                                                      )),
+                                                ),
+                                                // TextButton(
+                                                //   onPressed: () {
+                                                //
+                                                //
+                                                //     if (widget.isFromSide == true) {
+                                                //       while (context.canPop() == true) {
+                                                //         context.pop();
+                                                //       }
+                                                //       context.pushReplacementNamed('MapPage');
+                                                //     } else {
+                                                //       while (context.canPop() == true) {
+                                                //         context.pop();
+                                                //       }
+                                                //       context.pushReplacementNamed('MapPage');
+                                                //     }
+                                                //
+                                                //   },
+                                                //   child: Text(
+                                                //       FFLocalizations.of(context)
+                                                //           .getVariableText(
+                                                //         enText: 'Complete',
+                                                //         arText: 'استكمال',
+                                                //       )),
+                                                // ),
+                                              ],
+                                            );
+                                          },
+                                        );
+
+
+                                        return ;
+                                      }
+
+
                                       if (widget.isFromSide == true) {
                                         while (context.canPop() == true) {
                                           context.pop();
@@ -1182,23 +1265,92 @@ class _DetailsTrackingPageWidgetState extends State<DetailsTrackingPageWidget> {
                                                 .toList()
                                                 .cast<BusModelStruct>();
 
+                                        if(getJsonField(
+                                          (_model.apiResult51f?.jsonBody ?? ''),
+                                          r'''$.coordinates''',
+                                          true,
+                                        )!=null){
+                                          FFAppState().coordinates =
+                                              (getJsonField(
+                                                (_model.apiResult51f?.jsonBody ?? ''),
+                                                r'''$.coordinates''',
+                                                true,
+                                              )!
+                                                  .toList()
+                                                  .map<CoordinatesStruct?>(
+                                                  CoordinatesStruct
+                                                      .maybeFromMap)
+                                                  .toList()
+                                              as Iterable<
+                                                  CoordinatesStruct?>)
+                                                  .withoutNulls
+                                                  .toList()
+                                                  .cast<CoordinatesStruct>();
+                                        }
 
-                                        FFAppState().updatedBusessList =
-                                            (getJsonField(
-                                              (_model.apiResult51f?.jsonBody ?? ''),
-                                              r'''$.coordinates''',
-                                              true,
-                                            )!
-                                                .toList()
-                                                .map<BusModelStruct?>(
-                                                BusModelStruct
-                                                    .maybeFromMap)
-                                                .toList()
-                                            as Iterable<
-                                                BusModelStruct?>)
-                                                .withoutNulls
-                                                .toList()
-                                                .cast<BusModelStruct>();
+                                        if(FFAppState().updatedBusessList.isEmpty){
+                                            showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  FFLocalizations.of(context)
+                                                      .getVariableText(
+                                                    enText: 'Error',
+                                                    arText: 'خطأ',
+                                                  )),
+                                              content:
+                                              Text(
+                                                  FFLocalizations.of(context)
+                                                      .getVariableText(
+                                                    enText: 'There are no buses on this trip. You must reset the appointment process again. Would you like to choose another trip?',
+                                                    arText: 'لا يوجد حافلات على هذه الرحله يجب ان تعيد عملية التعيين مجدد هل ترغب في اختيار رحلة اخرى',
+                                                  )),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(
+                                                        alertDialogContext);
+                                                  },
+                                                  child: Text(
+                                                      FFLocalizations.of(context)
+                                                          .getVariableText(
+                                                        enText: 'Ok',
+                                                        arText: 'حسنا',
+                                                      )),
+                                                ),
+                                                // TextButton(
+                                                //   onPressed: () {
+                                                //
+                                                //
+                                                //     if (widget.isFromSide == true) {
+                                                //       while (context.canPop() == true) {
+                                                //         context.pop();
+                                                //       }
+                                                //       context.pushReplacementNamed('MapPage');
+                                                //     } else {
+                                                //       while (context.canPop() == true) {
+                                                //         context.pop();
+                                                //       }
+                                                //       context.pushReplacementNamed('MapPage');
+                                                //     }
+                                                //
+                                                //   },
+                                                //   child: Text(
+                                                //       FFLocalizations.of(context)
+                                                //           .getVariableText(
+                                                //         enText: 'Complete',
+                                                //         arText: 'استكمال',
+                                                //       )),
+                                                // ),
+                                              ],
+                                            );
+                                          },
+                                          );
+
+
+                                          return ;
+                                        }
 
 
                                         while (context.canPop() == true) {
