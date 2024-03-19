@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_getters_setters
 
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -13,12 +12,14 @@ class BusModelStruct extends BaseStruct {
     double? lng,
     double? maDistance,
     List<double>? startPoint,
+    List<CoordinatesStruct>? coordinates,
   })  : _busId = busId,
         _busIdentity = busIdentity,
         _lat = lat,
         _lng = lng,
         _maDistance = maDistance,
-        _startPoint = startPoint;
+        _startPoint = startPoint,
+        _coordinates = coordinates;
 
   // "busId" field.
   String? _busId;
@@ -61,6 +62,14 @@ class BusModelStruct extends BaseStruct {
       updateFn(_startPoint ??= []);
   bool hasStartPoint() => _startPoint != null;
 
+  // "coordinates" field.
+  List<CoordinatesStruct>? _coordinates;
+  List<CoordinatesStruct> get coordinates => _coordinates ?? const [];
+  set coordinates(List<CoordinatesStruct>? val) => _coordinates = val;
+  void updateCoordinates(Function(List<CoordinatesStruct>) updateFn) =>
+      updateFn(_coordinates ??= []);
+  bool hasCoordinates() => _coordinates != null;
+
   static BusModelStruct fromMap(Map<String, dynamic> data) => BusModelStruct(
         busId: data['busId'] as String?,
         busIdentity: data['busIdentity'] as String?,
@@ -68,6 +77,10 @@ class BusModelStruct extends BaseStruct {
         lng: castToType<double>(data['lng']),
         maDistance: castToType<double>(data['maDistance']),
         startPoint: getDataList(data['startPoint']),
+        coordinates: getStructList(
+          data['coordinates'],
+          CoordinatesStruct.fromMap,
+        ),
       );
 
   static BusModelStruct? maybeFromMap(dynamic data) =>
@@ -80,6 +93,7 @@ class BusModelStruct extends BaseStruct {
         'lng': _lng,
         'maDistance': _maDistance,
         'startPoint': _startPoint,
+        'coordinates': _coordinates?.map((e) => e.toMap()).toList(),
       }.withoutNulls;
 
   @override
@@ -107,6 +121,11 @@ class BusModelStruct extends BaseStruct {
         'startPoint': serializeParam(
           _startPoint,
           ParamType.double,
+          true,
+        ),
+        'coordinates': serializeParam(
+          _coordinates,
+          ParamType.DataStruct,
           true,
         ),
       }.withoutNulls;
@@ -143,6 +162,12 @@ class BusModelStruct extends BaseStruct {
           ParamType.double,
           true,
         ),
+        coordinates: deserializeStructParam<CoordinatesStruct>(
+          data['coordinates'],
+          ParamType.DataStruct,
+          true,
+          structBuilder: CoordinatesStruct.fromSerializableMap,
+        ),
       );
 
   @override
@@ -157,12 +182,13 @@ class BusModelStruct extends BaseStruct {
         lat == other.lat &&
         lng == other.lng &&
         maDistance == other.maDistance &&
-        listEquality.equals(startPoint, other.startPoint);
+        listEquality.equals(startPoint, other.startPoint) &&
+        listEquality.equals(coordinates, other.coordinates);
   }
 
   @override
-  int get hashCode => const ListEquality()
-      .hash([busId, busIdentity, lat, lng, maDistance, startPoint]);
+  int get hashCode => const ListEquality().hash(
+      [busId, busIdentity, lat, lng, maDistance, startPoint, coordinates]);
 }
 
 BusModelStruct createBusModelStruct({

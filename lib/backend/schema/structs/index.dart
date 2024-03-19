@@ -6,3 +6,4 @@ export 'news_model_struct.dart';
 export 'travel_model_struct.dart';
 export 'user_model_struct.dart';
 export 'way_point_model_struct.dart';
+export 'coordinates_struct.dart';
